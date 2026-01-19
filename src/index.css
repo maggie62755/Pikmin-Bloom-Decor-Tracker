@@ -1,1 +1,42 @@
 @import "tailwindcss";
+@config "../tailwind.config.js";
+
+@layer base {
+  :root {
+    /* Ultra-subtle grass pattern to avoid "noisy" visuals */
+    --grass-pattern: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M10 10L12 15L10 20M30 40L32 45L30 50M50 10L52 15L50 20' stroke='%234d7c0f' stroke-width='1' fill='none' stroke-opacity='0.03'/%3E%3C/svg%3E");
+  }
+
+  body {
+    margin: 0;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    background-color: #fafaf9; /* Stone-50: Warm neutral background */
+    color: #1c1917; /* Stone-900: Soft black for readability */
+    background-image: var(--grass-pattern);
+    background-attachment: fixed;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  }
+
+  html {
+    scrollbar-gutter: stable;
+  }
+}
+
+@layer components {
+  .glass-panel {
+    @apply bg-white/70 backdrop-blur-xl border border-white/50 shadow-2xl shadow-stone-200/50;
+  }
+  
+  .soft-card {
+    @apply bg-white/90 border border-stone-100 shadow-sm rounded-3xl transition-all duration-300;
+  }
+
+  .btn-primary {
+    @apply px-6 py-3 bg-brand-primary text-white rounded-full font-black shadow-lg shadow-lime-900/10 hover:brightness-110 active:scale-95 transition-all;
+  }
+
+  .btn-secondary {
+    @apply px-6 py-3 bg-white text-stone-800 border border-stone-200 rounded-full font-black shadow-sm hover:bg-stone-50 active:scale-95 transition-all;
+  }
+}

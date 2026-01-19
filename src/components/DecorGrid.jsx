@@ -1,63 +1,57 @@
 import React from 'react';
 import PikminCard from './PikminCard';
+import { PIKMIN_COLORS, DECOR_STATUS } from '../constants';
 
-const DecorGrid = ({ variants, onCardClick, collectionState }) => {
+const VariantRow = React.memo(({ variant, categoryId, onCardClick, collectionState }) => (
+    <div className="flex flex-col gap-4">
+       <div className="flex items-center gap-3 ml-1">
+            <div className="h-6 w-1 bg-brand-primary/40 rounded-full" />
+            <h4 className="text-sm font-black text-stone-900/40 uppercase tracking-widest">{variant.name}</h4>
+       </div>
+       <div className="grid grid-cols-4 sm:grid-cols-7 gap-3 sm:gap-4">
+         {PIKMIN_COLORS.map((colorDef) => {
+           const isAvailable = variant.colors.includes(colorDef.id);
+           const status = collectionState?.[variant.id]?.[colorDef.id] || DECOR_STATUS.NOT_COLLECTED;
+           
+           if (!isAvailable) {
+             return (
+               <div 
+                 key={colorDef.id} 
+                 className="w-full aspect-square rounded-2xl border-2 border-dashed border-stone-100 bg-stone-50/50 opacity-30"
+               />
+             );
+           }
+
+           return (
+             <PikminCard 
+               key={colorDef.id}
+               color={colorDef}
+               status={status}
+               name={variant.name}
+               categoryId={categoryId}
+               onClick={() => onCardClick(variant.id, colorDef.id)}
+             />
+           );
+         })}
+       </div>
+    </div>
+));
+
+const DecorGrid = React.memo(({ variants, onCardClick, collectionState, category }) => {
   return (
-    <div className="flex flex-col gap-6">
+    <div className="flex flex-col gap-10">
       {variants.map((variant) => (
-        <div key={variant.id} className="flex flex-col gap-2">
-          <h4 className="text-sm font-semibold text-slate-500 uppercase tracking-wider">{variant.name}</h4>
-          <div className="grid grid-cols-7 gap-3 sm:gap-4 place-items-center">
-            {variant.colors.map((colorKey) => {
-              // Find color definition (assuming passed or imported, but here passed via props likely won't work well without import)
-              // Better to import PIKMIN_COLORS in parent and pass the actual color object, OR import here.
-              // Let's import here for simplicity or assume parent passes enriched data.
-              // Re-importing constants here to map color key to object 
-              // But 'variant.colors' is just an array of strings ['red', 'blue'...]
-              
-              // We need the color definition.
-              // Let's pass the helper function or color map from parent.
-              // For now, I will assume the parent passes a look-up function or I import constants.
-              return null; // Placeholder, will fix in next thought or component
-            })}
-          </div>
-        </div>
+        <VariantRow 
+          key={variant.id}
+          variant={variant}
+          categoryId={category.id}
+          onCardClick={onCardClick}
+          collectionState={collectionState}
+        />
       ))}
     </div>
   );
-};
-// Re-writing to be self-sufficient
-import { PIKMIN_COLORS } from '../constants';
+});
 
-const DecorGridSelf = ({ variants, onCardClick, collectionState }) => {
-  const getColor = (key) => PIKMIN_COLORS.find(c => c.id === key) || { id: key, name: key, bg: 'bg-gray-400' };
 
-  return (
-    <div className="flex flex-col gap-6">
-      {variants.map((variant) => (
-        <div key={variant.id} className="flex flex-col gap-2">
-           <h4 className="text-sm font-semibold text-slate-500 uppercase tracking-wider ml-1">{variant.name}</h4>
-           <div className="grid grid-cols-7 gap-2 sm:gap-3">
-             {variant.colors.map((colorKey) => {
-               const colorDef = getColor(colorKey);
-               // collectionState structure: { [variantId]: { [colorId]: status } }
-               const status = collectionState?.[variant.id]?.[colorKey] || 0;
-               
-               return (
-                 <PikminCard 
-                   key={colorKey}
-                   color={colorDef}
-                   status={status}
-                   name={variant.name}
-                   onClick={() => onCardClick(variant.id, colorKey)}
-                 />
-               );
-             })}
-           </div>
-        </div>
-      ))}
-    </div>
-  );
-};
-
-export default DecorGridSelf;
+export default DecorGrid;

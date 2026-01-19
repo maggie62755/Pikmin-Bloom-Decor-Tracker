@@ -1,11 +1,13 @@
+import { COLORS } from './theme/colors';
+
 export const PIKMIN_COLORS = [
-  { id: 'red', name: 'Red', bg: 'bg-red-500' },
-  { id: 'yellow', name: 'Yellow', bg: 'bg-yellow-400' },
-  { id: 'blue', name: 'Blue', bg: 'bg-blue-500' },
-  { id: 'white', name: 'White', bg: 'bg-gray-200' },
-  { id: 'purple', name: 'Purple', bg: 'bg-purple-600' },
-  { id: 'rock', name: 'Rock', bg: 'bg-gray-600' },
-  { id: 'winged', name: 'Winged', bg: 'bg-pink-300' },
+  { id: 'red', name: 'Red', hex: COLORS.pikmin.red },
+  { id: 'yellow', name: 'Yellow', hex: COLORS.pikmin.yellow },
+  { id: 'blue', name: 'Blue', hex: COLORS.pikmin.blue },
+  { id: 'white', name: 'White', hex: COLORS.pikmin.white },
+  { id: 'purple', name: 'Purple', hex: COLORS.pikmin.purple },
+  { id: 'rock', name: 'Rock', hex: COLORS.pikmin.rock },
+  { id: 'winged', name: 'Winged', hex: COLORS.pikmin.winged },
 ];
 
 export const DECOR_CATEGORIES = [
@@ -270,3 +272,10 @@ export const DECOR_CATEGORIES = [
   },
   /* Add more specific events as needed */
 ];
+
+export const DECOR_STATUS = {
+  NOT_COLLECTED: 0,
+  SEEDLING: 1,
+  GROWING: 2,
+  COLLECTED: 3,
+};
