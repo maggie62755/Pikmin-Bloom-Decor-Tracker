@@ -17,20 +17,21 @@ export const COLORS = {
   
   // Status Colors (Refined)
   status: {
-    collected: '#15803d', // Green-700
-    growing: '#db2777',   // Pink-600
-    seedling: '#f59e0b',  // Amber-500
-    missing: '#94a3b8',   // Slate-400
+    collected: '#2D9C5E',
+    growing: '#FF85A2',
+    seedling: '#FFB347',
+    missing: '#CBD5E1',
   },
 
   // Pikmin Type Colors (Remains standard but slightly softened if needed)
   pikmin: {
-    red: '#dc2626',    // Red-600
-    yellow: '#eab308', // Yellow-500
-    blue: '#2563eb',   // Blue-600
-    white: '#f1f5f9',  // Slate-100
-    purple: '#7c3aed', // Violet-600
-    rock: '#475569',   // Slate-600
-    winged: '#f472b6', // Pink-400
+    red: '#e54c47',
+    yellow: '#fae866',
+    blue: '#408de6',
+    white: '#f1f5f9',
+    purple: '#a54bba',
+    rock: '#626365',
+    winged: '#eea9db',
+    ice: '#93f1f8',
   }
 };

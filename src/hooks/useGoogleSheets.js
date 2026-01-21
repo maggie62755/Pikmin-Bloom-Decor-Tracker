@@ -102,7 +102,7 @@ export const useGoogleSheets = () => {
           variant.colors.forEach(color => {
             const status = collectionState[variant.id]?.[color] || 0;
             if (status > 0) {
-               rows.push([cat.id, variant.id, variant.name, color, status]);
+               rows.push([cat.id, variant.id, variant.name_ch || variant.name, color, status]);
             }
           });
         });

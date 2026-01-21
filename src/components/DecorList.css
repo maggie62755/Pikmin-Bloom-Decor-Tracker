@@ -1,0 +1,207 @@
+/* DecorList.css */
+
+.decor-list-container {
+    border-radius: 2rem; /* rounded-4xl */
+    overflow: hidden;
+    border: 1px solid rgba(231, 229, 228, 0.5); /* border-stone-200/50 */
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04); /* shadow-xl */
+    background-color: rgba(255, 255, 255, 0.5); /* bg-white/50 */
+    backdrop-filter: blur(12px); /* glass-panel effect */
+}
+
+.decor-list-scroll {
+    overflow-x: auto;
+}
+
+.decor-list-table {
+    width: 100%;
+    font-size: 0.875rem; /* text-sm */
+    text-align: left;
+    border-collapse: collapse;
+}
+
+/* 表頭樣式 */
+.decor-list-thead tr {
+    background-color: #fafaf9; /* bg-stone-50 */
+    border-bottom: 1px solid rgba(231, 229, 228, 1); /* border-stone-100 */
+}
+
+.decor-list-th-main {
+    padding: 1rem 0.75rem; /* Reduced for mobile */
+    font-weight: 900;
+    color: #1c1917;
+    min-width: 120px; /* Smaller min-width for mobile */
+    position: sticky;
+    left: 0;
+    background-color: #fafaf9;
+    z-index: 10;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.02);
+}
+
+@media (min-width: 640px) {
+    .decor-list-th-main {
+        padding: 1.25rem 1.5rem;
+        min-width: 220px;
+    }
+}
+
+.decor-list-th-color {
+    padding: 1rem 0.25rem; /* Reduced for mobile */
+    text-align: center;
+    min-width: 44px; /* Narrower for mobile */
+}
+
+@media (min-width: 640px) {
+    .decor-list-th-color {
+        padding: 1.25rem 0.75rem;
+        min-width: 70px;
+    }
+}
+
+.decor-list-color-indicator {
+    width: 1.25rem; /* 5 */
+    height: 1.25rem;
+    border-radius: 9999px;
+    margin-left: auto;
+    margin-right: auto;
+    border: 2px solid white;
+    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05); /* shadow-sm */
+    outline: 1px solid rgba(231, 229, 228, 1); /* ring-1 ring-stone-200 */
+}
+
+/* 內容列樣式 */
+.decor-list-tbody tr {
+    border-bottom: 1px solid rgba(231, 229, 228, 1); /* divide-stone-100 */
+    transition: background-color 0.2s ease;
+}
+
+.decor-list-tbody tr:hover {
+    background-color: white;
+}
+
+.decor-list-td-main {
+    padding: 1rem 0.75rem; /* Reduced for mobile */
+    position: sticky;
+    left: 0;
+    background-color: white;
+    z-index: 10;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.02);
+    transition: background-color 0.2s ease;
+}
+
+@media (min-width: 640px) {
+    .decor-list-td-main {
+        padding: 1rem 1.5rem;
+    }
+}
+
+.decor-list-tbody tr:hover .decor-list-td-main {
+    background-color: #fafaf9; /* stone-50 */
+}
+
+.decor-list-variant-name {
+    font-weight: 900;
+    color: #292524; /* stone-800 */
+    line-height: 1.25;
+}
+
+.decor-list-category-name {
+    font-size: 10px;
+    font-weight: 700;
+    color: #a8a29e; /* stone-400 */
+    text-transform: uppercase;
+    letter-spacing: 0.1em; /* tracking-widest */
+    margin-top: 0.125rem;
+}
+
+.decor-list-td-card {
+    padding: 0.125rem; /* Very compact for mobile */
+    text-align: center;
+}
+
+@media (min-width: 640px) {
+    .decor-list-td-card {
+        padding: 0.25rem;
+    }
+}
+
+/* MiniCard 樣式 */
+.mini-card {
+    position: relative;
+    width: 2.25rem; /* Smaller for mobile: 9x4=36px */
+    height: 2.25rem;
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: 0.75rem; /* xl */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    border: none;
+    cursor: pointer;
+}
+
+@media (min-width: 640px) {
+    .mini-card {
+        width: 3rem;
+        height: 3rem;
+        border-radius: 1rem;
+    }
+}
+
+.mini-card.not-collected {
+    background-color: rgba(245, 245, 244, 0.5); /* stone-100/50 */
+    filter: grayscale(100%);
+    opacity: 0.4;
+}
+
+.mini-card.not-collected:hover {
+    filter: grayscale(0);
+    opacity: 1;
+    transform: scale(1.1);
+}
+
+.mini-card.collected {
+    background-color: white;
+    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+    outline: 1px solid rgba(245, 245, 244, 1); /* ring-stone-100 */
+}
+
+.mini-card.collected:hover {
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    transform: scale(1.1);
+}
+
+.mini-card-img {
+    width: 1.5rem; /* 6x4=24px for mobile */
+    height: 1.5rem;
+    object-fit: contain;
+}
+
+@media (min-width: 640px) {
+    .mini-card-img {
+        width: 2rem;
+        height: 2rem;
+    }
+}
+
+.mini-card-status-indicator {
+    position: absolute;
+    bottom: -0.375rem; /* -1.5 */
+    right: -0.375rem;
+    padding: 0.25rem;
+    background-color: white;
+    border-radius: 9999px;
+    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+    border: 1px solid rgba(245, 245, 244, 1);
+}
+
+.decor-list-unavailable-dot {
+    width: 0.375rem; /* 1.5 */
+    height: 0.375rem;
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: 9999px;
+    background-color: #e7e5e4; /* stone-200 */
+    opacity: 0.3;
+}

@@ -1,0 +1,133 @@
+/* PikminCard.css */
+
+.pikmin-card {
+    position: relative;
+    padding: 0.5rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border-radius: 1rem; 
+}
+
+@media (min-width: 640px) {
+    .pikmin-card {
+        padding: 0.75rem;
+    }
+}
+
+.pikmin-card:hover {
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05); /* shadow-lg */
+    box-shadow: 0 10px 15px -3px rgba(231, 229, 228, 0.5), 0 4px 6px -2px rgba(231, 229, 228, 0.5); /* shadow-stone-200/50 */
+    transform: translateY(-2px);
+}
+
+.pikmin-card.not-collected {
+    opacity: 0.3;
+    filter: grayscale(100%);
+}
+
+.pikmin-card.not-collected:hover {
+    opacity: 1;
+}
+
+/* 圖片容器 - 固定高度確保水平對齊 */
+.pikmin-card-image-container {
+    position: relative;
+    width: 100%;
+    height: 5rem; /* 手機版固定高度 */
+    background-color: rgba(255, 255, 255, 0.4); /* white/40 */
+    border-radius: 1rem;
+    display: flex;
+    align-items: flex-end; /* 底端對齊 */
+    justify-content: center;
+    padding: 0.25rem;
+    margin-bottom: 0.5rem;
+    transition: transform 0.5s ease;
+}
+
+@media (min-width: 640px) {
+    .pikmin-card-image-container {
+        height: 7rem; /* 桌機版固定高度 */
+    }
+}
+
+
+.pikmin-card:hover .pikmin-card-image-container {
+    transform: scale(1.05);
+}
+
+.pikmin-card-image {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+    filter: drop-shadow(0 4px 3px rgba(0, 0, 0, 0.07)) drop-shadow(0 2px 2px rgba(0, 0, 0, 0.06)); /* drop-shadow-md */
+}
+
+/* 狀態圖示小圓圈 */
+.pikmin-card-status-indicator {
+    position: absolute;
+    bottom: -0.25rem;
+    right: -0.25rem;
+    padding: 0.25rem;
+    background-color: white;
+    border-radius: 9999px;
+    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+    border: 1px solid rgba(231, 229, 228, 1); /* stone-100 */
+}
+
+/* 下方類型標籤區域 */
+.pikmin-card-label-row {
+    margin-top: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.375rem; /* 1.5 */
+    width: 100%;
+    height: 1.5rem;
+}
+
+.pikmin-card-color-dot {
+    width: 0.625rem; /* 2.5 */
+    height: 0.625rem;
+    border-radius: 9999px;
+    flex-shrink: 0;
+    box-shadow: inset 0 1px 2px rgba(0,0,0,0.1);
+    border: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.pikmin-card-type-text {
+    font-size: 10px;
+    font-weight: 900; /* black */
+    color: rgba(68, 64, 60, 0.4); /* stone-900/40 */
+    text-transform: uppercase;
+    letter-spacing: -0.05em; /* tighter */
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 80%;
+    text-align: center;
+}
+
+/* 懸浮提示標籤 */
+.pikmin-card-tooltip {
+    position: absolute;
+    bottom: -0.5rem;
+    padding: 0.25rem 0.625rem;
+    background-color: #292524; /* stone-800 */
+    color: white;
+    font-size: 9px;
+    font-weight: 900;
+    border-radius: 9999px;
+    opacity: 0;
+    transition: all 0.3s ease;
+    z-index: 10;
+    pointer-events: none;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+.pikmin-card:hover .pikmin-card-tooltip {
+    opacity: 1;
+}

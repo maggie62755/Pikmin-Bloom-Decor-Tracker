@@ -4,6 +4,8 @@ import { LogIn, LogOut, Download, Save, Home, List as ListIcon, BarChart2 } from
 import { usePikmin } from '../context/PikminContext';
 import { DECOR_CATEGORIES } from '../constants';
 
+import logo from '../assets/logo.png';
+
 const Navigation = () => {
     const {
         user, login, logout,
@@ -15,21 +17,24 @@ const Navigation = () => {
 
     return (
         <header className="fixed top-4 left-4 right-4 z-50">
-            <div className="max-w-4xl mx-auto glass-panel rounded-full px-6 h-16 flex items-center justify-between relative">
-                
+            <div className="max-w-7xl mx-auto glass-panel rounded-full px-6 h-16 flex items-center justify-between relative">
+
                 {/* Left: Logo */}
-                <div className="w-32 flex-shrink-0">
-                    <h1 className="text-xl font-black bg-gradient-to-r from-brand-primary to-brand-accent bg-clip-text text-transparent hidden sm:block">
-                        Pikmin Bloom
-                    </h1>
-                     <h1 className="text-xl font-black bg-gradient-to-r from-brand-primary to-brand-accent bg-clip-text text-transparent sm:hidden">
-                        PB
-                    </h1>
+                <div className="flex items-center gap-3 flex-shrink-0 min-w-0">
+                    <img src={logo} alt="Logo" className="w-10 h-10 object-contain drop-shadow-sm" />
+                    <div className="flex flex-col leading-none">
+                        <h1 className="text-lg font-black bg-gradient-to-r from-brand-primary to-brand-accent bg-clip-text text-transparent truncate hidden md:block tracking-tight">
+                            Pikmin Bloom
+                        </h1>
+                        <span className="text-[10px] font-bold text-stone-400 tracking-[0.2em] uppercase hidden md:block">
+                            Decor Tracker
+                        </span>
+                    </div>
                 </div>
 
                 {/* Center: Tabs Navigation */}
                 <nav className="absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2">
-                    <div className="flex bg-stone-100/50 p-1.5 rounded-full border border-stone-200/50 shadow-inner">
+                    <div className="nav-tabs-wrapper">
                         <NavTab to="/" icon={Home} label="Home" />
                         <NavTab to="/tracker" icon={ListIcon} label="Tracker" />
                         <NavTab to="/dashboard" icon={BarChart2} label="Stats" />
@@ -44,7 +49,7 @@ const Navigation = () => {
                         </button>
                     ) : (
                         <div className="flex items-center gap-1">
-                             <SyncControls />
+                            <SyncControls />
                         </div>
                     )}
                 </div>
@@ -67,8 +72,8 @@ const NavTab = ({ to, icon: Icon, label }) => (
         to={to}
         className={({ isActive }) => `
             flex items-center gap-2 px-4 py-2 rounded-full text-sm font-black transition-all duration-300
-            ${isActive 
-                ? 'bg-white text-stone-800 shadow-sm scale-105' 
+            ${isActive
+                ? 'bg-white text-stone-800 shadow-sm scale-105'
                 : 'text-stone-500 hover:text-stone-800 hover:bg-white/40'}
         `}
     >

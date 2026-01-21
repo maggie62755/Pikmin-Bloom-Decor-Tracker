@@ -10,11 +10,11 @@ const Home = () => {
             <section className="text-center space-y-8 py-16 relative">
                 <div className="absolute top-0 left-1/2 -translate-x-1/2 w-80 h-80 bg-stone-200/20 blur-3xl -z-10 rounded-full" />
                 <h1 className="text-6xl font-black text-stone-900 tracking-tight leading-tight">
-                    Pikmin <span className="text-brand-primary">Bloom</span> <br/>
+                    Pikmin <span className="text-brand-primary">Bloom</span> <br />
                     <span className="text-4xl text-stone-400 font-bold">Decor Tracker</span>
                 </h1>
                 <p className="text-xl text-stone-600/80 max-w-xl mx-auto font-bold">
-                    輕鬆追蹤你的皮克敏裝飾收藏，<br/>紀錄每一步與花開的時刻。
+                    輕鬆追蹤你的皮克敏裝飾收藏，<br />紀錄每一步與花開的時刻。
                 </p>
                 <div className="flex justify-center gap-6">
                     <NavLink to="/tracker" className="btn-primary flex items-center gap-2">
@@ -33,27 +33,27 @@ const Home = () => {
                 <h2 className="text-2xl font-black text-stone-800 text-center mb-10">收藏狀態指南</h2>
                 <div className="grid grid-cols-2 lg:grid-cols-4 gap-8">
                     {/* Not Collected */}
-                    <StatusItem 
-                        color="bg-stone-100" 
-                        label="未收藏" 
+                    <StatusItem
+                        color="bg-stone-100"
+                        label="未收藏"
                         icon={<div className="w-10 h-10 rounded-full border-4 border-dashed border-stone-200" />}
                     />
                     {/* Seedling */}
-                    <StatusItem 
-                        color="bg-amber-50 border-2 border-amber-100" 
-                        label="大苗" 
+                    <StatusItem
+                        color="bg-amber-50 border-2 border-amber-100"
+                        label="大苗"
                         icon={<Sprout className="w-8 h-8 text-amber-600" />}
                     />
                     {/* Growing */}
-                    <StatusItem 
-                        color="bg-pink-50 border-2 border-pink-100" 
-                        label="成長中" 
+                    <StatusItem
+                        color="bg-pink-50 border-2 border-pink-100"
+                        label="成長中"
                         icon={<Heart className="w-8 h-8 text-pink-500 animate-pulse" />}
                     />
                     {/* Collected */}
-                    <StatusItem 
-                        color="bg-brand-primary shadow-lg shadow-brand-primary/10" 
-                        label="已獲得" 
+                    <StatusItem
+                        color="bg-brand-primary shadow-lg shadow-brand-primary/10"
+                        label="已獲得"
                         icon={<div className="w-6 h-6 bg-white rounded-full shadow-inner" />}
                     />
                 </div>
@@ -62,19 +62,19 @@ const Home = () => {
 
             {/* Features */}
             <section className="grid md:grid-cols-3 gap-8 pb-10">
-                <FeatureCard 
+                <FeatureCard
                     icon={<LayoutGrid className="text-brand-secondary" />}
                     title="多樣化視圖"
                     desc="在網格與列表視圖間輕鬆切換，管理你的裝飾皮克敏。"
                     bg="bg-stone-50/50"
                 />
-                <FeatureCard 
+                <FeatureCard
                     icon={<Sprout className="text-brand-primary" />}
                     title="成長管理"
                     desc="追蹤從大苗到成長完畢的完整過程，保持收藏井然有序。"
                     bg="bg-stone-50/50"
                 />
-                <FeatureCard 
+                <FeatureCard
                     icon={<List className="text-brand-accent" />}
                     title="雲端同步"
                     desc="同步至私人的 Google 試算表，不再擔心數據丟失。"

@@ -11,7 +11,7 @@ const Layout = () => {
     return (
         <div className="min-h-screen text-nature-earth selection:bg-brand-primary/20">
             <Navigation />
-            <main className="pt-28 pb-20 px-4">
+            <main className="pt-28 pb-20 px-6">
                 <Outlet />
             </main>
         </div>

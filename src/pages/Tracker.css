@@ -1,0 +1,199 @@
+/* Filter & Controls Bar */
+.tracker-controls {
+    background-color: white;
+    padding: 1rem;
+    border-radius: 1rem;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+    border: 1px solid #f5f5f4; /* stone-100 */
+    margin-bottom: 1.2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    align-items: flex-start;
+}
+
+@media (min-width: 1024px) {
+    .tracker-controls {
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+    }
+}
+
+/* Search Input */
+.search-container {
+    position: relative;
+    width: 100%;
+    flex: 1;
+}
+
+@media (min-width: 1024px) {
+    .search-container {
+        max-width: 28rem; /* lg:max-w-md */
+    }
+}
+
+.search-icon {
+    position: absolute;
+    left: 0.75rem;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #a8a29e; /* stone-400 */
+}
+
+.search-input {
+    width: 100%;
+    padding-left: 2.5rem; /* 10 */
+    padding-right: 2.5rem; /* 10 */
+    padding-top: 0.625rem; /* 2.5 */
+    padding-bottom: 0.625rem; /* 2.5 */
+    background-color: #fafaf9; /* stone-50 */
+    border: 1px solid #e7e5e4; /* stone-200 */
+    border-radius: 0.75rem; /* xl */
+    font-size: 0.875rem; /* sm */
+    transition: all 0.2s;
+    outline: none;
+}
+
+.search-input:focus {
+    border-color: #84cc16; /* brand-primary approx */
+    box-shadow: 0 0 0 1px #84cc16;
+}
+
+.search-clear-btn {
+    position: absolute;
+    right: 0.75rem;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #a8a29e; /* stone-400 */
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.search-clear-btn:hover {
+    color: #57534e; /* stone-600 */
+}
+
+/* Actions Group */
+.actions-group {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.75rem;
+    width: 100%;
+}
+
+@media (min-width: 1024px) {
+    .actions-group {
+        width: auto;
+    }
+}
+
+/* Filter Toggle */
+.filter-group {
+    display: flex;
+    background-color: #f5f5f4; /* stone-100 */
+    border-radius: 0.5rem;
+    padding: 0.25rem;
+}
+
+.filter-btn {
+    padding: 0.375rem 0.75rem;
+    border-radius: 0.375rem;
+    font-size: 0.875rem;
+    font-weight: 500;
+    transition: all 0.2s;
+    border: none;
+    cursor: pointer;
+    background: none;
+    color: #78716c; /* stone-500 */
+}
+
+.filter-btn:hover {
+    color: #44403c; /* stone-700 */
+}
+
+.filter-btn.active {
+    background-color: white;
+    color: #84cc16; /* brand-primary */
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+}
+
+/* Sort Button */
+.sort-btn {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.625rem 1rem;
+    border-radius: 0.75rem;
+    font-size: 0.875rem;
+    font-weight: 500;
+    transition: all 0.2s;
+    cursor: pointer;
+    border: 1px solid #e7e5e4; /* stone-200 */
+    background-color: white;
+    color: #57534e; /* stone-600 */
+}
+
+.sort-btn:hover {
+    background-color: #fafaf9; /* stone-50 */
+}
+
+.sort-btn.active {
+    background-color: rgba(132, 204, 22, 0.1); /* brand-primary/10 */
+    border-color: rgba(132, 204, 22, 0.2); /* brand-primary/20 */
+    color: #84cc16; /* brand-primary */
+}
+
+.sort-text {
+    display: none;
+}
+
+@media (min-width: 640px) {
+    .sort-text {
+        display: inline;
+    }
+}
+
+/* View Mode Toggles (Small) */
+.view-mode-group {
+    display: flex;
+    background-color: #f5f5f4; /* stone-100 */
+    border-radius: 0.5rem;
+    padding: 0.25rem;
+    margin-left: auto;
+}
+
+@media (min-width: 1024px) {
+    .view-mode-group {
+        margin-left: 0;
+    }
+}
+
+.view-mode-btn {
+    padding: 0.5rem;
+    border-radius: 0.375rem;
+    transition: all 0.2s;
+    border: none;
+    cursor: pointer;
+    background: none;
+    color: #a8a29e; /* stone-400 */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.view-mode-btn:hover {
+    color: #57534e; /* stone-600 */
+}
+
+.view-mode-btn.active {
+    background-color: white;
+    color: #84cc16; /* brand-primary */
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+}

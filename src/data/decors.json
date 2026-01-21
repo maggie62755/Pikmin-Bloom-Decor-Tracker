@@ -1,0 +1,1021 @@
+{
+    "categories": [
+        {
+            "id": "restaurant",
+            "name": "Restaurant",
+            "name_ch": "餐廳",
+            "icon": "Restaurant.png",
+            "image_path": "Restaurant",
+            "variants": [
+                {
+                    "id": "chef_hat",
+                    "name": "Chef Hat",
+                    "name_ch": "廚師帽",
+                    "image_name": "ChefHat",
+                    "colors": [
+                        "red",
+                        "yellow",
+                        "blue",
+                        "white",
+                        "purple",
+                        "rock",
+                        "winged",
+                        "ice"
+                    ]
+                },
+                {
+                    "id": "shiny_chef_hat",
+                    "name": "Rare: Shiny Chef Hat",
+                    "name_ch": "稀有：發光廚師帽",
+                    "image_name": "(Rare)",
+                    "colors": [
+                        "red",
+                        "yellow",
+                        "blue",
+                        "white",
+                        "purple",
+                        "rock",
+                        "winged",
+                        "ice"
+                    ]
+                }
+            ]
+        },
+        {
+            "id": "cafe",
+            "name": "Cafe",
+            "name_ch": "咖啡店",
+            "icon": "Cafe.png",
+            "image_path": "Cafe",
+            "variants": [
+                {
+                    "id": "coffee_cup",
+                    "name": "Coffee Cup",
+                    "name_ch": "咖啡杯",
+                    "image_name": "CoffeeCup",
+                    "colors": [
+                        "red",
+                        "yellow",
+                        "blue",
+                        "white",
+                        "purple",
+                        "rock",
+                        "winged"
+                    ]
+                }
+            ]
+        },
+        {
+            "id": "sweetshop",
+            "name": "Sweetshop",
+            "name_ch": "甜點店",
+            "icon": "Sweetshop.png",
+            "image_path": "Sweetshop",
+            "variants": [
+                {
+                    "id": "macaron",
+                    "name": "Macaron",
+                    "name_ch": "馬卡龍",
+                    "image_name": "Macaron",
+                    "colors": [
+                        "red",
+                        "yellow",
+                        "blue",
+                        "white",
+                        "purple",
+                        "rock",
+                        "winged"
+                    ]
+                },
+                {
+                    "id": "donut",
+                    "name": "Donut",
+                    "name_ch": "甜甜圈",
+                    "image_name": "Donut",
+                    "colors": [
+                        "red",
+                        "yellow",
+                        "blue",
+                        "white",
+                        "purple",
+                        "rock",
+                        "winged"
+                    ]
+                }
+            ]
+        },
+        {
+            "id": "movie_theater",
+            "name": "Movie Theater",
+            "name_ch": "電影院",
+            "icon": "MovieTheater.png",
+            "image_path": "MovieTheater",
+            "variants": [
+                {
+                    "id": "popcorn",
+                    "name": "Popcorn",
+                    "name_ch": "爆米花",
+                    "image_name": "Popcorn",
+                    "colors": [
+                        "red",
+                        "yellow",
+                        "blue",
+                        "white",
+                        "purple",
+                        "rock",
+                        "winged"
+                    ]
+                },
+                {
+                    "id": "3d_glasses",
+                    "name": "3D Glasses",
+                    "name_ch": "3D眼鏡",
+                    "image_name": "3DGlasses",
+                    "colors": [
+                        "red",
+                        "yellow",
+                        "blue",
+                        "white",
+                        "purple",
+                        "rock",
+                        "winged"
+                    ]
+                }
+            ]
+        },
+        {
+            "id": "pharmacy",
+            "name": "Pharmacy",
+            "name_ch": "藥局",
+            "icon": "Pharmacy.png",
+            "image_path": "Pharmacy",
+            "variants": [
+                {
+                    "id": "toothbrush",
+                    "name": "Toothbrush",
+                    "name_ch": "牙刷",
+                    "image_name": "Toothbrush",
+                    "colors": [
+                        "red",
+                        "yellow",
+                        "blue",
+                        "white",
+                        "purple",
+                        "rock",
+                        "winged"
+                    ]
+                }
+            ]
+        },
+        {
+            "id": "zoo",
+            "name": "Zoo",
+            "name_ch": "動物園",
+            "icon": "Zoo.png",
+            "image_path": "Zoo",
+            "variants": [
+                {
+                    "id": "dandelion",
+                    "name": "Dandelion",
+                    "name_ch": "蒲公英",
+                    "image_name": "Dandelion",
+                    "colors": [
+                        "red",
+                        "yellow",
+                        "blue",
+                        "white",
+                        "purple",
+                        "rock",
+                        "winged"
+                    ]
+                }
+            ]
+        },
+        {
+            "id": "forest",
+            "name": "Forest",
+            "name_ch": "森林",
+            "icon": "Forest.png",
+            "image_path": "Forest",
+            "variants": [
+                {
+                    "id": "stag_beetle",
+                    "name": "Stag Beetle",
+                    "name_ch": "鍬形蟲",
+                    "image_name": "StagBeetle",
+                    "colors": [
+                        "red",
+                        "yellow",
+                        "blue",
+                        "white",
+                        "purple",
+                        "rock",
+                        "winged"
+                    ]
+                },
+                {
+                    "id": "acorn",
+                    "name": "Acorn",
+                    "name_ch": "橡實",
+                    "image_name": "Acorn",
+                    "colors": [
+                        "red",
+                        "yellow",
+                        "blue",
+                        "white",
+                        "purple",
+                        "rock",
+                        "winged"
+                    ]
+                }
+            ]
+        },
+        {
+            "id": "waterside",
+            "name": "Waterside",
+            "name_ch": "水邊",
+            "icon": "Waterside.png",
+            "image_path": "Waterside",
+            "variants": [
+                {
+                    "id": "lure",
+                    "name": "Fishing Lure",
+                    "name_ch": "路亞釣餌",
+                    "image_name": "FishingLure",
+                    "colors": [
+                        "red",
+                        "yellow",
+                        "blue",
+                        "white",
+                        "purple",
+                        "rock",
+                        "winged"
+                    ]
+                }
+            ]
+        },
+        {
+            "id": "post_office",
+            "name": "Post Office",
+            "name_ch": "郵局",
+            "icon": "PostOffice.png",
+            "image_path": "PostOffice",
+            "variants": [
+                {
+                    "id": "stamp",
+                    "name": "Postage Stamp",
+                    "name_ch": "郵票",
+                    "image_name": "PostageStamp",
+                    "colors": [
+                        "red",
+                        "yellow",
+                        "blue",
+                        "white",
+                        "purple",
+                        "rock",
+                        "winged"
+                    ]
+                }
+            ]
+        },
+        {
+            "id": "art_gallery",
+            "name": "Art Gallery",
+            "name_ch": "美術館",
+            "icon": "ArtGallery.png",
+            "image_path": "ArtGallery",
+            "variants": [
+                {
+                    "id": "picture_frame",
+                    "name": "Picture Frame",
+                    "name_ch": "畫框",
+                    "image_name": "PictureFrame",
+                    "colors": [
+                        "red",
+                        "yellow",
+                        "blue",
+                        "white",
+                        "purple",
+                        "rock",
+                        "winged"
+                    ]
+                }
+            ]
+        },
+        {
+            "id": "airport",
+            "name": "Airport",
+            "name_ch": "機場",
+            "icon": "Airport.png",
+            "image_path": "Airport",
+            "variants": [
+                {
+                    "id": "toy_plane",
+                    "name": "Toy Airplane",
+                    "name_ch": "玩具飛機",
+                    "image_name": "ToyAirplane",
+                    "colors": [
+                        "red",
+                        "yellow",
+                        "blue",
+                        "white",
+                        "purple",
+                        "rock",
+                        "winged"
+                    ]
+                }
+            ]
+        },
+        {
+            "id": "station",
+            "name": "Station",
+            "name_ch": "車站",
+            "icon": "Station.png",
+            "image_path": "Station",
+            "variants": [
+                {
+                    "id": "paper_train",
+                    "name": "Paper Train",
+                    "name_ch": "紙電車",
+                    "image_name": "PaperTrain",
+                    "colors": [
+                        "red",
+                        "yellow",
+                        "blue",
+                        "white",
+                        "purple",
+                        "rock",
+                        "winged"
+                    ]
+                },
+                {
+                    "id": "ticket",
+                    "name": "Ticket",
+                    "name_ch": "車票",
+                    "image_name": "Ticket",
+                    "colors": [
+                        "red",
+                        "yellow",
+                        "blue",
+                        "white",
+                        "purple",
+                        "rock",
+                        "winged"
+                    ]
+                }
+            ]
+        },
+        {
+            "id": "beach",
+            "name": "Beach",
+            "name_ch": "海灘",
+            "icon": "Beach.png",
+            "image_path": "Beach",
+            "variants": [
+                {
+                    "id": "shell",
+                    "name": "Shell",
+                    "name_ch": "貝殼",
+                    "image_name": "Shell",
+                    "colors": [
+                        "red",
+                        "yellow",
+                        "blue",
+                        "white",
+                        "purple",
+                        "rock",
+                        "winged"
+                    ]
+                }
+            ]
+        },
+        {
+            "id": "burger_shop",
+            "name": "Burger Shop",
+            "name_ch": "漢堡店",
+            "icon": "BurgerShop.png",
+            "image_path": "BurgerShop",
+            "variants": [
+                {
+                    "id": "burger",
+                    "name": "Burger",
+                    "name_ch": "漢堡",
+                    "image_name": "Burger",
+                    "colors": [
+                        "red",
+                        "yellow",
+                        "blue",
+                        "white",
+                        "purple",
+                        "rock",
+                        "winged"
+                    ]
+                }
+            ]
+        },
+        {
+            "id": "corner_store",
+            "name": "Corner Store",
+            "name_ch": "便利商店",
+            "icon": "CornerStore.png",
+            "image_path": "CornerStore",
+            "variants": [
+                {
+                    "id": "bottle_cap",
+                    "name": "Bottle Cap",
+                    "name_ch": "瓶蓋",
+                    "image_name": "BottleCap",
+                    "colors": [
+                        "red",
+                        "yellow",
+                        "blue",
+                        "white",
+                        "purple",
+                        "rock",
+                        "winged"
+                    ]
+                },
+                {
+                    "id": "snack",
+                    "name": "Snack",
+                    "name_ch": "點心包裝",
+                    "image_name": "Snack",
+                    "colors": [
+                        "red",
+                        "yellow",
+                        "blue",
+                        "white",
+                        "purple",
+                        "rock",
+                        "winged"
+                    ]
+                }
+            ]
+        },
+        {
+            "id": "supermarket",
+            "name": "Supermarket",
+            "name_ch": "超市",
+            "icon": "Supermarket.png",
+            "image_path": "Supermarket",
+            "variants": [
+                {
+                    "id": "mushroom",
+                    "name": "Mushroom",
+                    "name_ch": "菇類",
+                    "image_name": "Mushroom",
+                    "colors": [
+                        "red",
+                        "yellow",
+                        "blue",
+                        "white",
+                        "purple",
+                        "rock",
+                        "winged"
+                    ]
+                },
+                {
+                    "id": "banana",
+                    "name": "Banana",
+                    "name_ch": "香蕉",
+                    "image_name": "Banana",
+                    "colors": [
+                        "red",
+                        "yellow",
+                        "blue",
+                        "white",
+                        "purple",
+                        "rock",
+                        "winged"
+                    ]
+                }
+            ]
+        },
+        {
+            "id": "bakery",
+            "name": "Bakery",
+            "name_ch": "麵包店",
+            "icon": "Bakery.png",
+            "image_path": "Bakery",
+            "variants": [
+                {
+                    "id": "baguette",
+                    "name": "Baguette",
+                    "name_ch": "法式長棍麵包",
+                    "image_name": "Baguette",
+                    "colors": [
+                        "red",
+                        "yellow",
+                        "blue",
+                        "white",
+                        "purple",
+                        "rock",
+                        "winged"
+                    ]
+                }
+            ]
+        },
+        {
+            "id": "hair_salon",
+            "name": "Hair Salon",
+            "name_ch": "理髮廳",
+            "icon": "HairSalon.png",
+            "image_path": "HairSalon",
+            "variants": [
+                {
+                    "id": "scissors",
+                    "name": "Scissors",
+                    "name_ch": "剪刀",
+                    "image_name": "Scissors",
+                    "colors": [
+                        "red",
+                        "yellow",
+                        "blue",
+                        "white",
+                        "purple",
+                        "rock",
+                        "winged"
+                    ]
+                }
+            ]
+        },
+        {
+            "id": "clothing_store",
+            "name": "Clothing Store",
+            "name_ch": "服飾店",
+            "icon": "ClothingStore.png",
+            "image_path": "ClothingStore",
+            "variants": [
+                {
+                    "id": "hair_tie",
+                    "name": "Hair Tie",
+                    "name_ch": "髮圈",
+                    "image_name": "HairTie",
+                    "colors": [
+                        "red",
+                        "yellow",
+                        "blue",
+                        "white",
+                        "purple",
+                        "rock",
+                        "winged"
+                    ]
+                }
+            ]
+        },
+        {
+            "id": "park",
+            "name": "Park",
+            "name_ch": "公園",
+            "icon": "Park.png",
+            "image_path": "Park",
+            "variants": [
+                {
+                    "id": "clover",
+                    "name": "Clover",
+                    "name_ch": "三葉草",
+                    "image_name": "Clover",
+                    "colors": [
+                        "red",
+                        "yellow",
+                        "blue",
+                        "white",
+                        "purple",
+                        "rock",
+                        "winged"
+                    ]
+                },
+                {
+                    "id": "four_leaf_clover",
+                    "name": "Four-Leaf Clover",
+                    "name_ch": "四葉草",
+                    "image_name": "Four-LeafClover",
+                    "colors": [
+                        "red",
+                        "yellow",
+                        "blue",
+                        "white",
+                        "purple",
+                        "rock",
+                        "winged"
+                    ]
+                }
+            ]
+        },
+        {
+            "id": "library",
+            "name": "Library",
+            "name_ch": "圖書館",
+            "icon": "Library.png",
+            "image_path": "Library",
+            "variants": [
+                {
+                    "id": "book",
+                    "name": "Tiny Book",
+                    "name_ch": "迷你書",
+                    "image_name": "TinyBook",
+                    "colors": [
+                        "red",
+                        "yellow",
+                        "blue",
+                        "white",
+                        "purple",
+                        "rock",
+                        "winged"
+                    ]
+                }
+            ]
+        },
+        {
+            "id": "roadside",
+            "name": "Roadside",
+            "name_ch": "路邊",
+            "icon": "Roadside.png",
+            "image_path": "Roadside",
+            "variants": [
+                {
+                    "id": "sticker_green",
+                    "name": "Green Sticker",
+                    "name_ch": "綠色貼紙",
+                    "image_name": "GreenSticker",
+                    "colors": [
+                        "red",
+                        "yellow",
+                        "blue",
+                        "white",
+                        "purple",
+                        "rock",
+                        "winged"
+                    ]
+                },
+                {
+                    "id": "sticker_blue",
+                    "name": "Blue Sticker",
+                    "name_ch": "藍色貼紙",
+                    "image_name": "BlueSticker",
+                    "colors": [
+                        "red",
+                        "yellow",
+                        "blue",
+                        "white",
+                        "purple",
+                        "rock",
+                        "winged"
+                    ]
+                },
+                {
+                    "id": "sticker_orange",
+                    "name": "Orange Sticker",
+                    "name_ch": "橘色貼紙",
+                    "image_name": "OrangeSticker",
+                    "colors": [
+                        "red",
+                        "yellow",
+                        "blue",
+                        "white",
+                        "purple",
+                        "rock",
+                        "winged"
+                    ]
+                },
+                {
+                    "id": "coin",
+                    "name": "Coin",
+                    "name_ch": "硬幣",
+                    "image_name": "Coin",
+                    "colors": [
+                        "red",
+                        "yellow",
+                        "blue",
+                        "white",
+                        "purple",
+                        "rock",
+                        "winged"
+                    ]
+                }
+            ]
+        },
+        {
+            "id": "sushi_restaurant",
+            "name": "Sushi Restaurant",
+            "name_ch": "壽司店",
+            "icon": "SushiRestaurant.png",
+            "image_path": "SushiRestaurant",
+            "variants": [
+                {
+                    "id": "sushi",
+                    "name": "Sushi",
+                    "name_ch": "壽司",
+                    "image_name": "Sushi",
+                    "colors": [
+                        "red",
+                        "yellow",
+                        "blue",
+                        "white",
+                        "purple",
+                        "rock",
+                        "winged"
+                    ]
+                }
+            ]
+        },
+        {
+            "id": "mountain",
+            "name": "Mountain",
+            "name_ch": "山岳",
+            "icon": "Mountain.png",
+            "image_path": "Mountain",
+            "variants": [
+                {
+                    "id": "mountain_badge",
+                    "name": "Mountain Badge",
+                    "name_ch": "山岳徽章",
+                    "image_name": "MountainBadge",
+                    "colors": [
+                        "red",
+                        "yellow",
+                        "blue"
+                    ]
+                }
+            ]
+        },
+        {
+            "id": "stadium",
+            "name": "Stadium",
+            "name_ch": "體育場",
+            "icon": "Stadium.png",
+            "image_path": "Stadium",
+            "variants": [
+                {
+                    "id": "keychain",
+                    "name": "Ball Keychain",
+                    "name_ch": "球類吊飾",
+                    "image_name": "BallKeychain",
+                    "colors": [
+                        "red",
+                        "yellow",
+                        "blue"
+                    ]
+                }
+            ]
+        },
+        {
+            "id": "rainy_day",
+            "name": "Rainy Day",
+            "name_ch": "雨天",
+            "icon": "RainyDay.png",
+            "image_path": "RainyDay",
+            "variants": [
+                {
+                    "id": "leaf_hat",
+                    "name": "Leaf Hat",
+                    "name_ch": "葉子帽",
+                    "image_name": "LeafHat",
+                    "colors": [
+                        "blue"
+                    ]
+                }
+            ]
+        },
+        {
+            "id": "snowy_day",
+            "name": "Snowy Day",
+            "name_ch": "雪天",
+            "icon": "SnowyDay.png",
+            "image_path": "SnowyDay",
+            "variants": [
+                {
+                    "id": "mitten",
+                    "name": "Mitten",
+                    "name_ch": "連指手套",
+                    "image_name": "Mitten",
+                    "colors": [
+                        "blue"
+                    ]
+                }
+            ]
+        },
+        {
+            "id": "curry_restaurant",
+            "name": "Curry Restaurant",
+            "name_ch": "咖哩餐廳",
+            "icon": "CurryRestaurant.png",
+            "image_path": "CurryRestaurant",
+            "variants": [
+                {
+                    "id": "curry",
+                    "name": "Curry",
+                    "name_ch": "咖哩",
+                    "image_name": "Curry",
+                    "colors": [
+                        "red",
+                        "yellow",
+                        "blue",
+                        "white",
+                        "purple",
+                        "rock",
+                        "winged"
+                    ]
+                }
+            ]
+        },
+        {
+            "id": "tech_store",
+            "name": "Electronics Store",
+            "name_ch": "電器店",
+            "icon": "ElectronicsStore.png",
+            "image_path": "ElectronicsStore",
+            "variants": [
+                {
+                    "id": "light",
+                    "name": "Light String",
+                    "name_ch": "飾燈",
+                    "image_name": "LightString",
+                    "colors": [
+                        "red",
+                        "yellow",
+                        "blue",
+                        "white",
+                        "purple",
+                        "rock",
+                        "winged"
+                    ]
+                }
+            ]
+        },
+        {
+            "id": "hotel",
+            "name": "Hotel",
+            "name_ch": "旅館",
+            "icon": "Hotel.png",
+            "image_path": "Hotel",
+            "variants": [
+                {
+                    "id": "amenity",
+                    "name": "Amenity",
+                    "name_ch": "盥洗用品",
+                    "image_name": "Amenity",
+                    "colors": [
+                        "red",
+                        "yellow",
+                        "blue",
+                        "white",
+                        "purple",
+                        "rock",
+                        "winged"
+                    ]
+                }
+            ]
+        },
+        {
+            "id": "makeup",
+            "name": "Cosmetics Store",
+            "name_ch": "化妝品店",
+            "icon": "CosmeticsStore.png",
+            "image_path": "CosmeticsStore",
+            "variants": [
+                {
+                    "id": "compact",
+                    "name": "Compact",
+                    "name_ch": "粉餅盒",
+                    "image_name": "Compact",
+                    "colors": [
+                        "red",
+                        "yellow",
+                        "blue",
+                        "white",
+                        "purple",
+                        "rock",
+                        "winged"
+                    ]
+                }
+            ]
+        },
+        {
+            "id": "event_lny_2024",
+            "name": "Lunar New Year 2024",
+            "name_ch": "2024 農曆新年",
+            "icon": "LunarNewYear2024.png",
+            "image_path": "LunarNewYear2024",
+            "variants": [
+                {
+                    "id": "lny_ornament",
+                    "name": "LNY Ornament (Red/Gold)",
+                    "name_ch": "農曆新年飾品 (紅/金)",
+                    "image_name": "LNYOrnament",
+                    "colors": [
+                        "red",
+                        "yellow",
+                        "blue",
+                        "white",
+                        "purple",
+                        "rock",
+                        "winged"
+                    ]
+                }
+            ]
+        },
+        {
+            "id": "event_halloween_2024",
+            "name": "Halloween 2024",
+            "name_ch": "2024 萬聖節",
+            "icon": "Halloween2024.png",
+            "image_path": "Halloween2024",
+            "variants": [
+                {
+                    "id": "halloween_treat",
+                    "name": "Halloween Treat",
+                    "name_ch": "萬聖節糖果",
+                    "image_name": "HalloweenTreat",
+                    "colors": [
+                        "red",
+                        "yellow",
+                        "blue",
+                        "white",
+                        "purple",
+                        "rock",
+                        "winged"
+                    ]
+                },
+                {
+                    "id": "halloween_pumpkin",
+                    "name": "Jack-o'-Lantern",
+                    "name_ch": "南瓜燈",
+                    "image_name": "Jack-o'-Lantern",
+                    "colors": [
+                        "red",
+                        "yellow",
+                        "blue",
+                        "white",
+                        "purple",
+                        "rock",
+                        "winged"
+                    ]
+                },
+                {
+                    "id": "halloween_light",
+                    "name": "Halloween Light",
+                    "name_ch": "萬聖節燈飾",
+                    "image_name": "HalloweenLight",
+                    "colors": [
+                        "red",
+                        "yellow",
+                        "blue",
+                        "white",
+                        "purple",
+                        "rock",
+                        "winged"
+                    ]
+                }
+            ]
+        },
+        {
+            "id": "event_card_2024",
+            "name": "Flower Card 2024",
+            "name_ch": "2024 花札",
+            "icon": "FlowerCard2024.png",
+            "image_path": "FlowerCard2024",
+            "variants": [
+                {
+                    "id": "flower_card",
+                    "name": "Flower Card",
+                    "name_ch": "花札",
+                    "image_name": "FlowerCard",
+                    "colors": [
+                        "red",
+                        "yellow",
+                        "blue",
+                        "white",
+                        "purple",
+                        "rock",
+                        "winged"
+                    ]
+                }
+            ]
+        },
+        {
+            "id": "event_puzzle_2024",
+            "name": "2024 Puzzle",
+            "name_ch": "2024 拼圖",
+            "icon": "2024Puzzle.png",
+            "image_path": "2024Puzzle",
+            "variants": [
+                {
+                    "id": "puzzle_2024",
+                    "name": "Puzzle Piece 2024",
+                    "name_ch": "2024 拼圖片",
+                    "image_name": "Puzzle2024",
+                    "colors": [
+                        "red",
+                        "yellow",
+                        "blue",
+                        "white",
+                        "purple",
+                        "rock",
+                        "winged"
+                    ]
+                }
+            ]
+        }
+    ]
+}
