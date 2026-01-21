@@ -8,11 +8,11 @@ import { BarChart, Bar, Cell, Tooltip, ResponsiveContainer, LabelList } from 're
  * @param {string} barSize - 柱狀條寬度
  */
 
-const PikminStatChart = ({ data, title, height = 250, barSize = 36 }) => {
+const PikminStatChart = ({ data, title, height = 250, barSize = 36, transparent = false }) => {
     const hasData = data && data.length > 0 && data.some(item => item.value > 0);
 
     return (
-        <div className="flex flex-col gap-4 p-6 bg-white/80 backdrop-blur-md rounded-[2.5rem] shadow-sm border border-stone-100 h-full">
+        <div className={`flex flex-col gap-4 h-full ${transparent ? '' : 'p-6 bg-white/80 backdrop-blur-md rounded-[2.5rem] shadow-sm border border-stone-100'}`}>
             {title && (
                 <h3 className="text-lg font-bold text-stone-700 px-2 flex items-center gap-2">
                     <span className="w-1.5 h-6 bg-blue-400 rounded-full" /> {title}

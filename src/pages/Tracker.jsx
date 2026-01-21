@@ -11,7 +11,7 @@ const Tracker = () => {
     const { collection, toggleStatus, calculateProgress } = usePikmin();
     const [viewMode, setViewMode] = useState('grid');
     const [openCategories, setOpenCategories] = useState({});
-    
+
     // Search & Filter State
     const [searchQuery, setSearchQuery] = useState('');
     const [sortOrder, setSortOrder] = useState('default'); // default, asc (low->high), desc (high->low)
@@ -45,11 +45,11 @@ const Tracker = () => {
         // 2. Search
         if (searchQuery) {
             const query = searchQuery.toLowerCase();
-            result = result.filter(c => 
-                c.name.toLowerCase().includes(query) || 
+            result = result.filter(c =>
+                c.name.toLowerCase().includes(query) ||
                 c.name_ch.includes(query) ||
-                c.variants.some(v => 
-                    v.name.toLowerCase().includes(query) || 
+                c.variants.some(v =>
+                    v.name.toLowerCase().includes(query) ||
                     v.name_ch.includes(query)
                 )
             );
@@ -60,7 +60,7 @@ const Tracker = () => {
             result.sort((a, b) => {
                 const progA = calculateProgress(a);
                 const rateA = progA.total > 0 ? progA.collected / progA.total : 0;
-                
+
                 const progB = calculateProgress(b);
                 const rateB = progB.total > 0 ? progB.collected / progB.total : 0;
 
@@ -77,35 +77,35 @@ const Tracker = () => {
 
     return (
         <div className="page-container">
-                <div className="section-header">
-                    <h2 className="section-title">裝飾品追蹤</h2>
-                    <p className="section-desc">點擊卡片即可切換收藏狀態</p>
-                </div>
-            <div className="tracker-controls">
-                
-                {/* Search */}
-                <div className="search-container">
-                    <Search className="search-icon" size={18} />
-                    <input 
+            <div className="section-header">
+                <h2 className="section-title">裝飾品追蹤</h2>
+                <p className="section-desc">點擊卡片即可切換收藏狀態</p>
+            </div>
+            {/* Sticky Minimialist Toolbar */}
+            <div className="tracker-sticky-header">
+
+                {/* Row 1: Search */}
+                <div className="tracker-search-bar">
+                    <Search className="search-icon" size={20} />
+                    <input
                         type="text"
-                        placeholder="搜尋類別、飾品 (例如: 餐廳, 廚師帽)"
+                        placeholder="搜尋飾品..."
                         value={searchQuery}
                         onChange={(e) => setSearchQuery(e.target.value)}
-                        className="search-input"
+                        className="search-input-minimal"
                     />
                     {searchQuery && (
-                        <button 
-                            onClick={() => setSearchQuery('')}
-                            className="search-clear-btn"
-                        >
+                        <button onClick={() => setSearchQuery('')} className="search-clear-btn">
                             <X size={16} />
                         </button>
                     )}
                 </div>
 
-                <div className="actions-group">
-                    {/* Type Filter */}
-                    <div className="filter-group">
+                {/* Row 2: Filter Chips & Actions (Horizontal Scroll) */}
+                <div className="tracker-filter-row no-scrollbar">
+
+                    {/* Filter Chips */}
+                    <div className="flex items-center gap-2">
                         {[
                             { id: 'all', label: '全部' },
                             { id: 'standard', label: '一般' },
@@ -114,66 +114,56 @@ const Tracker = () => {
                             <button
                                 key={type.id}
                                 onClick={() => setFilterType(type.id)}
-                                className={`filter-btn ${filterType === type.id ? 'active' : ''}`}
+                                className={`chip-btn ${filterType === type.id ? 'active' : ''}`}
                             >
                                 {type.label}
                             </button>
                         ))}
                     </div>
 
-                    {/* Sort */}
-                    <button 
+                    <div className="w-px h-6 bg-stone-300 mx-1 flex-shrink-0" />
+
+                    {/* Sort Chip */}
+                    <button
                         onClick={() => {
-                            const next = {
-                                'default': 'desc',
-                                'desc': 'asc',
-                                'asc': 'default'
-                            };
+                            const next = { 'default': 'desc', 'desc': 'asc', 'asc': 'default' };
                             setSortOrder(next[sortOrder]);
                         }}
-                        className={`sort-btn ${sortOrder !== 'default' ? 'active' : ''}`}
+                        className={`chip-btn ${sortOrder !== 'default' ? 'active-secondary' : ''}`}
                     >
-                        <ArrowUpDown size={16} />
-                        <span className="sort-text">
-                            {sortOrder === 'default' ? '預設排序' : sortOrder === 'desc' ? '完成度: 高 → 低' : '完成度: 低 → 高'}
-                        </span>
+                        <ArrowUpDown size={14} />
+                        <span>{sortOrder === 'default' ? '排序' : sortOrder === 'desc' ? '高→低' : '低→高'}</span>
                     </button>
 
-                    {/* Expand/Collapse Controls */}
-                    <div className="view-mode-group">
-                        <button 
-                            onClick={expandAll}
-                            className="view-mode-btn"
-                            title="展開全部"
+                    <div className="flex-1" /> {/* Spacer */}
+
+                    {/* View Toggles */}
+                    {viewMode === 'grid' && (
+                        <div className="flex items-center gap-1 bg-white/40 p-1 rounded-full border border-white/20">
+                            <button onClick={expandAll} className="icon-btn-small" title="展開">
+                                <ChevronsDown size={16} />
+                            </button>
+                            <button onClick={collapseAll} className="icon-btn-small" title="收合">
+                                <ChevronsUp size={16} />
+                            </button>
+                        </div>
+                    )}
+
+                    <div className="flex items-center gap-1 bg-white/40 p-1 rounded-full border border-white/20">
+                        <button
+                            onClick={() => setViewMode('grid')}
+                            className={`icon-btn-small ${viewMode === 'grid' ? 'active' : ''}`}
                         >
-                            <ChevronsDown size={18} />
+                            <LayoutGrid size={16} />
                         </button>
-                        <button 
-                            onClick={collapseAll}
-                            className="view-mode-btn"
-                            title="收合全部"
+                        <button
+                            onClick={() => setViewMode('list')}
+                            className={`icon-btn-small ${viewMode === 'list' ? 'active' : ''}`}
                         >
-                            <ChevronsUp size={18} />
+                            <List size={16} />
                         </button>
                     </div>
 
-                    {/* View Mode Toggle */}
-                    <div className="view-mode-group">
-                       <button 
-                            onClick={() => setViewMode('grid')}
-                            className={`view-mode-btn ${viewMode === 'grid' ? 'active' : ''}`}
-                            title="網格檢視"
-                        >
-                            <LayoutGrid size={18} /> 
-                        </button>
-                        <button 
-                            onClick={() => setViewMode('list')}
-                            className={`view-mode-btn ${viewMode === 'list' ? 'active' : ''}`}
-                            title="列表檢視"
-                        >
-                            <List size={18} /> 
-                        </button>
-                    </div>
                 </div>
             </div>
 
@@ -182,30 +172,30 @@ const Tracker = () => {
             {viewMode === 'grid' ? (
                 filteredCategories.length > 0 ? (
                     filteredCategories.map(category => {
-                    const { collected, total } = calculateProgress(category);
-                    return (
-                        <DecorGridCategory
-                            key={category.id}
-                            category={category}
-                            isOpen={openCategories[category.id]}
-                            onToggle={() => toggleCategory(category.id)}
-                            progress={collected}
-                            total={total}
-                        >
-                            <DecorGrid
-                                category={category} // Added this
-                                variants={category.variants}
-                                onCardClick={toggleStatus}
-                                collectionState={collection}
-                            />
+                        const { collected, total } = calculateProgress(category);
+                        return (
+                            <DecorGridCategory
+                                key={category.id}
+                                category={category}
+                                isOpen={openCategories[category.id]}
+                                onToggle={() => toggleCategory(category.id)}
+                                progress={collected}
+                                total={total}
+                            >
+                                <DecorGrid
+                                    category={category} // Added this
+                                    variants={category.variants}
+                                    onCardClick={toggleStatus}
+                                    collectionState={collection}
+                                />
 
-                        </DecorGridCategory>
-                    );
-                })
+                            </DecorGridCategory>
+                        );
+                    })
                 ) : (
                     <div className="empty-state">
                         <p className="empty-state-text">找不到符合的飾品</p>
-                        <button onClick={() => {setSearchQuery(''); setFilterType('all');}} className="btn-link">
+                        <button onClick={() => { setSearchQuery(''); setFilterType('all'); }} className="btn-link">
                             清除搜尋條件
                         </button>
                     </div>

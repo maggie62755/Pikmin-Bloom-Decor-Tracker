@@ -1,6 +1,7 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 import { Sprout, Heart, LayoutGrid, List, BarChart2 } from 'lucide-react';
+import { DECOR_STATUS, DECOR_STATUS_LABELS } from '../constants';
 import { COLORS } from '../theme/colors';
 
 const Home = () => {
@@ -35,25 +36,25 @@ const Home = () => {
                     {/* Not Collected */}
                     <StatusItem
                         color="bg-stone-100"
-                        label="未收藏"
+                        label={DECOR_STATUS_LABELS[DECOR_STATUS.NOT_COLLECTED]}
                         icon={<div className="w-10 h-10 rounded-full border-4 border-dashed border-stone-200" />}
                     />
                     {/* Seedling */}
                     <StatusItem
                         color="bg-amber-50 border-2 border-amber-100"
-                        label="大苗"
+                        label={DECOR_STATUS_LABELS[DECOR_STATUS.SEEDLING]}
                         icon={<Sprout className="w-8 h-8 text-amber-600" />}
                     />
                     {/* Growing */}
                     <StatusItem
                         color="bg-pink-50 border-2 border-pink-100"
-                        label="成長中"
+                        label={DECOR_STATUS_LABELS[DECOR_STATUS.GROWING]}
                         icon={<Heart className="w-8 h-8 text-pink-500 animate-pulse" />}
                     />
                     {/* Collected */}
                     <StatusItem
                         color="bg-brand-primary shadow-lg shadow-brand-primary/10"
-                        label="已獲得"
+                        label={DECOR_STATUS_LABELS[DECOR_STATUS.COLLECTED]}
                         icon={<div className="w-6 h-6 bg-white rounded-full shadow-inner" />}
                     />
                 </div>

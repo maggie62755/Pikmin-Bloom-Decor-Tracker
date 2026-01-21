@@ -24,6 +24,13 @@ export const DECOR_STATUS = {
   COLLECTED: 3,
 };
 
+export const DECOR_STATUS_LABELS = {
+  [DECOR_STATUS.NOT_COLLECTED]: '未取得',
+  [DECOR_STATUS.SEEDLING]: '花苗尚未孵化',
+  [DECOR_STATUS.GROWING]: '培養感情中',
+  [DECOR_STATUS.COLLECTED]: '已獲得',
+};
+
 export const isStandardCategory = (id) => {
   return !id.startsWith('event_');
 };

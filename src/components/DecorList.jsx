@@ -1,62 +1,135 @@
-import React from 'react';
+import React, { useState, useRef } from 'react';
 import { PIKMIN_COLORS, DECOR_STATUS } from '../constants';
-import { Sprout, Heart, Check } from 'lucide-react';
+import { COLORS } from '../theme/colors';
 
 import './DecorList.css';
+import MissingImageFallback from './shared/MissingImageFallback';
+import StatusIcon from './shared/StatusIcon';
+import ContextMenu from './shared/ContextMenu';
 
-const MiniStatusIcon = ({ status, size = 10 }) => {
-    switch (status) {
-        case DECOR_STATUS.SEEDLING: return <Sprout size={size} className="text-amber-500" />;
-        case DECOR_STATUS.GROWING: return <Heart size={size} className="text-pink-500 fill-pink-500/20" />;
-        case DECOR_STATUS.COLLECTED: return <Check size={size} className="text-brand-primary" strokeWidth={3} />;
-        default: return null;
+const MiniCard = React.memo(({ status, imagePath, color, onClick }) => {
+  const [imgError, setImgError] = useState(false);
+  const [showMenu, setShowMenu] = useState(false);
+
+  // Long Press Refs
+  const timerRef = useRef(null);
+  const isLongPress = useRef(false);
+
+  // Reset error if image path changes
+  React.useEffect(() => {
+    setImgError(false);
+  }, [imagePath]);
+
+  // -- Interaction Handlers --
+
+  // 1. Toggle Logic (Left Click / Tap)
+  const handleToggle = (e) => {
+    if (showMenu) return; // Don't toggle if menu is open
+
+    let newStatus = DECOR_STATUS.COLLECTED;
+    if (status === DECOR_STATUS.COLLECTED) {
+      newStatus = DECOR_STATUS.NOT_COLLECTED;
     }
-};
+    onClick(newStatus);
+  };
 
-const MiniCard = React.memo(({ status, imagePath, colorName, onClick }) => (
-    <button 
-        onClick={onClick}
+  // 2. Right Click (Desktop)
+  const handleContextMenu = (e) => {
+    e.preventDefault();
+    setShowMenu(true);
+  };
+
+  // 3. Long Press (Mobile)
+  const handleTouchStart = () => {
+    isLongPress.current = false;
+    timerRef.current = setTimeout(() => {
+      isLongPress.current = true;
+      setShowMenu(true);
+      // Optional: Vibrate if supported
+      if (navigator.vibrate) navigator.vibrate(50);
+    }, 500); // 500ms long press
+  };
+
+  const handleTouchEnd = (e) => {
+    if (timerRef.current) {
+      clearTimeout(timerRef.current);
+      timerRef.current = null;
+    }
+    // If it was a long press, prevent the default click
+    if (isLongPress.current && e.cancelable) {
+      e.preventDefault();
+    }
+  };
+
+  const handleMenuSelect = (selectedStatus) => {
+    onClick(selectedStatus);
+    setShowMenu(false);
+  };
+
+  return (
+    <>
+      <button
+        onClick={handleToggle}
+        onContextMenu={handleContextMenu}
+        onTouchStart={handleTouchStart}
+        onTouchEnd={handleTouchEnd}
         className={`mini-card ${status === DECOR_STATUS.NOT_COLLECTED ? 'not-collected' : 'collected'}`}
-    >
-        <img
+      >
+        {!imgError && imagePath ? (
+          <img
             src={imagePath}
-            alt={colorName}
+            alt={color.name_ch || color.name}
             className="mini-card-img"
-            onError={(e) => { e.target.src = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1' height='1'%3E%3C/svg%3E"; }}
-        />
+            onError={() => setImgError(true)}
+          />
+        ) : (
+          <MissingImageFallback color={color} compact />
+        )}
+
         <div className="mini-card-status-indicator">
-            <MiniStatusIcon status={status} size={10} />
+          <StatusIcon status={status} size={10} variant="minimal" />
         </div>
-    </button>
-));
+      </button>
+
+      {/* Context Menu Overlay */}
+      {showMenu && (
+        <ContextMenu
+          onClose={() => setShowMenu(false)}
+          onSelect={handleMenuSelect}
+          currentStatus={status}
+        />
+      )}
+    </>
+  );
+});
 
 const DecorRow = React.memo(({ variant, category, collection, onCardClick }) => (
-    <tr className="group">
-        <td className="decor-list-td-main">
-            <div className="decor-list-variant-name">{variant.name_ch || variant.name}</div>
-            <div className="decor-list-category-name hidden sm:block">{category.name_ch || category.name}</div>
+  <tr className="group">
+    <td className="decor-list-td-main">
+      <div className="decor-list-variant-name">{variant.name_ch || variant.name}</div>
+      <div className="decor-list-category-name hidden sm:block">{category.name_ch || category.name}</div>
+    </td>
+    {PIKMIN_COLORS.map(colorDef => {
+      const isAvailable = variant.colors.includes(colorDef.id);
+      const status = collection[variant.id]?.[colorDef.id] || DECOR_STATUS.NOT_COLLECTED;
+      const imagePath = `/src/data/images/decors_images/${category.image_path}/${variant.image_name}_${colorDef.name}.png`;
+
+      return (
+        <td key={colorDef.id} className="decor-list-td-card">
+          {isAvailable ? (
+            <MiniCard
+              status={status}
+              imagePath={imagePath}
+              color={colorDef}
+              onClick={(newStatus) => onCardClick(variant.id, colorDef.id, newStatus)}
+            />
+          ) : (
+            <div className="decor-list-unavailable-dot" />
+          )}
         </td>
-        {PIKMIN_COLORS.map(colorDef => {
-            const isAvailable = variant.colors.includes(colorDef.id);
-            const status = collection[variant.id]?.[colorDef.id] || DECOR_STATUS.NOT_COLLECTED;
-            const imagePath = `/src/data/images/decors_images/${category.image_path}/${variant.image_name}_${colorDef.name}.png`;
-            
-            return (
-                <td key={colorDef.id} className="decor-list-td-card">
-                    {isAvailable ? (
-                        <MiniCard 
-                            status={status} 
-                            imagePath={imagePath} 
-                            colorName={colorDef.name_ch || colorDef.name} 
-                            onClick={() => onCardClick(variant.id, colorDef.id)} 
-                        />
-                    ) : (
-                        <div className="decor-list-unavailable-dot" />
-                    )}
-                </td>
-            );
-        })}
-    </tr>
+      );
+    })}
+  </tr>
 ));
 
 const DecorList = ({ categories, collection, onCardClick }) => {
@@ -71,9 +144,9 @@ const DecorList = ({ categories, collection, onCardClick }) => {
               </th>
               {PIKMIN_COLORS.map(color => (
                 <th key={color.id} className="decor-list-th-color">
-                  <div 
-                    className="decor-list-color-indicator" 
-                    style={{ backgroundColor: color.hex }} 
+                  <div
+                    className="decor-list-color-indicator"
+                    style={{ backgroundColor: color.hex }}
                     title={color.name_ch || color.name}
                   />
                 </th>
@@ -84,7 +157,7 @@ const DecorList = ({ categories, collection, onCardClick }) => {
             {categories.map(category => (
               <React.Fragment key={category.id}>
                 {category.variants.map(variant => (
-                  <DecorRow 
+                  <DecorRow
                     key={variant.id}
                     variant={variant}
                     category={category}
@@ -102,4 +175,3 @@ const DecorList = ({ categories, collection, onCardClick }) => {
 };
 
 export default DecorList;
-

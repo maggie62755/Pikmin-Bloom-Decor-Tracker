@@ -16,8 +16,8 @@ const Navigation = () => {
     const { collected: totalCollected, total: grandTotal } = calculateTotalProgress();
 
     return (
-        <header className="fixed top-4 left-4 right-4 z-50">
-            <div className="max-w-7xl mx-auto glass-panel rounded-full px-6 h-16 flex items-center justify-between relative">
+        <header className="fixed top-6 left-4 right-4 z-50 pointer-events-none">
+            <div className="max-w-7xl mx-auto glass-panel rounded-full px-2 sm:px-6 h-18 sm:h-20 flex items-center justify-between relative pointer-events-auto transform transition-transform hover:scale-[1.005]">
 
                 {/* Left: Logo */}
                 <div className="flex items-center gap-3 flex-shrink-0 min-w-0">
@@ -55,9 +55,9 @@ const Navigation = () => {
                 </div>
 
                 {/* Progress Bar (Integrated Bottom) */}
-                <div className="absolute -bottom-2 left-10 right-10 h-1.5 bg-stone-200/50 backdrop-blur-sm rounded-full overflow-hidden border border-white/20">
+                <div className="absolute -bottom-1 left-12 right-12 h-1 bg-stone-200/30 backdrop-blur-sm rounded-full overflow-hidden border border-white/10">
                     <div
-                        className="h-full bg-gradient-to-r from-brand-primary to-brand-accent transition-all duration-1000 ease-out"
+                        className="h-full bg-gradient-to-r from-brand-primary via-brand-accent to-brand-secondary transition-all duration-1000 ease-out shadow-[0_0_10px_rgba(101,163,13,0.5)]"
                         style={{ width: `${(totalCollected / grandTotal) * 100}%` }}
                     />
                 </div>
@@ -71,14 +71,16 @@ const NavTab = ({ to, icon: Icon, label }) => (
     <NavLink
         to={to}
         className={({ isActive }) => `
-            flex items-center gap-2 px-4 py-2 rounded-full text-sm font-black transition-all duration-300
+            relative flex items-center gap-2 px-4 py-2.5 rounded-full text-sm font-black transition-all duration-300 overflow-hidden group
             ${isActive
-                ? 'bg-white text-stone-800 shadow-sm scale-105'
-                : 'text-stone-500 hover:text-stone-800 hover:bg-white/40'}
+                ? 'bg-white text-brand-primary shadow-sm scale-110 ring-2 ring-white/50'
+                : 'text-stone-500 hover:text-stone-700 hover:bg-white/40'}
         `}
     >
-        <Icon size={16} />
-        <span className="hidden sm:inline">{label}</span>
+        <div className={`absolute inset-0 bg-gradient-to-r from-white/0 via-white/40 to-white/0 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-700`} />
+
+        <Icon size={18} className="relative z-10" />
+        <span className="hidden sm:inline relative z-10">{label}</span>
     </NavLink>
 );
 

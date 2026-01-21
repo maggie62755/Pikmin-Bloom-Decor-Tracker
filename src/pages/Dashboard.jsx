@@ -1,6 +1,6 @@
 import React, { useState, useMemo, useEffect } from 'react';
 import { usePikmin } from '../context/PikminContext';
-import { DECOR_CATEGORIES, DECOR_STATUS, PIKMIN_COLORS, isStandardCategory } from '../constants';
+import { DECOR_CATEGORIES, DECOR_STATUS, DECOR_STATUS_LABELS, PIKMIN_COLORS, isStandardCategory } from '../constants';
 import { COLORS } from '../theme/colors';
 import './Dashboard.css';
 
@@ -115,10 +115,10 @@ const Dashboard = () => {
     }, [activeCategories, calculateProgress, collection]);
 
     const statusData = [
-        { name: '飾品獲得', value: stats[DECOR_STATUS.COLLECTED], color: COLORS.status.collected },
-        { name: '培養感情中', value: stats[DECOR_STATUS.GROWING], color: COLORS.status.growing },
-        { name: '花苗等待孵化', value: stats[DECOR_STATUS.SEEDLING], color: COLORS.status.seedling },
-        { name: '未獲得花苗', value: stats[DECOR_STATUS.NOT_COLLECTED], color: COLORS.status.missing },
+        { name: DECOR_STATUS_LABELS[DECOR_STATUS.COLLECTED], value: stats[DECOR_STATUS.COLLECTED], color: COLORS.status.collected },
+        { name: DECOR_STATUS_LABELS[DECOR_STATUS.GROWING], value: stats[DECOR_STATUS.GROWING], color: COLORS.status.growing },
+        { name: DECOR_STATUS_LABELS[DECOR_STATUS.SEEDLING], value: stats[DECOR_STATUS.SEEDLING], color: COLORS.status.seedling },
+        { name: DECOR_STATUS_LABELS[DECOR_STATUS.NOT_COLLECTED], value: stats[DECOR_STATUS.NOT_COLLECTED], color: COLORS.status.missing },
     ];
 
     const colorData = useMemo(() => PIKMIN_COLORS.map(c => {
@@ -151,20 +151,28 @@ const Dashboard = () => {
                 availableCategories={availableCategories}
             />
 
-            {/* Top Row: Donut Chart + Stats Grid */}
-            <div className="charts-grid mb-8">
-                <PikminDonutChart data={statusData} title="收集進度" />
+            {/* Top Row: Overview (Donut + Stats) */}
+            <div className="dashboard-section-glass grid grid-cols-1 lg:grid-cols-[1.2fr_2fr] gap-8 items-center animate-[float_0.5s_ease-out]">
+                <div className="h-full min-h-[400px]">
+                    <PikminDonutChart data={statusData} title="收集進度" transparent={true} />
+                </div>
                 <DashboardStats
                     stats={stats}
-                    className="grid grid-cols-2 gap-6" // Force 2x2 grid
+                    className="grid grid-cols-2 lg:grid-cols-2 gap-4 h-full"
                 />
             </div>
 
-            {/* Bottom Row: Bar Charts */}
-            <DashboardCharts
-                colorData={colorData}
-                missingByColor={missingByColor}
-            />
+            {/* Bottom Row: Detailed Analysis (Bar Charts) */}
+            <div className="dashboard-section-glass animate-[float_0.6s_ease-out_0.2s_both]">
+                <h3 className="text-xl font-bold text-stone-700 mb-6 px-2 flex items-center gap-2">
+                    <span className="text-2xl">📊</span> 詳細數據分析
+                </h3>
+                <DashboardCharts
+                    colorData={colorData}
+                    missingByColor={missingByColor}
+                    transparent={true}
+                />
+            </div>
 
             <IncompleteList incompleteCategories={incompleteCategories} />
 

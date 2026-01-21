@@ -1,34 +1,41 @@
 @import "tailwindcss";
 @config "../tailwind.config.js";
 
+/* Import Nunito (Rounded & Modern) */
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700;800;900&display=swap');
+
 @layer base {
   :root {
-    /* Colors from theme/colors.js */
-    --color-stone-50: #fafaf9;
-    --color-stone-100: #f5f5f4;
-    --color-stone-200: #e7e5e4;
-    --color-stone-300: #d6d3d1;
-    --color-stone-400: #a8a29e;
-    --color-stone-800: #292524;
-    --color-stone-900: #1c1917;
+    /* Colors from theme/colors.js mapping */
+    --color-bg-base: #F7F9F5;
+    --color-text-primary: #1C1917;
+    --color-text-secondary: #78716C;
     
-    --brand-primary: #4d7c0f;
-    --brand-secondary: #db2777;
-    --brand-accent: #d97706;
+    --brand-primary: #65A30D;
+    --brand-secondary: #EC4899;
+    --brand-accent: #F59E0B;
 
-    /* Ultra-subtle grass pattern to avoid "noisy" visuals */
-    --grass-pattern: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M10 10L12 15L10 20M30 40L32 45L30 50M50 10L52 15L50 20' stroke='%234d7c0f' stroke-width='1' fill='none' stroke-opacity='0.03'/%3E%3C/svg%3E");
+    /* Glass Effect Variables */
+    --glass-bg: rgba(255, 255, 255, 0.65);
+    --glass-border: rgba(255, 255, 255, 0.6);
+    --glass-blur: 20px;
+    --glass-shadow: 0 8px 32px 0 rgba(77, 124, 15, 0.07);
   }
 
   body {
     margin: 0;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    background-color: var(--color-stone-50);
-    color: var(--color-stone-900);
-    background-image: var(--grass-pattern);
+    background-color: var(--color-bg-base);
+    color: var(--color-text-primary);
+    
+    /* Dynamic Nature Gradient Background */
+    background-image: 
+        radial-gradient(circle at 10% 20%, rgba(236, 252, 203, 0.4) 0%, transparent 40%),
+        radial-gradient(circle at 90% 60%, rgba(252, 231, 243, 0.4) 0%, transparent 40%),
+        radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.8) 0%, transparent 100%);
     background-attachment: fixed;
-    font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    font-family: 'Nunito', sans-serif; /* Applied new font globally */
   }
 
   html {
@@ -37,182 +44,137 @@
 }
 
 @layer components {
+  /* 
+   * Glass Panel 
+   * The core container style for the app
+   */
   .glass-panel {
-    background-color: rgba(255, 255, 255, 0.7);
-    backdrop-filter: blur(24px);
-    -webkit-backdrop-filter: blur(24px);
-    border: 1px solid rgba(255, 255, 255, 0.5);
-    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25); /* shadow-2xl */
-    /* shadow-stone-200/50 is trickier in vanilla without var, approximating */
-    box-shadow: 0 25px 50px -12px rgba(231, 229, 228, 0.5); 
+    background-color: var(--glass-bg);
+    backdrop-filter: blur(var(--glass-blur));
+    -webkit-backdrop-filter: blur(var(--glass-blur));
+    border: 1px solid var(--glass-border);
+    box-shadow: var(--glass-shadow);
+    transition: all 0.3s ease;
   }
   
+  /* 
+   * Soft Card
+   * Used for list items, stats, etc.
+   */
   .soft-card {
-    background-color: rgba(255, 255, 255, 0.9);
-    border: 1px solid var(--color-stone-100);
-    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05); /* shadow-sm */
-    border-radius: 1.5rem; /* rounded-3xl */
-    transition: all 300ms cubic-bezier(0.4, 0, 0.2, 1);
+    background-color: rgba(255, 255, 255, 0.85);
+    border: 1px solid rgba(255, 255, 255, 0.8);
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.02), 0 2px 4px -1px rgba(0, 0, 0, 0.02);
+    border-radius: 1.5rem;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  .soft-card:hover {
+    background-color: rgba(255, 255, 255, 0.95);
+    transform: translateY(-2px);
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05), 0 4px 6px -2px rgba(0, 0, 0, 0.025);
   }
 
+  /* Buttons */
   .btn-primary {
-    padding: 0.75rem 1.5rem; /* px-6 py-3 */
-    background-color: var(--brand-primary);
+    padding: 0.75rem 1.5rem;
+    background: linear-gradient(135deg, var(--brand-primary), #4d7c0f);
     color: white;
-    border-radius: 9999px; /* rounded-full */
-    font-weight: 900; /* font-black */
-    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05); /* shadow-lg */
-    transition: all 150ms cubic-bezier(0.4, 0, 0.2, 1);
+    border-radius: 9999px;
+    font-weight: 800;
+    box-shadow: 0 4px 12px rgba(101, 163, 13, 0.3);
+    transition: all 0.2s ease;
+    border: 2px solid transparent;
   }
   .btn-primary:hover {
-    filter: brightness(1.1);
+    box-shadow: 0 6px 16px rgba(101, 163, 13, 0.4);
+    transform: translateY(-1px);
+    filter: brightness(1.05);
   }
   .btn-primary:active {
-    transform: scale(0.95);
+    transform: scale(0.98);
   }
 
   .btn-secondary {
     padding: 0.75rem 1.5rem;
-    background-color: white;
-    color: var(--color-stone-800);
-    border: 1px solid var(--color-stone-200);
+    background-color: rgba(255, 255, 255, 0.8);
+    color: var(--color-text-secondary);
+    border: 1px solid rgba(0,0,0,0.05);
     border-radius: 9999px;
-    font-weight: 900;
-    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
-    transition: all 150ms;
+    font-weight: 800;
+    transition: all 0.2s ease;
   }
   .btn-secondary:hover {
-    background-color: var(--color-stone-50);
-  }
-  .btn-secondary:active {
-    transform: scale(0.95);
+    background-color: white;
+    color: var(--brand-primary);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
   }
 
   /* Layout & Typography */
   .page-container {
-    max-width: 56rem; /* max-w-4xl (4 * 16 * 14 = 896px? No, 4xl is 896px (56rem)) */
-    margin-left: auto;
-    margin-right: auto;
-    padding-bottom: 5rem; /* pb-20 */
+    max-width: 80rem; /* max-w-7xl */
+    margin: 0 auto;
+    padding: 0 1.5rem 6rem 1.2rem;
   }
 
   .section-header {
     display: flex;
     flex-direction: column;
     gap: 0.5rem;
-    margin-bottom: 1.2rem;
+    margin-bottom: 1.5rem;
+    margin-top: 1rem;
+    text-align: center;
+  }
+  @media (min-width: 768px) {
+    .section-header {
+      text-align: left;
+    }
   }
 
-
   .section-title {
-    font-size: 1.875rem; /* 3xl */
-    line-height: 2.25rem;
+    font-size: 2.25rem;
+    line-height: 2.5rem;
     font-weight: 900;
-    color: var(--color-stone-900);
-    letter-spacing: -0.025em; /* tracking-tight */
-    margin: 0;
+    color: var(--color-text-primary);
+    letter-spacing: -0.03em;
   }
 
   .section-desc {
-    color: var(--color-stone-400);
-    font-weight: 700;
-    margin: 0;
+    color: var(--color-text-secondary);
+    font-weight: 600;
+    font-size: 1.125rem;
   }
 
-  /* Specific Components */
+  /* Components: Stat Card */
   .stat-card-value {
-    font-size: 2.25rem; /* 4xl */
-    line-height: 2.5rem;
+    font-size: 2.5rem;
+    line-height: 1;
     font-weight: 900;
-    margin-bottom: 0.25rem;
-    transition: transform 150ms;
+    margin-bottom: 0.5rem;
+    transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
   }
   .group:hover .stat-card-value {
-      transform: scale(1.1);
+      transform: scale(1.15) rotate(-2deg);
   }
 
   .stat-card-label {
-    font-size: 0.875rem; /* sm */
+    font-size: 0.875rem;
     font-weight: 700;
-    color: var(--color-stone-400);
+    color: var(--color-text-secondary);
     text-transform: uppercase;
-    letter-spacing: 0.05em; /* tracking-wider */
+    letter-spacing: 0.05em;
   }
 
   .nav-tabs-wrapper {
     display: flex;
-    background-color: rgba(245, 245, 244, 0.5); /* stone-100/50 */
-    padding: 0.375rem; /* p-1.5 */
+    background-color: rgba(255, 255, 255, 0.5);
+    padding: 0.375rem;
     border-radius: 9999px;
-    border: 1px solid rgba(231, 229, 228, 0.5); /* stone-200/50 */
-    box-shadow: inset 0 2px 4px 0 rgba(0, 0, 0, 0.06); /* shadow-inner */
-    overflow: hidden;
+    border: 1px solid rgba(255, 255, 255, 0.6);
+    backdrop-filter: blur(8px);
+    box-shadow: 0 2px 10px rgba(0,0,0,0.03);
   }
 
-  /* Custom Scrollbar Helper */
-  .custom-scrollbar {
-    scrollbar-width: thin;
-    scrollbar-color: var(--color-stone-200) transparent;
-  }
-  .custom-scrollbar::-webkit-scrollbar {
-    width: 6px;
-    height: 6px;
-  }
-  .custom-scrollbar::-webkit-scrollbar-track {
-    background: transparent;
-  }
-  .custom-scrollbar::-webkit-scrollbar-thumb {
-    background-color: rgba(231, 229, 228, 0.5);
-    border-radius: 9999px;
-    transition: background-color 150ms;
-  }
-  .custom-scrollbar::-webkit-scrollbar-thumb:hover {
-    background-color: var(--color-stone-300);
-  }
-
-  /* Shared Layout Utilities */
-  .page-header-row {
-    display: flex;
-    flex-direction: column;
-    gap: 1.5rem; /* gap-6 */
-    margin-bottom: 1rem; /* mb-8 */
-  }
-  @media (min-width: 640px) { /* sm */
-    .page-header-row {
-      flex-direction: row;
-      align-items: center;
-      justify-content: space-between;
-    }
-  }
-
-  /* Empty States */
-  .empty-state {
-    text-align: center;
-    padding-top: 5rem;
-    padding-bottom: 5rem;
-    color: var(--color-stone-400);
-  }
-  
-  .empty-state-text {
-    font-size: 1.125rem; /* lg */
-    font-weight: 500;
-    margin: 0;
-  }
-
-  /* Links & Text Buttons */
-  .btn-link {
-    margin-top: 0.5rem;
-    color: var(--brand-primary);
-    background: transparent;
-    border: none;
-    font-weight: 500;
-    cursor: pointer;
-  }
-  .btn-link:hover {
-    text-decoration: underline;
-  }
-
-  /* Dashboard Grids & Panels */
+  /* Dashboard Grid */
   .stats-grid {
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -229,32 +191,25 @@
     display: grid;
     gap: 2rem;
   }
-  @media (min-width: 768px) {
+  @media (min-width: 1024px) {
     .charts-grid {
       grid-template-columns: repeat(2, minmax(0, 1fr));
     }
   }
 
   .chart-panel {
-    /* Extending glass-panel styles here explicitly since @apply failed */
-    background-color: rgba(255, 255, 255, 0.7);
-    backdrop-filter: blur(24px);
-    -webkit-backdrop-filter: blur(24px);
-    border: 1px solid rgba(255, 255, 255, 0.5);
-    box-shadow: 0 25px 50px -12px rgba(231, 229, 228, 0.5); 
+    /* Extending glass-panel styles explicitly to avoid @apply error */
+    background-color: var(--glass-bg);
+    backdrop-filter: blur(var(--glass-blur));
+    -webkit-backdrop-filter: blur(var(--glass-blur));
+    border: 1px solid var(--glass-border);
+    box-shadow: var(--glass-shadow);
+    transition: all 0.3s ease;
     
     padding: 2rem;
-    border-radius: 2rem; /* rounded-4xl */
-    height: 350px;
+    border-radius: 2rem;
+    height: 400px;
     display: flex;
     flex-direction: column;
-  }
-  
-  .chart-title {
-    font-size: 1.125rem; /* lg */
-    font-weight: 900;
-    color: var(--color-stone-900);
-    margin-bottom: 1rem;
-    margin-top: 0;
   }
 }

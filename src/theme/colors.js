@@ -1,37 +1,39 @@
 export const COLORS = {
-  // Nature-inspired tones (Adjusted for visual comfort)
+  // Nature-inspired tones (Refined for a softer, premium look)
   nature: {
-    grass: '#fafaf9',  // Stone-50 (Neutral background)
-    meadow: '#f0fdf4', // Very pale green-50
-    earth: '#451a03',  // Darker brown for text/contrast
-    sky: '#f0f9ff',    // Sky-50
-    flower: '#fdf2f8', // Pink-50
+    grass: '#F7F9F5',   // Very subtle warm greenish-white
+    meadow: '#ECFCCB',  // Light lime green
+    earth: '#57534E',   // Warm Stone-600
+    sky: '#E0F2FE',     // Sky-100
+    flower: '#FCE7F3',  // Pink-100
+    sun: '#FEF3C7',     // Amber-100
   },
 
-  // Brand
+  // Brand Colors (More vibrant & friendly)
   brand: {
-    primary: '#4d7c0f',   // Darker Lime-700 (Forest feel, less neon)
-    secondary: '#db2777', // Pink-600
-    accent: '#d97706',    // Amber-600 (Earthy accent)
+    primary: '#65A30D',   // Lime-600: Fresh & energetic
+    secondary: '#EC4899', // Pink-500: Playful & floral
+    accent: '#F59E0B',    // Amber-500: Warm & highlighting
+    dark: '#3F6212',      // Lime-800: Deep contrast
   },
   
-  // Status Colors (Refined)
+  // Status Colors (Pastel yet clear)
   status: {
-    collected: '#2D9C5E',
-    growing: '#FF85A2',
-    seedling: '#FFB347',
-    missing: '#CBD5E1',
+    collected: '#84CC16', // Lime-500
+    growing: '#F472B6',   // Pink-400
+    seedling: '#FBBF24',  // Amber-400
+    missing: '#E2E8F0',   // Slate-200
   },
 
-  // Pikmin Type Colors (Remains standard but slightly softened if needed)
+  // Pikmin Type Colors (Softened for better readability on white)
   pikmin: {
-    red: '#e54c47',
-    yellow: '#fae866',
-    blue: '#408de6',
-    white: '#f1f5f9',
-    purple: '#a54bba',
-    rock: '#626365',
-    winged: '#eea9db',
-    ice: '#93f1f8',
+    red: '#EF4444',     // Red-500
+    yellow: '#FACC15',  // Yellow-400
+    blue: '#3B82F6',    // Blue-500
+    white: '#E2E8F0',   // Slate-200 (Adjusted for visibility)
+    purple: '#A855F7',  // Purple-500
+    rock: '#78716C',    // Stone-500
+    winged: '#F472B6',  // Pink-400
+    ice: '#22D3EE',     // Cyan-400
   }
 };

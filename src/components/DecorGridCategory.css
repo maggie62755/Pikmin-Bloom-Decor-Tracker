@@ -2,151 +2,147 @@
 
 .grid-category-container {
     overflow: hidden;
-    margin-bottom: 1.2rem; /* mb-6 */
-    transition: all 0.3s ease;
+    margin-bottom: 1rem;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    background-color: rgba(255, 255, 255, 0.6); /* Base glass opacity */
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.6);
 }
 
 .grid-category-container.is-open {
-    outline: 1px solid rgba(231, 229, 228, 1); /* ring-1 ring-stone-200 */
-    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04); /* shadow-xl */
+    background-color: rgba(255, 255, 255, 0.85); /* More opaque when open */
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.05), 0 8px 10px -6px rgba(0, 0, 0, 0.01);
+    border-color: rgba(255, 255, 255, 0.8);
+    transform: scale(1.005); /* Subtle pop */
 }
 
-.grid-category-container:not(.is-open):hover {
-    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06); /* hover:shadow-md */
-}
-
+/* Header */
 .grid-category-header {
     width: 100%;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 1.2rem; /* p-6 */
-    transition: background-color 0.2s ease;
+    padding: 1rem 1.25rem;
+    background: transparent;
     border: none;
     cursor: pointer;
+    transition: all 0.2s ease;
 }
 
-.grid-category-header.is-open {
-    background-color: rgba(250, 250, 249, 0.5); /* bg-stone-50/50 */
+.grid-category-header:hover {
+    background-color: rgba(255, 255, 255, 0.5);
 }
 
-.grid-category-header:not(.is-open) {
-    background-color: white;
-}
-
-.grid-category-header:not(.is-open):hover {
-    background-color: rgba(250, 250, 249, 0.3); /* hover:bg-stone-50/30 */
-}
-
+/* Title Area */
 .grid-category-title-area {
     display: flex;
     align-items: center;
-    gap: 1rem; /* gap-4 */
+    gap: 1rem;
 }
 
+/* Chevron Circle */
 .grid-category-chevron-wrapper {
-    padding: 0.5rem; /* p-2 */
-    border-radius: 0.75rem; /* rounded-xl */
-    transition: background-color 0.2s ease, color 0.2s ease;
+    width: 2rem;
+    height: 2rem;
+    border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
+    background-color: rgba(255, 255, 255, 0.5);
+    color: var(--color-stone-400);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .grid-category-chevron-wrapper.is-open {
-    background-color: white;
-    color: #83a598; /* approximate brand-primary */
-    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05); /* shadow-sm */
-}
-
-.grid-category-chevron-wrapper:not(.is-open) {
-    color: #d6d3d1; /* text-stone-300 */
+    background-color: var(--brand-primary);
+    color: white;
+    transform: rotate(180deg);
+    box-shadow: 0 4px 6px -1px rgba(101, 163, 13, 0.3);
 }
 
 .grid-category-icon {
-    width: 2rem; /* 8 */
-    height: 2rem;
+    width: 2.25rem;
+    height: 2.25rem;
     object-fit: contain;
+    filter: drop-shadow(0 2px 4px rgba(0,0,0,0.1));
 }
 
 .grid-category-title {
-    font-weight: 900; /* font-black */
-    color: #292524; /* stone-800 */
-    font-size: 1.25rem; /* text-xl */
-    letter-spacing: -0.025em; /* tracking-tight */
+    font-weight: 800;
+    color: var(--color-stone-700);
+    font-size: 1.125rem;
+    letter-spacing: -0.01em;
 }
 
+/* Progress Area */
 .grid-category-progress-area {
     display: flex;
     align-items: center;
-    gap: 1rem; /* gap-4 */
+    gap: 1rem;
 }
 
 .grid-category-progress-bar-bg {
-    height: 0.625rem; /* 2.5 */
-    width: 6rem; /* 24 */
-    background-color: #f5f5f4; /* stone-100 */
+    height: 0.5rem;
+    width: 6rem;
+    background-color: var(--color-stone-200);
     border-radius: 9999px;
     overflow: hidden;
-    display: none; /* hidden */
-    border: 1px solid rgba(231, 229, 228, 0.5); /* border-stone-200/50 */
+    display: none;
 }
 
 @media (min-width: 640px) {
     .grid-category-progress-bar-bg {
-        display: block; /* sm:block */
+        display: block;
     }
 }
 
 .grid-category-progress-bar-fill {
     height: 100%;
-    background-color: #83a598; /* brand-primary */
-    transition: width 0.7s cubic-bezier(0, 0, 0.2, 1);
+    background-color: var(--brand-primary);
+    border-radius: 9999px;
+    transition: width 0.7s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .grid-category-progress-badge {
-    font-size: 0.75rem; /* text-xs */
-    font-weight: 900; /* font-black */
-    color: #57534e; /* stone-600 */
-    background-color: white;
-    padding: 0.5rem 1rem; /* py-2 px-4 */
+    font-size: 0.75rem;
+    font-weight: 800;
+    color: var(--color-stone-500);
+    background-color: rgba(255, 255, 255, 0.5);
+    padding: 0.375rem 0.75rem;
     border-radius: 9999px;
-    border: 1px solid #f5f5f4; /* border-stone-100 */
-    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05); /* shadow-sm */
-    line-height: 1;
-    display: flex;
-    align-items: center;
-    gap: 0.375rem; /* 1.5 */
-    white-space: nowrap;
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    transition: all 0.2s;
+}
+
+.grid-category-container.is-open .grid-category-progress-badge {
+    background-color: white;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.05);
 }
 
 .grid-category-progress-badge .current {
-    color: #83a598; /* text-brand-primary */
+    color: var(--brand-primary);
 }
 
-.grid-category-progress-badge .separator {
-    color: #d6d3d1; /* text-stone-300 */
-    font-weight: 500;
+/* Smooth Accordion Values */
+.grid-category-content-wrapper {
+    display: grid;
+    grid-template-rows: 0fr;
+    transition: grid-template-rows 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-.grid-category-progress-badge .total {
-    color: #a8a29e; /* text-stone-400 */
+.grid-category-content-wrapper.is-open {
+    grid-template-rows: 1fr;
+    border-top: 1px solid rgba(255, 255, 255, 0.3);
 }
 
 .grid-category-content {
-    padding: 1.5rem; /* p-6 */
-    background-color: rgba(255, 255, 255, 0.4); /* bg-white/40 */
-    border-top: 1px solid #f5f5f4; /* border-stone-100 */
-    animation: accordion-in 0.3s ease-out;
+    overflow: hidden;
+    padding: 0 1.5rem; /* Horizontal padding only */
 }
 
-@keyframes accordion-in {
-    from {
-        opacity: 0;
-        transform: translateY(-0.5rem);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
+/* Inner content spacing controlled by wrapper padding animation if needed, 
+   or just vertical margin on the inner content */
+.grid-category-content > * {
+    margin-top: 1.5rem;
+    margin-bottom: 1.5rem;
 }

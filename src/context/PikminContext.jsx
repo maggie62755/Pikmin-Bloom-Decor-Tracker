@@ -26,11 +26,15 @@ export const PikminProvider = ({ children }) => {
         localStorage.setItem('pikmin-collection', JSON.stringify(collection));
     }, [collection]);
 
-    const toggleStatus = React.useCallback((variantId, colorId) => {
+    const toggleStatus = React.useCallback((variantId, colorId, specificStatus = null) => {
         setCollection(prev => {
             const variant = prev[variantId] || {};
             const currentStatus = variant[colorId] || DECOR_STATUS.NOT_COLLECTED;
-            const nextStatus = (currentStatus + 1) % 4;
+
+            // If specificStatus is provided, use it. Otherwise cycle.
+            const nextStatus = specificStatus !== null
+                ? specificStatus
+                : (currentStatus + 1) % 4;
 
             return {
                 ...prev,
@@ -58,17 +62,17 @@ export const PikminProvider = ({ children }) => {
 
         return { collected: collectedArg, total: totalArg };
     }, [collection]);
-    
+
     const calculateTotalProgress = React.useCallback(() => {
-          let collected = 0;
-          let total = 0;
-          DECOR_CATEGORIES.forEach(cat => {
-              const { collected: c, total: t } = calculateProgress(cat);
-              collected += c;
-              total += t;
-          });
-          return { collected, total };
-      }, [calculateProgress]);
+        let collected = 0;
+        let total = 0;
+        DECOR_CATEGORIES.forEach(cat => {
+            const { collected: c, total: t } = calculateProgress(cat);
+            collected += c;
+            total += t;
+        });
+        return { collected, total };
+    }, [calculateProgress]);
 
     const value = React.useMemo(() => ({
         collection,
@@ -84,12 +88,12 @@ export const PikminProvider = ({ children }) => {
         syncStatus,
         syncMessage
     }), [
-        collection, 
-        toggleStatus, 
-        calculateProgress, 
-        calculateTotalProgress, 
-        login, logout, user, 
-        saveToSheet, loadFromSheet, 
+        collection,
+        toggleStatus,
+        calculateProgress,
+        calculateTotalProgress,
+        login, logout, user,
+        saveToSheet, loadFromSheet,
         syncStatus, syncMessage
     ]);
 

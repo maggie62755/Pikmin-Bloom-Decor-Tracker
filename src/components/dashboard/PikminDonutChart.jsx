@@ -7,7 +7,7 @@ import { PieChart, Pie, Cell, ResponsiveContainer } from 'recharts';
  * @param {string} centerLabel - 中心數字下方的文字 (預設為 Progress)
  */
 
-const PikminDonutChart = ({ data, title, centerLabel = "Progress" }) => {
+const PikminDonutChart = ({ data, title, centerLabel = "Progress", transparent = false }) => {
     // 計算總數與已收藏百分比
     const total = data.reduce((sum, item) => sum + item.value, 0);
     const collectedItem = data.find(d => d.name === '飾品獲得' || d.name === '已收藏' || d.name === 'Collected');
@@ -17,7 +17,7 @@ const PikminDonutChart = ({ data, title, centerLabel = "Progress" }) => {
     const chartData = data.map(item => ({ ...item, totalValue: total }));
 
     return (
-        <div className="chart-panel flex flex-col bg-white/80 backdrop-blur-md rounded-[2.5rem] p-6 shadow-sm border border-stone-100 h-full min-h-[350px]">
+        <div className={`flex flex-col h-full min-h-[350px] ${transparent ? '' : 'chart-panel bg-white/80 backdrop-blur-md rounded-[2.5rem] p-6 shadow-sm border border-stone-100'}`}>
             {title && (
                 <h3 className="text-lg font-bold text-stone-700 px-2 flex items-center gap-2 mb-2">
                     <span className="w-1.5 h-6 bg-pink-400 rounded-full" /> {title}
