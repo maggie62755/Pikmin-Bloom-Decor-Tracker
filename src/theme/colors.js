@@ -22,18 +22,18 @@ export const COLORS = {
     collected: '#84CC16', // Lime-500
     growing: '#F472B6',   // Pink-400
     seedling: '#FBBF24',  // Amber-400
-    missing: '#E2E8F0',   // Slate-200
+    missing: '#E2E8F0',
   },
 
   // Pikmin Type Colors (Softened for better readability on white)
   pikmin: {
-    red: '#EF4444',     // Red-500
-    yellow: '#FACC15',  // Yellow-400
-    blue: '#3B82F6',    // Blue-500
-    white: '#E2E8F0',   // Slate-200 (Adjusted for visibility)
-    purple: '#A855F7',  // Purple-500
-    rock: '#78716C',    // Stone-500
-    winged: '#F472B6',  // Pink-400
-    ice: '#22D3EE',     // Cyan-400
+    red: '#E53E3E',
+    yellow: '#ECC94B',
+    blue: '#3182CE',
+    white: '#e6ecf5ff',
+    purple: '#9561C5',
+    rock: '#4A5568',
+    winged: '#F687B3',
+    ice: '#BEE3F8',
   }
 };

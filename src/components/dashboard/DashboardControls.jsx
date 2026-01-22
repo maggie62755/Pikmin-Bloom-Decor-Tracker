@@ -34,7 +34,7 @@ const DashboardControls = ({
                 <ChevronDown size={20} className="text-stone-400" />
 
                 {isCategoryDropdownOpen && (
-                    <div className="multi-select-dropdown" onClick={(e) => e.stopPropagation()}>
+                    <div className="multi-select-dropdown z-50" onClick={(e) => e.stopPropagation()}>
                         <input
                             type="text"
                             placeholder="搜尋類別..."

@@ -13,6 +13,7 @@
 .dashboard-search-bar {
     pointer-events: auto;
     position: relative;
+    z-index: 50;
     max-width: 32rem;
     margin: 0 auto 0.5rem auto;
     

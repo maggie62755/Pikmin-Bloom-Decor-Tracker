@@ -19,20 +19,23 @@ const Layout = () => {
 };
 
 
+import ScrollToTop from './components/shared/ScrollToTop';
+
 function App() {
-  return (
-    <PikminProvider>
-        <BrowserRouter>
-            <Routes>
-                <Route path="/" element={<Layout />}>
-                    <Route index element={<Home />} />
-                    <Route path="tracker" element={<Tracker />} />
-                    <Route path="dashboard" element={<Dashboard />} />
-                </Route>
-            </Routes>
-        </BrowserRouter>
-    </PikminProvider>
-  );
+    return (
+        <PikminProvider>
+            <BrowserRouter>
+                <ScrollToTop />
+                <Routes>
+                    <Route path="/" element={<Layout />}>
+                        <Route index element={<Home />} />
+                        <Route path="tracker" element={<Tracker />} />
+                        <Route path="dashboard" element={<Dashboard />} />
+                    </Route>
+                </Routes>
+            </BrowserRouter>
+        </PikminProvider>
+    );
 }
 
 export default App;

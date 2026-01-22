@@ -7,13 +7,15 @@ const DashboardCharts = ({ colorData, missingByColor, transparent = false }) => 
             {/* 1. 已收藏分佈 */}
             <PikminStatChart
                 data={colorData}
-                title="皮克敏色系分佈 (已收藏)"
+                title="已收藏分佈"
+                subtitle="COLLECTED BY COLOR"
                 transparent={transparent}
             />
 
             <PikminStatChart
                 data={missingByColor}
-                title="缺少的皮克敏 (按顏色)"
+                title="缺漏分佈"
+                subtitle="MISSING BY COLOR"
                 transparent={transparent}
             />
 

@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
 import { LayoutGrid, List, Search, ArrowUpDown, Filter, X, ChevronsDown, ChevronsUp } from 'lucide-react';
 import { usePikmin } from '../context/PikminContext';
 import { DECOR_CATEGORIES, isStandardCategory } from '../constants';
@@ -12,10 +13,19 @@ const Tracker = () => {
     const [viewMode, setViewMode] = useState('grid');
     const [openCategories, setOpenCategories] = useState({});
 
-    // Search & Filter State
-    const [searchQuery, setSearchQuery] = useState('');
+    const location = useLocation();
+
+    // Search & Filter State (Initialize from navigation state if available)
+    const [searchQuery, setSearchQuery] = useState(location.state?.searchQuery || '');
     const [sortOrder, setSortOrder] = useState('default'); // default, asc (low->high), desc (high->low)
-    const [filterType, setFilterType] = useState('all'); // all, standard, event
+    const [filterType, setFilterType] = useState(location.state?.filterType || 'all'); // all, standard, event
+
+    // Clear state on unmount or new navigation to prevent persistent params? 
+    // Actually standard behavior is fine, user can clear it manually.
+
+    // If coming from dashboard with a search, maybe expand the relevant category automatically?
+    // That would be a nice touch, but requires finding which category matches.
+    // For now simple search filter is enough.
 
     const toggleCategory = (id) => {
         setOpenCategories(prev => ({ ...prev, [id]: !prev[id] }));
