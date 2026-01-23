@@ -37,8 +37,8 @@ const IncompleteList = ({ incompleteCategories }) => {
                                     <div
                                         className="category-icon w-6 h-6 flex-shrink-0 opacity-80"
                                         style={{
-                                            WebkitMaskImage: `url(/src/data/images/icons/${cat.icon})`,
-                                            maskImage: `url(/src/data/images/icons/${cat.icon})`
+                                            WebkitMaskImage: `url(${import.meta.env.BASE_URL}images/icons/${cat.icon})`,
+                                            maskImage: `url(${import.meta.env.BASE_URL}images/icons/${cat.icon})`
                                         }}
                                     />
                                 )}

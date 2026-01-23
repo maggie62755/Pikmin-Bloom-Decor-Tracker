@@ -23,7 +23,7 @@ const PikminCard = React.memo(({ color, status, onClick, variant, category }) =>
     };
 
     const imagePath = (category && variant)
-        ? `/src/data/images/decors_images/${category.image_path}/${variant.image_name}_${color.id.charAt(0).toUpperCase() + color.id.slice(1)}.png`
+        ? `${import.meta.env.BASE_URL}images/decors_images/${category.image_path}/${variant.image_name}_${color.id.charAt(0).toUpperCase() + color.id.slice(1)}.png`
         : null;
 
     const pikminType = color.id;

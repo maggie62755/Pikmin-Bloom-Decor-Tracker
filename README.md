@@ -75,7 +75,8 @@ To use the sync feature / 使用同步功能:
 3. Click **Save** to create/update a spreadsheet named `PikminBloomTracker` in your Google Drive. (點擊 **Save** 以在您的 Google Drive 建立/更新名為 `PikminBloomTracker` 的試算表)
 4. Click **Load** to restore your progress on another device. (點擊 **Load** 以在其他裝置恢復您的進度)
 
-## License / 授權
 
-This project is for personal use and fan appreciation. Pikmin is a trademark of Nintendo.
-本專案僅供個人使用與粉絲交流，Pikmin 為任天堂之商標。
+
+## Credits & Legal
+- **Images:** All Pikmin icons and decor images are sourced from [Pikmin Wiki](https://www.pikminwiki.com/).
+- **Legal Disclaimer:** This project is a fan-made tool and is not affiliated with, endorsed by, or or specifically approved by Nintendo or Niantic. Pikmin and all related characters and elements are trademarks of Nintendo.

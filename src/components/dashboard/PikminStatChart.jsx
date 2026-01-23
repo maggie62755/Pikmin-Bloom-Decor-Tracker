@@ -16,7 +16,7 @@ const FlowerBar = (props) => {
     if (height === 0) return null;
 
     // const flowerImage = FLOWER_IMAGES[payload.type] || '/assets/flowers/flower.png';
-    const flowerImage = `/assets/flowers/${payload.type}.png`;
+    const flowerImage = `${import.meta.env.BASE_URL}assets/flowers/${payload.type}.png`;
     const stemColor = '#8fa876'; // More natural moss green
     const flowerSize = 48; // Slightly larger flowers
 

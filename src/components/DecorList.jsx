@@ -125,8 +125,8 @@ const DecorRow = React.memo(({ variant, category, collection, onCardClick }) => 
             <div
               className="category-icon w-6 h-6 flex-shrink-0 opacity-80"
               style={{
-                WebkitMaskImage: `url(/src/data/images/icons/${category.icon})`,
-                maskImage: `url(/src/data/images/icons/${category.icon})`
+                WebkitMaskImage: `url(${import.meta.env.BASE_URL}images/icons/${category.icon})`,
+                maskImage: `url(${import.meta.env.BASE_URL}images/icons/${category.icon})`
               }}
             />
           )}
@@ -160,7 +160,7 @@ const DecorRow = React.memo(({ variant, category, collection, onCardClick }) => 
             {itemToRender ? (
               <MiniCard
                 status={collection[variant.id]?.[itemToRender.colorId] || DECOR_STATUS.NOT_COLLECTED}
-                imagePath={`/src/data/images/decors_images/${category.image_path}/${variant.image_name}_${itemToRender.colorId.charAt(0).toUpperCase() + itemToRender.colorId.slice(1)}.png`}
+                imagePath={`${import.meta.env.BASE_URL}images/decors_images/${category.image_path}/${variant.image_name}_${itemToRender.colorId.charAt(0).toUpperCase() + itemToRender.colorId.slice(1)}.png`}
                 color={{ ...itemToRender.baseDef, id: itemToRender.colorId }}
                 onClick={(newStatus) => onCardClick(variant.id, itemToRender.colorId, newStatus)}
               />

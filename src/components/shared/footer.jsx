@@ -4,7 +4,7 @@ import logo from '../../assets/logo.png';
 
 const Footer = () => {
     const currentYear = new Date().getFullYear();
-    const bgImage = '/assets/footer.png';
+    const bgImage = `${import.meta.env.BASE_URL}assets/footer.png`;
 
     return (
         <footer

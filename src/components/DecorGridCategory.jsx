@@ -17,8 +17,8 @@ const DecorGridCategory = React.memo(({ category, isOpen, onToggle, progress, to
             <div
               className="category-icon grid-category-icon"
               style={{
-                WebkitMaskImage: `url(/src/data/images/icons/${category.icon})`,
-                maskImage: `url(/src/data/images/icons/${category.icon})`
+                WebkitMaskImage: `url(${import.meta.env.BASE_URL}images/icons/${category.icon})`,
+                maskImage: `url(${import.meta.env.BASE_URL}images/icons/${category.icon})`
               }}
             />
           )}
