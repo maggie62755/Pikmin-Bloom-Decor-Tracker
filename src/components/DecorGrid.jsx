@@ -3,41 +3,65 @@ import PikminCard from './PikminCard';
 import { PIKMIN_COLORS, DECOR_STATUS } from '../constants';
 import './DecorGrid.css';
 
-const VariantRow = React.memo(({ variant, category, onCardClick, collectionState }) => (
-  <div className="variant-row-container">
-    <div className="variant-header">
-      <div className="variant-line" />
-      <h4 className="variant-title">{variant.name_ch || variant.name}</h4>
-    </div>
-    <div className="pikmin-grid">
-      {PIKMIN_COLORS.map((colorDef) => {
-        const isAvailable = variant.colors.includes(colorDef.id);
-        const status = collectionState?.[variant.id]?.[colorDef.id] || DECOR_STATUS.NOT_COLLECTED;
+const VariantRow = React.memo(({ variant, category, onCardClick, collectionState }) => {
+  const getBaseColorId = (id) => {
+    const base = PIKMIN_COLORS.find(pc =>
+      id === pc.id || id.startsWith(pc.id) && /^\d+$/.test(id.replace(pc.id, ''))
+    );
+    return base ? base.id : id;
+  };
 
-        if (!isAvailable) {
+  const baseColorIds = variant.colors.map(getBaseColorId);
+  const isSequential = new Set(baseColorIds).size !== baseColorIds.length;
+
+  return (
+    <div className="variant-row-container">
+      <div className="variant-header">
+        <div className="variant-line" />
+        <h4 className="variant-title">{variant.name_ch || variant.name}</h4>
+      </div>
+      <div className="pikmin-grid">
+        {PIKMIN_COLORS.map((colorDef, index) => {
+          let itemToRender = null;
+
+          if (isSequential) {
+            const colorId = variant.colors[index];
+            if (colorId) {
+              const itemBaseId = getBaseColorId(colorId);
+              const itemBaseDef = PIKMIN_COLORS.find(c => c.id === itemBaseId) || colorDef;
+              itemToRender = { colorId, baseDef: itemBaseDef };
+            }
+          } else {
+            const colorId = variant.colors.find(id => getBaseColorId(id) === colorDef.id);
+            if (colorId) {
+              itemToRender = { colorId, baseDef: colorDef };
+            }
+          }
+
+          if (!itemToRender) {
+            return (
+              <div
+                key={colorDef.id}
+                className="empty-pikmin-slot"
+              />
+            );
+          }
+
           return (
-            <div
-              key={colorDef.id}
-              className="empty-pikmin-slot"
+            <PikminCard
+              key={itemToRender.colorId}
+              color={{ ...itemToRender.baseDef, id: itemToRender.colorId }}
+              status={collectionState?.[variant.id]?.[itemToRender.colorId] || DECOR_STATUS.NOT_COLLECTED}
+              variant={variant}
+              category={category}
+              onClick={(newStatus) => onCardClick(variant.id, itemToRender.colorId, newStatus)}
             />
           );
-        }
-
-        return (
-          <PikminCard
-            key={colorDef.id}
-            color={colorDef}
-            status={status}
-            variant={variant}
-            category={category}
-            onClick={(newStatus) => onCardClick(variant.id, colorDef.id, newStatus)}
-          />
-        );
-
-      })}
+        })}
+      </div>
     </div>
-  </div>
-));
+  );
+});
 
 const DecorGrid = React.memo(({ variants, onCardClick, collectionState, category }) => {
   return (

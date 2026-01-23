@@ -11,7 +11,6 @@ const usePseudoRandom = (seed) => {
 // Organic Flower Bar Shape
 const FlowerBar = (props) => {
     const { x, y, width, height, payload, index } = props;
-    console.log(payload)
 
     // Safety check
     if (height === 0) return null;

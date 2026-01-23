@@ -1,7 +1,7 @@
 /* DecorList.css */
 
 .decor-list-container {
-    border-radius: 2rem; /* rounded-4xl */
+    border-radius: 1rem;
     overflow: hidden;
     border: 1px solid rgba(231, 229, 228, 0.5); /* border-stone-200/50 */
     box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04); /* shadow-xl */
@@ -30,7 +30,8 @@
     padding: 1rem 0.75rem; /* Reduced for mobile */
     font-weight: 900;
     color: #1c1917;
-    min-width: 120px; /* Smaller min-width for mobile */
+    white-space: nowrap;
+    min-width: 50px; /* Smaller min-width for mobile */
     position: sticky;
     left: 0;
     background-color: #fafaf9;
@@ -46,14 +47,13 @@
 }
 
 .decor-list-th-color {
-    padding: 1rem 0.25rem; /* Reduced for mobile */
+    padding: 0.5rem 0.25rem; /* Reduced for mobile */
     text-align: center;
-    min-width: 44px; /* Narrower for mobile */
+    min-width: 52px; /* Narrower for mobile, slightly increased to fit larger card */
 }
 
 @media (min-width: 640px) {
     .decor-list-th-color {
-        padding: 1.25rem 0.75rem;
         min-width: 70px;
     }
 }
@@ -80,7 +80,7 @@
 }
 
 .decor-list-td-main {
-    padding: 1rem 0.75rem; /* Reduced for mobile */
+    padding: 0.6rem 0.5rem; /* Further reduced for mobile */
     position: sticky;
     left: 0;
     background-color: white;
@@ -114,6 +114,32 @@
     margin-top: 0.125rem;
 }
 
+/* 手機端點擊顯示名稱提示 */
+@media (max-width: 639px) {
+    .decor-list-td-main:active .flex.flex-col {
+        display: flex !important;
+        position: absolute;
+        left: 3rem;
+        top: 50%;
+        transform: translateY(-50%);
+        background: #1c1917;
+        color: white;
+        padding: 0.25rem 0.75rem;
+        border-radius: 0.5rem;
+        z-index: 50;
+        white-space: nowrap;
+        box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.2);
+    }
+    
+    .decor-list-td-main:active .decor-list-variant-name {
+        color: white;
+    }
+    
+    .decor-list-td-main:active .decor-list-category-name {
+        color: rgba(255,255,255,0.6);
+    }
+}
+
 .decor-list-td-card {
     padding: 0.125rem; /* Very compact for mobile */
     text-align: center;
@@ -128,8 +154,8 @@
 /* MiniCard 樣式 */
 .mini-card {
     position: relative;
-    width: 2.25rem; /* Smaller for mobile: 9x4=36px */
-    height: 2.25rem;
+    width: 2.75rem; /* Increased for mobile visibility */
+    height: 2.75rem;
     margin-left: auto;
     margin-right: auto;
     border-radius: 0.75rem; /* xl */
@@ -172,16 +198,34 @@
     transform: scale(1.1);
 }
 
-.mini-card-img {
-    width: 1.5rem; /* 6x4=24px for mobile */
-    height: 1.5rem;
-    object-fit: contain;
+.mini-card-img-container {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    border-radius: inherit;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
-@media (min-width: 640px) {
+@media (max-width: 639px) {
+    .mini-card-img-container {
+        padding: 0.25rem;
+    }
+}
+
+.mini-card-img {
+    width: 150%; /* Significantly larger for visibility */
+    height: 150%;
+    object-fit: contain;
+    transition: transform 0.3s ease;
+}
+
+@media (max-width: 639px) {
     .mini-card-img {
-        width: 2rem;
-        height: 2rem;
+        width: 110%;
+        height: 110%;
     }
 }
 

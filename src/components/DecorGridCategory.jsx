@@ -14,11 +14,12 @@ const DecorGridCategory = React.memo(({ category, isOpen, onToggle, progress, to
             {isOpen ? <ChevronDown size={22} /> : <ChevronRight size={22} />}
           </div>
           {category.icon && (
-            <img
-              src={`/src/data/images/icons/${category.icon}`}
-              alt=""
-              className="grid-category-icon"
-              onError={(e) => { e.target.style.display = 'none'; }}
+            <div
+              className="category-icon grid-category-icon"
+              style={{
+                WebkitMaskImage: `url(/src/data/images/icons/${category.icon})`,
+                maskImage: `url(/src/data/images/icons/${category.icon})`
+              }}
             />
           )}
           <h3 className="grid-category-title">{category.name_ch || category.name}</h3>

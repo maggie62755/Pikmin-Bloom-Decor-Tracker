@@ -5,6 +5,7 @@ import Navigation from './components/Navigation';
 import Home from './pages/Home';
 import Tracker from './pages/Tracker';
 import Dashboard from './pages/Dashboard';
+import Footer from './components/shared/footer';
 
 // Layout Component
 const Layout = () => {
@@ -14,6 +15,8 @@ const Layout = () => {
             <main className="pt-28 pb-20 px-6">
                 <Outlet />
             </main>
+            <Footer />
+
         </div>
     );
 };

@@ -36,6 +36,7 @@ A beautiful, mobile-responsive web application for tracking your Pikmin Bloom de
 ### Prerequisites / 前置需求
 - Node.js (v18 or higher / v18 或更高版本)
 - A Google Cloud Project with **Sheets API** and **Drive API** enabled. (啟用 Sheets API 和 Drive API 的 Google Cloud 專案)
+- google cloud console: https://console.cloud.google.com/welcome?project=pikmin-bloom-tracker&authuser=1
 
 ### Installation / 安裝步驟
 

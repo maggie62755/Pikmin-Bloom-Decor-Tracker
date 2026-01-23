@@ -63,8 +63,13 @@ export const useDashboardStats = () => {
                 v.colors.forEach(cId => {
                     const status = collection[v.id]?.[cId] || DECOR_STATUS.NOT_COLLECTED;
                     if (status !== DECOR_STATUS.COLLECTED) {
-                        if (missingCounts[cId] !== undefined) {
-                            missingCounts[cId]++;
+                        // Map specific ID (e.g. 'blue1') to base ID (e.g. 'blue')
+                        const baseColorId = PIKMIN_COLORS.find(pc => 
+                            cId === pc.id || cId.startsWith(pc.id) && /^\d+$/.test(cId.replace(pc.id, ''))
+                        )?.id;
+
+                        if (baseColorId && missingCounts[baseColorId] !== undefined) {
+                            missingCounts[baseColorId]++;
                         }
                     }
                 });
@@ -90,12 +95,16 @@ export const useDashboardStats = () => {
                     v.colors.forEach(c => {
                         const status = collection[v.id]?.[c] || DECOR_STATUS.NOT_COLLECTED;
                         if (status !== DECOR_STATUS.COLLECTED) {
-                            const colorName = PIKMIN_COLORS.find(col => col.id === c)?.name_ch || c;
+                            const baseColor = PIKMIN_COLORS.find(col => 
+                                c === col.id || c.startsWith(col.id) && /^\d+$/.test(c.replace(col.id, ''))
+                            );
+                            const colorLabel = baseColor?.name_ch || c;
                             missingItems.push({
-                                label: `${v.name_ch || v.name} (${colorName})`,
+                                label: `${v.name_ch || v.name} (${colorLabel})`,
                                 // Store enough info to navigate/search
                                 searchTerm: v.name_ch || v.name,
-                                filterType: isStandardCategory(cat.id) ? 'standard' : 'event'
+                                filterType: isStandardCategory(cat.id) ? 'standard' : 'event',
+                                categoryId: cat.id
                             });
                         }
                     });
@@ -123,11 +132,15 @@ export const useDashboardStats = () => {
         let count = 0;
         activeCategories.forEach(cat => {
             cat.variants.forEach(v => {
-                if (v.colors.includes(c.id)) {
-                    if ((collection[v.id]?.[c.id] || 0) === DECOR_STATUS.COLLECTED) {
-                        count++;
+                v.colors.forEach(cId => {
+                    // Check if this cId belongs to the base color c.id
+                    const isMatch = cId === c.id || (cId.startsWith(c.id) && /^\d+$/.test(cId.replace(c.id, '')));
+                    if (isMatch) {
+                        if ((collection[v.id]?.[cId] || 0) === DECOR_STATUS.COLLECTED) {
+                            count++;
+                        }
                     }
-                }
+                });
             });
         });
         return { name: c.name_ch, type: c.id || c.name, value: count, fill: COLORS.pikmin[c.id], type: c.id };

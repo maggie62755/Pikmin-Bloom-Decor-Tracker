@@ -1,8 +1,6 @@
 @import "tailwindcss";
-@config "../tailwind.config.js";
-
-/* Import Nunito (Rounded & Modern) */
 @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700;800;900&display=swap');
+@config "../tailwind.config.js";
 
 @layer base {
   :root {
@@ -211,5 +209,16 @@
     height: 400px;
     display: flex;
     flex-direction: column;
+  }
+
+  .category-icon {
+    -webkit-mask-repeat: no-repeat;
+    -webkit-mask-position: center;
+    -webkit-mask-size: contain;
+    mask-repeat: no-repeat;
+    mask-position: center;
+    mask-size: contain;
+    background-color: var(--color-text-secondary);
+    display: inline-block;
   }
 }

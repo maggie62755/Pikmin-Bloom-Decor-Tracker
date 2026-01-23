@@ -11,7 +11,8 @@ const IncompleteList = ({ incompleteCategories }) => {
         navigate('/tracker', {
             state: {
                 searchQuery: item.searchTerm,
-                filterType: item.filterType || 'all'
+                filterType: item.filterType || 'all',
+                openCategoryId: item.categoryId
             }
         });
     };
@@ -31,9 +32,18 @@ const IncompleteList = ({ incompleteCategories }) => {
                 <div className="incomplete-grid">
                     {incompleteCategories.map(cat => (
                         <div key={cat.id} className="incomplete-card group">
-                            <div className="incomplete-header">
+                            <div className="incomplete-header flex items-center gap-2">
+                                {cat.icon && (
+                                    <div
+                                        className="category-icon w-6 h-6 flex-shrink-0 opacity-80"
+                                        style={{
+                                            WebkitMaskImage: `url(/src/data/images/icons/${cat.icon})`,
+                                            maskImage: `url(/src/data/images/icons/${cat.icon})`
+                                        }}
+                                    />
+                                )}
                                 <span className="incomplete-title">{cat.name_ch}</span>
-                                <span className="text-sm font-bold text-brand-primary">{cat.progress}/{cat.total}</span>
+                                <span className="text-sm font-bold text-brand-primary ml-auto">{cat.progress}/{cat.total}</span>
                             </div>
 
                             {/* Progress Bar */}

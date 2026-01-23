@@ -9,11 +9,28 @@ import DecorList from '../components/DecorList';
 import './Tracker.css';
 
 const Tracker = () => {
+    const location = useLocation();
     const { collection, toggleStatus, calculateProgress } = usePikmin();
     const [viewMode, setViewMode] = useState('grid');
-    const [openCategories, setOpenCategories] = useState({});
+    const [openCategories, setOpenCategories] = useState(
+        location.state?.openCategoryId ? { [location.state.openCategoryId]: true } : {}
+    );
 
-    const location = useLocation();
+    // Sync state if navigation happens while already on the page
+    useEffect(() => {
+        if (location.state?.openCategoryId) {
+            setOpenCategories(prev => ({
+                ...prev,
+                [location.state.openCategoryId]: true
+            }));
+        }
+        if (location.state?.searchQuery !== undefined) {
+            setSearchQuery(location.state.searchQuery);
+        }
+        if (location.state?.filterType !== undefined) {
+            setFilterType(location.state.filterType);
+        }
+    }, [location.state]);
 
     // Search & Filter State (Initialize from navigation state if available)
     const [searchQuery, setSearchQuery] = useState(location.state?.searchQuery || '');
