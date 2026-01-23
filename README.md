@@ -4,6 +4,8 @@ A beautiful, mobile-responsive web application for tracking your Pikmin Bloom de
 
 一個美觀、支援行動裝置的網頁應用程式，用於追蹤您的 Pikmin Bloom 飾品收集進度。使用 React, Vite 和 Tailwind CSS 構建。
 
+demo path: https://maggie62755.github.io/Pikmin-Bloom-Decor-Tracker/
+
 ## Features / 功能
 
 - **Comprehensive Tracking**: Track status for all Decor categories including Restaurant, Roadside, and special Events (2024/2025).
