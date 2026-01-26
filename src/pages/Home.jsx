@@ -66,6 +66,66 @@ const Home = () => {
             </section>
 
 
+            {/* Usage Guide */}
+            <section className="space-y-8">
+                <div className="flex items-center gap-4">
+                    <div className="h-px flex-1 bg-stone-200" />
+                    <h2 className="text-2xl font-black text-stone-300 uppercase tracking-widest">操作說明</h2>
+                    <div className="h-px flex-1 bg-stone-200" />
+                </div>
+
+                <div className="grid md:grid-cols-2 gap-6">
+                    {/* Interaction Guide */}
+                    <div className="glass-panel p-8 flex flex-col gap-6">
+                        <div className="flex items-center gap-4 border-b border-stone-100 pb-4">
+                            <div className="w-12 h-12 rounded-2xl bg-brand-primary/10 flex items-center justify-center text-brand-primary">
+                                <Sprout size={24} />
+                            </div>
+                            <h3 className="text-xl font-bold text-stone-800">卡片互動方式</h3>
+                        </div>
+
+                        <div className="space-y-4">
+                            <div className="flex gap-4 items-start">
+                                <div className="bg-stone-100 px-3 py-1 rounded text-sm font-bold text-stone-500 whitespace-nowrap">點擊 (Click)</div>
+                                <p className="text-stone-600 font-medium">
+                                    快速切換 <span className="text-stone-400 font-bold">未取得</span> 與 <span className="text-brand-primary font-bold">已獲得</span> 狀態。
+                                </p>
+                            </div>
+                            <div className="flex gap-4 items-start">
+                                <div className="bg-stone-100 px-3 py-1 rounded text-sm font-bold text-stone-500 whitespace-nowrap">長按 / 右鍵</div>
+                                <p className="text-stone-600 font-medium">
+                                    開啟選單，可選擇詳細狀態：<br />
+                                    <span className="inline-block mt-1 text-sm bg-amber-50 text-amber-700 px-2 py-0.5 rounded">花苗未孵化</span>
+                                    <span className="inline-block mt-1 ml-2 text-sm bg-pink-50 text-pink-600 px-2 py-0.5 rounded">培養感情中</span>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    {/* Sync Guide */}
+                    <div className="glass-panel p-8 flex flex-col gap-6">
+                        <div className="flex items-center gap-4 border-b border-stone-100 pb-4">
+                            <div className="w-12 h-12 rounded-2xl bg-brand-accent/10 flex items-center justify-center text-brand-accent">
+                                <List size={24} />
+                            </div>
+                            <h3 className="text-xl font-bold text-stone-800">資料同步</h3>
+                        </div>
+
+                        <div className="space-y-4">
+                            <p className="text-stone-600 font-medium leading-relaxed">
+                                點擊右上角的 <span className="font-bold text-stone-800">個人頭像</span> 可開啟同步選單。
+                            </p>
+                            <ul className="list-disc list-inside space-y-2 text-stone-600 bg-stone-50 p-4 rounded-2xl text-sm font-medium">
+                                <li>需登入 Google 帳號</li>
+                                <li>資料將儲存於您的私人 Google 試算表</li>
+                                <li>更換裝置時，請務必先 <span className="text-brand-primary font-bold">儲存</span> 再 <span className="text-brand-accent font-bold">讀取</span></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+
             {/* Features */}
             <section className="grid md:grid-cols-3 gap-8 pb-10">
                 <FeatureCard
