@@ -83,7 +83,7 @@ const PikminCard = React.memo(({ color, status, onClick, variant, category }) =>
 
     return (
         <div
-            className={`pikmin-card soft-card ${status === DECOR_STATUS.NOT_COLLECTED ? 'not-collected' : ''} ${statusClass[status] || ''}`}
+            className={`pikmin-card soft-card status-${Object.keys(DECOR_STATUS).find(key => DECOR_STATUS[key] === status).toLowerCase().replace('_', '-')} ${status === DECOR_STATUS.NOT_COLLECTED ? 'not-collected' : ''} ${statusClass[status] || ''}`}
             onClick={handleToggle}
             onContextMenu={handleContextMenu}
             onTouchStart={handleTouchStart}
@@ -102,7 +102,7 @@ const PikminCard = React.memo(({ color, status, onClick, variant, category }) =>
                 )}
 
                 <div className="pikmin-card-status-indicator">
-                    <StatusIcon status={status} size={11} />
+                    <StatusIcon status={status} size={12} />
                 </div>
             </div>
 

@@ -22,16 +22,14 @@ const Dashboard = () => {
 
     return (
         <div className="page-container">
-            <div className="mb-8 pt-4 px-2">
-                <span className="block text-xs font-black text-brand-primary/60 uppercase tracking-[0.2em] mb-2">
+            <div className="section-header">
+                <span className="section-label">
                     Overview
                 </span>
-                <h1 className="text-4xl font-black text-stone-800 tracking-tight flex items-baseline gap-3">
-                    數據儀表板
-                    <span className="text-sm font-bold text-stone-400 tracking-normal hidden sm:inline-block">
-                        / 收藏進度總覽
-                    </span>
-                </h1>
+                <h2 className="section-title">數據儀表板
+                    <p className="section-desc">/ 收藏進度總覽</p>
+                </h2>
+
             </div>
 
             <DashboardControls

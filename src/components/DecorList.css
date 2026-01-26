@@ -177,14 +177,6 @@
 
 .mini-card.not-collected {
     background-color: rgba(245, 245, 244, 0.5); /* stone-100/50 */
-    filter: grayscale(100%);
-    opacity: 0.4;
-}
-
-.mini-card.not-collected:hover {
-    filter: grayscale(0);
-    opacity: 1;
-    transform: scale(1.1);
 }
 
 .mini-card.collected {
@@ -193,8 +185,28 @@
     outline: 1px solid rgba(245, 245, 244, 1); /* ring-stone-100 */
 }
 
-.mini-card.collected:hover {
-    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+/* 狀態控制 (MiniCard 圖片) */
+.mini-card.status-not-collected .mini-card-img {
+    filter: grayscale(100%);
+    opacity: 0.3;
+}
+
+.mini-card.status-seedling .mini-card-img,
+.mini-card.status-growing .mini-card-img {
+    opacity: 0.65;
+    filter: grayscale(80%);
+}
+
+.mini-card.status-collected .mini-card-img {
+    opacity: 1;
+}
+
+.mini-card:hover .mini-card-img {
+    filter: grayscale(0);
+    opacity: 1;
+}
+
+.mini-card:hover {
     transform: scale(1.1);
 }
 
@@ -231,9 +243,9 @@
 
 .mini-card-status-indicator {
     position: absolute;
-    bottom: -0.375rem; /* -1.5 */
-    right: -0.375rem;
-    padding: 0.25rem;
+    bottom: 0.15rem; /* -1.5 */
+    right: 0.15rem;
+    padding: 0.1rem;
     background-color: white;
     border-radius: 9999px;
     box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);

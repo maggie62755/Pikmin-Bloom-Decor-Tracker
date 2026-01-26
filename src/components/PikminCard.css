@@ -24,13 +24,25 @@
     transform: translateY(-2px);
 }
 
-.pikmin-card.not-collected {
+/* 狀態控制 (圖片透明度與濾鏡) */
+.pikmin-card.status-not-collected .pikmin-card-image {
     opacity: 0.3;
-    filter: grayscale(100%);
+    filter: grayscale(100%) drop-shadow(0 4px 3px rgba(0, 0, 0, 0.07));
 }
 
-.pikmin-card.not-collected:hover {
+.pikmin-card.status-seedling .pikmin-card-image,
+.pikmin-card.status-growing .pikmin-card-image {
+    opacity: 0.65;
+    filter: grayscale(80%) drop-shadow(0 4px 3px rgba(0, 0, 0, 0.07));
+}
+
+.pikmin-card.status-collected .pikmin-card-image {
     opacity: 1;
+}
+
+.pikmin-card:hover .pikmin-card-image {
+    opacity: 1 !important;
+    filter: grayscale(0) !important;
 }
 
 /* 圖片容器 - 固定高度確保水平對齊 */
@@ -71,7 +83,7 @@
     position: absolute;
     bottom: -0.25rem;
     right: -0.25rem;
-    padding: 0.25rem;
+    padding: 0.1rem;
     background-color: white;
     border-radius: 9999px;
     box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);

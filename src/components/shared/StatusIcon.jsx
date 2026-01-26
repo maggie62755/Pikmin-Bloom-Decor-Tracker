@@ -9,9 +9,9 @@ const StatusIcon = ({ status, size = 16, variant = 'full' }) => {
             case DECOR_STATUS.SEEDLING:
                 return <Sprout size={size} className="text-amber-500" />;
             case DECOR_STATUS.GROWING:
-                return <Heart size={size} className="text-pink-500 fill-pink-500/20" />;
+                return <Heart size={size} className="bg-pink-100 rounded-full text-pink-500" />;
             case DECOR_STATUS.COLLECTED:
-                return <Check size={size} className="text-brand-primary" strokeWidth={3} />;
+                return <Check size={size} className="bg-brand-primary rounded-full text-white" strokeWidth={3} />;
             default: return null;
         }
     }

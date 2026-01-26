@@ -91,11 +91,12 @@ const Tracker = () => {
                 const progB = calculateProgress(b);
                 const rateB = progB.total > 0 ? progB.collected / progB.total : 0;
 
-                if (sortOrder === 'desc') {
-                    return rateB - rateA;
-                } else {
-                    return rateA - rateB;
+                if (Math.abs(rateA - rateB) < 0.0001) {
+                    // Secondary sort: Keep original order for stability
+                    return DECOR_CATEGORIES.indexOf(a) - DECOR_CATEGORIES.indexOf(b);
                 }
+
+                return sortOrder === 'desc' ? rateB - rateA : rateA - rateB;
             });
         }
 
@@ -105,8 +106,15 @@ const Tracker = () => {
     return (
         <div className="page-container">
             <div className="section-header">
-                <h2 className="section-title">裝飾品追蹤</h2>
-                <p className="section-desc">點擊卡片即可切換收藏狀態</p>
+                <span className="section-label">
+                    Tracker
+                </span>
+                <h1 className="section-title">
+                    裝飾品追蹤
+                    <span className="section-desc">
+                        / 點擊卡片切換狀態 / 右鍵(長按)卡片可選不同狀態
+                    </span>
+                </h1>
             </div>
             {/* Sticky Minimialist Toolbar */}
             <div className="tracker-sticky-header">
@@ -132,7 +140,7 @@ const Tracker = () => {
                 <div className="tracker-filter-row no-scrollbar">
 
                     {/* Filter Chips */}
-                    <div className="flex items-center gap-2">
+                    <div className="flex items-center gap-2 flex-shrink-0">
                         {[
                             { id: 'all', label: '全部' },
                             { id: 'standard', label: '一般' },
@@ -159,7 +167,10 @@ const Tracker = () => {
                         className={`chip-btn ${sortOrder !== 'default' ? 'active-secondary' : ''}`}
                     >
                         <ArrowUpDown size={14} />
-                        <span>{sortOrder === 'default' ? '排序' : sortOrder === 'desc' ? '高→低' : '低→高'}</span>
+                        <span>
+                            {sortOrder === 'default' ? '預設排序' :
+                                sortOrder === 'desc' ? '完成度 高→低' : '完成度 低→高'}
+                        </span>
                     </button>
 
                     <div className="flex-1" /> {/* Spacer */}

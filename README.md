@@ -1,84 +1,95 @@
 # Pikmin Bloom Decor Tracker (皮克敏飾品追蹤器)
 
-A beautiful, mobile-responsive web application for tracking your Pikmin Bloom decor collection. Built with React, Vite, and Tailwind CSS.
+[![React](https://img.shields.io/badge/React-19-blue.svg)](https://reactjs.org/)
+[![Vite](https://img.shields.io/badge/Vite-7-646CFF.svg)](https://vitejs.dev/)
+[![Tailwind](https://img.shields.io/badge/Tailwind-4-38B2AC.svg)](https://tailwindcss.com/)
 
-一個美觀、支援行動裝置的網頁應用程式，用於追蹤您的 Pikmin Bloom 飾品收集進度。使用 React, Vite 和 Tailwind CSS 構建。
+A premium, mobile-responsive web application for tracking your Pikmin Bloom decor collection. 
 
-demo path: https://maggie62755.github.io/Pikmin-Bloom-Decor-Tracker/
+一個精緻、支援行動裝置的網頁應用程式，專為追蹤您的 Pikmin Bloom 飾品收集進度而設計。
 
-## Features / 功能
+🔗 **Demo:** [https://maggie62755.github.io/Pikmin-Bloom-Decor-Tracker/](https://maggie62755.github.io/Pikmin-Bloom-Decor-Tracker/)
 
-- **Comprehensive Tracking**: Track status for all Decor categories including Restaurant, Roadside, and special Events (2024/2025).
-- **全面追蹤**：追蹤所有飾品類別，包括餐廳、路邊以及 2024/2025 特別活動。
+---
 
-- **4-Stage Status System / 4階段狀態系統**:
-  - 🌑 **Not Encountered / 未遭遇** (Gray / 灰色)
-  - 🌱 **Seedling / 花苗** (Green with Sprout Icon / 綠色帶芽圖示)
-  - ❤️ **Growing / 成長中** (Pink with Heart Icon / 粉色帶愛心圖示)
-  - ✅ **Collected / 已收集** (Full Color / 全彩)
+## 🌟 Key Features / 主要功能
 
-- **Google Sheets Sync**: Seamlessly save and load your collection progress to your personal Google Sheet (100% free database).
-- **Google Sheets 同步**：無縫將您的收集進度儲存並載入至您的個人 Google 試算表（100% 免費資料庫）。
+- **Dual View Modes / 雙重檢視模式**: 
+  - 🖼️ **Grid View (Tracker)**: A visual-first categorical grid for easy browsing. (方格圖鑑視圖)
+  - 📋 **List View (Collection)**: A dense, sortable table for completionists. (清單列表視圖)
+- **Advanced Tracking / 深度追蹤**: Supports all standard categories (Restaurant, Forest, etc.) and special Event decors (2023-2025). (支援所有基本類別與歷年活動飾品)
+- **Real-time Analytics / 即時統計**: Dashboard with visual "Garden" charts showing your completion progress by color and category. (動態花園主題統計圖表)
+- **Cloud Sync / 雲端同步**: Securely store your data to your personal Google Sheet. No registration required beyond Google Login. (使用 Google 試算表作為雲端資料庫，安全且完全免費)
 
-- **Responsive Design**: Optimized for both mobile and desktop use.
-- **響應式設計**：針對手機和電腦使用進行最佳化。
+---
 
-- **Premium UI**: Clean aesthetics with smooth animations and clear progress indicators.
-- **精緻 UI**：簡潔的美學設計，搭配流暢的動畫與清晰的進度指示。
+## 📊 Progress States / 收集狀態說明
 
-## Tech Stack / 技術棧
+The app uses a 4-stage visual system to help you identify your progress at a glance:
+程式採用四階段視覺系統，讓您一眼看出收集進度：
 
-- **Framework**: React 19 + Vite
-- **Styling**: Tailwind CSS v4
+| Status / 狀態 | Visual / 視覺效果 | Description / 說明 |
+| :--- | :--- | :--- |
+| **Not Encountered** | You haven't found this decor yet. (未獲得花苗) |
+| **Seedling (🌱)** | You have the seedling but haven't hatched it. (已取得花苗) |
+| **Growing (❤️)** |  You are currently leveling up friendships. (培養感情中 ) |
+| **Collected (✅)** | Fully collected and in your squad! (已獲得) |
+
+> [!TIP]
+> **Pro Tip:** In the Tracker view, you can cycle through these states by clicking or long-pressing a card! (在圖鑑模式中，點擊或長按卡片即可切換狀態！)
+
+---
+
+## 🛠️ Tech Stack / 技術棧
+
+- **Frontend**: React 19, Vite 7
+- **Styling**: Tailwind CSS v4 (Modern Design System)
 - **Icons**: Lucide React
-- **Auth & Storage**: Google OAuth 2.0 + Google Sheets API
+- **Data & Auth**: Google OAuth 2.0, Google Sheets API
+- **Charts**: Recharts (with Custom Organic SVG Designs)
 
-## Getting Started / 快速開始
+---
+
+
+## ☁️ Google Sheets Sync / 雲端同步指南
+
+1. **Login**: Click the **Login** button and grant "Drive" and "Sheets" permissions.
+2. **Save**: Click **Save** to create/update a file named `PikminBloomTracker` in your Google Drive.
+3. **Load**: Re-sync your data across any device instantly.
+
+---
+
+## 🚀 Getting Started / 快速開始
 
 ### Prerequisites / 前置需求
-- Node.js (v18 or higher / v18 或更高版本)
-- A Google Cloud Project with **Sheets API** and **Drive API** enabled. (啟用 Sheets API 和 Drive API 的 Google Cloud 專案)
-- google cloud console: https://console.cloud.google.com/welcome?project=pikmin-bloom-tracker&authuser=1
+- Node.js (v18+)
+- A Google Cloud Project (for Google Sheets Sync feature) / Google Cloud 專案（若需使用同步功能）
 
-### Installation / 安裝步驟
+### Setup / 安裝步驟
 
-1. Clone the repository / 複製儲存庫:
+1. **Clone & Install**:
    ```bash
    git clone https://github.com/maggie62755/Pikmin-Bloom-Decor-Tracker.git
    cd Pikmin-Bloom-Decor-Tracker
-   ```
-
-2. Install dependencies / 安裝依賴:
-   ```bash
    npm install
    ```
 
-3. Create a `.env` file in the root directory with your Google Credentials / 在根目錄建立 `.env` 檔案並填入您的 Google 憑證:
+2. **Environment Variables / 環境變數**:
+   Create a `.env` file in the root / 在根目錄建立 `.env`：
    ```env
-   VITE_GOOGLE_CLIENT_ID=your_client_id.apps.googleusercontent.com
-   VITE_GOOGLE_API_KEY=your_api_key
+   VITE_GOOGLE_CLIENT_ID=your_id.apps.googleusercontent.com
    ```
-   *Note: Ensure your Google Cloud OAuth consent screen includes the necessary scopes.*
-   *注意：請確保您的 Google Cloud OAuth 同意畫面包含必要的範圍。*
 
-### Running Locally / 在地端執行
+3. **Development / 開發模式**:
+   ```bash
+   npm run dev
+   ```
+   Visit `http://localhost:3000`.
 
-```bash
-npm run dev
-```
-The app will start at `http://localhost:3000`.
-應用程式將於 `http://localhost:3000` 啟動。
+---
 
-## Google Sheets Sync Setup / Google Sheets 同步設定
+## 📜 Credits & Legal
 
-To use the sync feature / 使用同步功能:
-1. Click **Login** in the app. (點擊應用程式中的 **Login**)
-2. Grant the requested permissions (Drive & Sheets). (授權 Drive 與 Sheets 權限)
-3. Click **Save** to create/update a spreadsheet named `PikminBloomTracker` in your Google Drive. (點擊 **Save** 以在您的 Google Drive 建立/更新名為 `PikminBloomTracker` 的試算表)
-4. Click **Load** to restore your progress on another device. (點擊 **Load** 以在其他裝置恢復您的進度)
-
-
-
-## Credits & Legal
-- **Images:** All Pikmin icons and decor images are sourced from [Pikmin Wiki](https://www.pikminwiki.com/).
-- **Legal Disclaimer:** This project is a fan-made tool and is not affiliated with, endorsed by, or or specifically approved by Nintendo or Niantic. Pikmin and all related characters and elements are trademarks of Nintendo.
+- **Developer**: [maggie62755](https://github.com/maggie62755)
+- **Assets**: Icons and decor images courtesy of [Pikmin Wiki](https://www.pikminwiki.com/).
+- **Disclaimer**: This is a fan-made project. Pikmin and Pikmin Bloom are trademarks of Nintendo and Niantic. This tool is not affiliated with or endorsed by them.

@@ -9,7 +9,7 @@ const DecorGridCategory = React.memo(({ category, isOpen, onToggle, progress, to
         onClick={onToggle}
         className={`grid-category-header ${isOpen ? 'is-open' : ''}`}
       >
-        <div className="grid-category-title-area">
+        <div className="grid-category-title-area min-w-0">
           <div className={`grid-category-chevron-wrapper ${isOpen ? 'is-open' : ''}`}>
             {isOpen ? <ChevronDown size={22} /> : <ChevronRight size={22} />}
           </div>
@@ -22,18 +22,20 @@ const DecorGridCategory = React.memo(({ category, isOpen, onToggle, progress, to
               }}
             />
           )}
-          <h3 className="grid-category-title">{category.name_ch || category.name}</h3>
+          <h3 className="grid-category-title truncate" title={category.name_ch || category.name}>
+            {category.name_ch || category.name}
+          </h3>
         </div>
 
         <div className="grid-category-progress-area">
           <div className="grid-category-progress-bar-bg">
             <div
-              className="grid-category-progress-bar-fill"
+              className={`grid-category-progress-bar-fill ${progress === total && total > 0 ? 'is-complete' : ''}`}
               style={{ width: `${(progress / total) * 100}%` }}
             />
           </div>
           <div className="grid-category-progress-badge">
-            <span className="current">{progress}</span>
+            <span className={`current ${progress === total && total > 0 ? 'is-complete' : ''}`}>{progress}</span>
             <span className="separator">/</span>
             <span className="total">{total}</span>
           </div>

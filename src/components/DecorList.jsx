@@ -73,7 +73,7 @@ const MiniCard = React.memo(({ status, imagePath, color, onClick }) => {
         onContextMenu={handleContextMenu}
         onTouchStart={handleTouchStart}
         onTouchEnd={handleTouchEnd}
-        className={`mini-card ${status === DECOR_STATUS.NOT_COLLECTED ? 'not-collected' : 'collected'}`}
+        className={`mini-card status-${Object.keys(DECOR_STATUS).find(key => DECOR_STATUS[key] === status).toLowerCase().replace('_', '-')} ${status === DECOR_STATUS.NOT_COLLECTED ? 'not-collected' : 'collected'}`}
       >
         <div className="mini-card-img-container">
           {!imgError && imagePath ? (
@@ -89,7 +89,7 @@ const MiniCard = React.memo(({ status, imagePath, color, onClick }) => {
         </div>
 
         <div className="mini-card-status-indicator">
-          <StatusIcon status={status} size={10} variant="minimal" />
+          <StatusIcon status={status} size={12} variant="minimal" />
         </div>
       </button>
 

@@ -3,6 +3,7 @@ import { NavLink } from 'react-router-dom';
 import { Sprout, Heart, LayoutGrid, List, BarChart2 } from 'lucide-react';
 import { DECOR_STATUS, DECOR_STATUS_LABELS } from '../constants';
 import { COLORS } from '../theme/colors';
+import StatusIcon from '../components/shared/StatusIcon';
 
 const Home = () => {
     return (
@@ -37,25 +38,29 @@ const Home = () => {
                     <StatusItem
                         color="bg-stone-100"
                         label={DECOR_STATUS_LABELS[DECOR_STATUS.NOT_COLLECTED]}
-                        icon={<div className="w-10 h-10 rounded-full border-4 border-dashed border-stone-200" />}
+                        // icon={<div className="w-10 h-10 rounded-full border-4 border-dashed border-stone-200" />}
+                        icon={<StatusIcon status={DECOR_STATUS.NOT_COLLECTED} size={40} />}
                     />
                     {/* Seedling */}
                     <StatusItem
-                        color="bg-amber-50 border-2 border-amber-100"
+                        // color="bg-amber-50 border-2 border-amber-100"
                         label={DECOR_STATUS_LABELS[DECOR_STATUS.SEEDLING]}
-                        icon={<Sprout className="w-8 h-8 text-amber-600" />}
+                        // icon={<Sprout className="w-8 h-8 text-amber-600" />}
+                        icon={<StatusIcon status={DECOR_STATUS.SEEDLING} size={40} />}
                     />
                     {/* Growing */}
                     <StatusItem
-                        color="bg-pink-50 border-2 border-pink-100"
+                        // color="bg-pink-50 border-2 border-pink-100"
                         label={DECOR_STATUS_LABELS[DECOR_STATUS.GROWING]}
-                        icon={<Heart className="w-8 h-8 text-pink-500 animate-pulse" />}
+                        // icon={<Heart className="w-8 h-8 text-pink-500 animate-pulse" />}
+                        icon={<StatusIcon status={DECOR_STATUS.GROWING} size={40} />}
                     />
                     {/* Collected */}
                     <StatusItem
-                        color="bg-brand-primary shadow-lg shadow-brand-primary/10"
+                        // color="bg-brand-primary shadow-lg shadow-brand-primary/10"
                         label={DECOR_STATUS_LABELS[DECOR_STATUS.COLLECTED]}
-                        icon={<div className="w-6 h-6 bg-white rounded-full shadow-inner" />}
+                        // icon={<div className="w-6 h-6 bg-white rounded-full shadow-inner" />}
+                        icon={<StatusIcon status={DECOR_STATUS.COLLECTED} size={40} />}
                     />
                 </div>
             </section>

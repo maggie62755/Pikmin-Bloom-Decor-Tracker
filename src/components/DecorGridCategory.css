@@ -36,7 +36,8 @@
 /* Title Area */
 .grid-category-title-area {
     display: flex;
-    align-items: center;
+    /* align-items: center; */
+    align-items: left;
     gap: 1rem;
 }
 
@@ -63,6 +64,8 @@
 .grid-category-icon {
     width: 1.75rem;
     height: 1.75rem;
+    min-width: 1.75rem; /* Prevent shrinking */
+    flex-shrink: 0;
     object-fit: contain;
     filter: drop-shadow(0 2px 4px rgba(0,0,0,0.1));
 }
@@ -72,6 +75,12 @@
     color: var(--color-stone-700);
     font-size: 1.125rem;
     letter-spacing: -0.01em;
+    
+    /* Truncation */
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    min-width: 0; /* Flexbox truncation magic */
 }
 
 /* Progress Area */
@@ -112,6 +121,7 @@
     border-radius: 9999px;
     border: 1px solid rgba(255, 255, 255, 0.5);
     transition: all 0.2s;
+    width: 60px;
 }
 
 .grid-category-container.is-open .grid-category-progress-badge {
@@ -145,4 +155,14 @@
 .grid-category-content > * {
     margin-top: 1.5rem;
     margin-bottom: 1.5rem;
+}
+
+/* Completed Progress Bar */
+.grid-category-progress-bar-fill.is-complete {
+    background: linear-gradient(135deg, #FCD34D 0%, #F59E0B 100%);
+    box-shadow: 0 0 8px rgba(245, 158, 11, 0.5);
+}
+
+.grid-category-progress-badge .current.is-complete {
+    color: #F59E0B; /* Amber-500 */
 }
