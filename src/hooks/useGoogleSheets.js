@@ -54,7 +54,7 @@ export const useGoogleSheets = () => {
       setSyncMessage('Login Failed');
     },
     ux_mode: 'popup', // 建議在獲取資料時使用 popup，體驗較佳；若需維持 redirect 則確保處理回傳 URL
-    scope: 'openid email profile https://www.googleapis.com/auth/spreadsheets https://www.googleapis.com/auth/drive.file',
+    scope: 'openid email profile https://www.googleapis.com/auth/drive.file',
   });
 
   const logout = () => {
