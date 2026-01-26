@@ -63,6 +63,9 @@ const Footer = () => {
                         <p className="text-[10px] text-stone-400/80 leading-relaxed text-center md:text-right max-w-[180px]">
                             This is a fan-made tool. Pikmin is a trademark of Nintendo.
                         </p>
+                        <Link to="/privacy" className="text-[10px] text-stone-400/60 hover:text-stone-400 transition-colors">
+                            隱私權條款
+                        </Link>
                     </div>
                 </div>
             </div>
