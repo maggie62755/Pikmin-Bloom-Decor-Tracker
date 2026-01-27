@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { NavLink, useLocation } from 'react-router-dom';
-import { LogIn, LogOut, Download, Save, Home, List as ListIcon, BarChart2, Menu, X } from 'lucide-react';
+import { LogIn, LogOut, Download, Save, Home, List as ListIcon, BarChart2, Menu, X, Leaf } from 'lucide-react';
 import { usePikmin } from '../context/PikminContext';
 import { DECOR_CATEGORIES } from '../constants';
 
@@ -11,6 +11,7 @@ import UserProfile from './UserProfile';
 const NAV_ITEMS = [
     { to: "/", icon: Home, label: "Home" },
     { to: "/tracker", icon: ListIcon, label: "Tracker" },
+    { to: "/decision-helper", icon: Leaf, label: "Advisor" },
     { to: "/dashboard", icon: BarChart2, label: "Stats" },
 ];
 

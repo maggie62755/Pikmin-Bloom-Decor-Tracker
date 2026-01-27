@@ -7,6 +7,7 @@ import Tracker from './pages/Tracker';
 import Dashboard from './pages/Dashboard';
 import Footer from './components/shared/footer';
 import PrivacyPolicy from './pages/PrivacyPolicy';
+import DecisionToolPage from './pages/DecisionToolPage'; // Import Page
 
 // Layout Component
 const Layout = () => {
@@ -34,6 +35,7 @@ function App() {
                     <Route path="/" element={<Layout />}>
                         <Route index element={<Home />} />
                         <Route path="tracker" element={<Tracker />} />
+                        <Route path="decision-helper" element={<DecisionToolPage />} />
                         <Route path="dashboard" element={<Dashboard />} />
                         <Route path="privacy" element={<PrivacyPolicy />} />
                     </Route>
