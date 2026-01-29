@@ -195,7 +195,8 @@
                         "white",
                         "purple",
                         "rock",
-                        "winged"
+                        "winged",
+                        "ice"
                     ]
                 },
                 {
@@ -210,7 +211,8 @@
                         "white",
                         "purple",
                         "rock",
-                        "winged"
+                        "winged",
+                        "ice"
                     ]
                 }
             ]
@@ -1426,6 +1428,48 @@
                         "purple",
                         "rock",
                         "winged"
+                    ]
+                }
+            ]
+        },
+        {
+            "id": "event_nitendo_consoles_80_95",
+            "name": "Nintendo Consoles '80-'95",
+            "name_ch": "Nintendo遊戲機 1980-1995",
+            "icon": "special.png",
+            "image_path": "NintendoConsoles8095",
+            "variants": [
+                {
+                    "id": "event_nitendo_consoles_80_95",
+                    "name": "Nintendo Consoles '80-'95",
+                    "name_ch": "Nintendo遊戲機 1980-1995",
+                    "image_name": "NintendoConsoles8095",
+                    "colors": [
+                        "red",
+                        "yellow",
+                        "blue",
+                        "white",
+                        "purple",
+                        "rock",
+                        "winged"
+                    ]
+                }
+            ]
+        },
+        {
+            "id": "event_photo_button_badge",
+            "name": "Photo Button Badge",
+            "name_ch": "照片和鈕扣徽章",
+            "icon": "special.png",
+            "image_path": "PhotoButtonBadge",
+            "variants": [
+                {
+                    "id": "event_photo_button_badge",
+                    "name": "Photo Button Badge",
+                    "name_ch": "照片和鈕扣徽章",
+                    "image_name": "PhotoButtonBadge",
+                    "colors": [
+                        "red"
                     ]
                 }
             ]
