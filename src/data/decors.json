@@ -62,6 +62,21 @@
                         "rock",
                         "winged"
                     ]
+                },
+                {
+                    "id": "coffee_cup_rare",
+                    "name": "Coffee Cup (Rare)",
+                    "name_ch": "咖啡杯(稀有)",
+                    "image_name": "(Rare)",
+                    "colors": [
+                        "red",
+                        "yellow",
+                        "blue",
+                        "white",
+                        "purple",
+                        "rock",
+                        "winged"
+                    ]
                 }
             ]
         },
