@@ -1266,6 +1266,30 @@
             ]
         },
         {
+            "id": "event_lunar_new_year_ornament_gold",
+            "name": "Lunar New Year Ornament (Gold)",
+            "name_ch": "農曆新年飾品:金色",
+            "icon": "special.png",
+            "image_path": "LunarNewYearOrnamentGold",
+            "variants": [
+                {
+                    "id": "event_lunar_new_year_ornament_gold",
+                    "name": "Lunar New Year Ornament (Gold)",
+                    "name_ch": "農曆新年飾品:金色",
+                    "image_name": "LunarNewYearOrnamentGold",
+                    "colors": [
+                        "red",
+                        "yellow",
+                        "blue",
+                        "white",
+                        "purple",
+                        "rock",
+                        "winged"
+                    ]
+                }
+            ]
+        },
+        {
             "id": "event_mitten",
             "name": "Mitten",
             "name_ch": "連紙手套",
@@ -1433,6 +1457,30 @@
             ]
         },
         {
+            "id": "event_chocolate",
+            "name": "Chocolate",
+            "name_ch": "巧克力",
+            "icon": "special.png",
+            "image_path": "Chocolate",
+            "variants": [
+                {
+                    "id": "event_chocolate",
+                    "name": "Chocolate",
+                    "name_ch": "巧克力",
+                    "image_name": "Chocolate",
+                    "colors": [
+                        "red",
+                        "yellow",
+                        "blue",
+                        "white",
+                        "purple",
+                        "rock",
+                        "winged"
+                    ]
+                }
+            ]
+        },
+        {
             "id": "event_nitendo_consoles_80_95",
             "name": "Nintendo Consoles '80-'95",
             "name_ch": "Nintendo遊戲機 1980-1995",
@@ -1578,6 +1626,31 @@
                     "name": "Osechi",
                     "name_ch": "日式年菜",
                     "image_name": "Osechi",
+                    "colors": [
+                        "red",
+                        "yellow",
+                        "blue",
+                        "white",
+                        "purple",
+                        "rock",
+                        "winged",
+                        "ice"
+                    ]
+                }
+            ]
+        },
+        {
+            "id": "event_2026chocolate",
+            "name": "2026 Chocolate",
+            "name_ch": "2026巧克力",
+            "icon": "special.png",
+            "image_path": "2026Chocolate",
+            "variants": [
+                {
+                    "id": "event_2026chocolate",
+                    "name": "2026 Chocolate",
+                    "name_ch": "2026巧克力",
+                    "image_name": "2026Chocolate",
                     "colors": [
                         "red",
                         "yellow",
