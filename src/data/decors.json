@@ -1848,6 +1848,27 @@
                     ]
                 }
             ]
-        }
+        },
+        {
+            "id": "event_super_mario_keychain",
+            "name": "Super Mario Keychain",
+            "name_ch": "超級馬力歐鑰匙圈",
+            "icon": "special.png",
+            "image_path": "SuperMarioKeychain",
+            "variants": [
+                {
+                    "id": "event_super_mario_keychain",
+                    "name": "Super Mario Keychain",
+                    "name_ch": "超級馬力歐鑰匙圈",
+                    "image_name": "SuperMarioKeychain",
+                    "colors": [
+                        "red",
+                        "yellow",
+                        "blue",
+                        "purple"
+                    ]
+                }
+            ]
+        }   
     ]
 }
