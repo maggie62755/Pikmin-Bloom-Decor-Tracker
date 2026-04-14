@@ -26,7 +26,7 @@ export const PikminProvider = ({ children }) => {
     // Conflict State
     const [conflictData, setConflictData] = useState(null); // { cloud: {data, timestamp, completion}, local: {data, timestamp, completion} }
 
-    const { login, logout, user, saveToSheet: saveToSheetApi, loadFromSheet: loadFromSheetApi, checkCloudVersion, syncStatus, syncMessage } = useGoogleSheets();
+    const { login, logout, user, token, saveToSheet: saveToSheetApi, loadFromSheet: loadFromSheetApi, checkCloudVersion, syncStatus, syncMessage } = useGoogleSheets();
 
     // Persistence
     useEffect(() => {
@@ -215,6 +215,7 @@ export const PikminProvider = ({ children }) => {
         login,
         logout,
         user,
+        token,
         saveToSheet,
         loadFromSheet: loadFromSheetApi, // Expose raw if needed, but mainly we use internal logic
         syncStatus,
@@ -226,7 +227,7 @@ export const PikminProvider = ({ children }) => {
         toggleStatus,
         calculateProgress,
         calculateTotalProgress,
-        login, logout, user,
+        login, logout, user, token,
         saveToSheet, loadFromSheetApi,
         syncStatus, syncMessage,
         hasUnsavedChanges, localTimestamp

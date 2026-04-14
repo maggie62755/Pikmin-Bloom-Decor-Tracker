@@ -1376,6 +1376,53 @@
             ]
         },
         {
+            "id": "event_easter_egg",
+            "name": "Easter Egg",
+            "name_ch": "復活節彩蛋",
+            "icon": "special.png",
+            "image_path": "EasterEgg",
+            "variants": [
+                {
+                    "id": "event_easter_egg",
+                    "name": "Easter Egg",
+                    "name_ch": "復活節彩蛋",
+                    "image_name": "EasterEgg",
+                    "colors": [
+                        "red",
+                        "yellow",
+                        "blue",
+                        "white",
+                        "purple",
+                        "rock",
+                        "winged"
+                    ]
+                }
+            ]
+        },{
+            "id": "event_bunny_egg",
+            "name": "Bunny Egg",
+            "name_ch": "兔寶寶彩蛋",
+            "icon": "special.png",
+            "image_path": "BunnyEgg",
+            "variants": [
+                {
+                    "id": "event_bunny_egg",
+                    "name": "Bunny Egg",
+                    "name_ch": "兔寶寶彩蛋",
+                    "image_name": "BunnyEgg",
+                    "colors": [
+                        "red",
+                        "yellow",
+                        "blue",
+                        "white",
+                        "purple",
+                        "rock",
+                        "winged"
+                    ]
+                }
+            ]
+        },
+        {
             "id": "event_puzzle_2021_fall_memories",
             "name": "Puzzle: 2021 Fall Memories",
             "name_ch": "拼圖:2021年秋天的回憶",
@@ -1680,19 +1727,124 @@
             ]
         },
         {
-            "id": "event_golden_toy_airplane",
-            "name": "Golden Toy Airplane",
-            "name_ch": "金色飛機玩具",
+            "id": "event_afternoon_tea",
+            "name": "Afternoon Tea",
+            "name_ch": "下午茶",
             "icon": "special.png",
-            "image_path": "GoldenToyAirplane",
+            "image_path": "AfternoonTea",
             "variants": [
                 {
-                    "id": "event_golden_toy_airplane",
-                    "name": "Golden Toy Airplane",
-                    "name_ch": "金色飛機玩具",
-                    "image_name": "GoldenToyAirplane",
+                    "id": "event_afternoon_tea",
+                    "name": "Afternoon Tea",
+                    "name_ch": "下午茶",
+                    "image_name": "AfternoonTea",
                     "colors": [
-                        "yellow"
+                        "red",
+                        "yellow",
+                        "blue",
+                        "white",
+                        "purple",
+                        "rock",
+                        "winged"
+                    ]
+                }
+            ]
+        },
+        {
+            "id": "event_valentine_sticker",
+            "name": "Valentine Sticker",
+            "name_ch": "情人節貼紙",
+            "icon": "special.png",
+            "image_path": "ValentineSticker",
+            "variants": [
+                {
+                    "id": "event_valentine_sticker",
+                    "name": "Valentine Sticker",
+                    "name_ch": "情人節貼紙",
+                    "image_name": "ValentineSticker",
+                    "colors": [
+                        "red",
+                        "yellow",
+                        "blue",
+                        "white",
+                        "purple",
+                        "rock",
+                        "winged"
+                    ]
+                }
+            ]
+        },
+        {
+            "id": "event_reverse_valentines_day_sticker",
+            "name": "Reverse Valentines Day Sticker",
+            "name_ch": "逆轉情人節貼紙",
+            "icon": "special.png",
+            "image_path": "ReverseValentinesDaySticker",
+            "variants": [
+                {
+                    "id": "event_reverse_valentines_day_sticker",
+                    "name": "Reverse Valentines Day Sticker",
+                    "name_ch": "逆轉情人節貼紙",
+                    "image_name": "ReverseValentinesDaySticker",
+                    "colors": [
+                        "red",
+                        "yellow",
+                        "blue",
+                        "white",
+                        "purple",
+                        "rock",
+                        "winged"
+                    ]
+                }
+            ]
+        },
+        {
+            "id": "event_colored_powder",
+            "name": "Colored Powder",
+            "name_ch": "彩色粉末",
+            "icon": "special.png",
+            "image_path": "ColoredPowder",
+            "variants": [
+                {
+                    "id": "event_colored_powder",
+                    "name": "Colored Powder",
+                    "name_ch": "彩色粉末",
+                    "image_name": "ColoredPowder",
+                    "colors": [
+                        "red",
+                        "yellow",
+                        "blue",
+                        "white",
+                        "purple",
+                        "rock",
+                        "winged",
+                        "ice"
+                    ]
+                }
+            ]
+            
+        },
+        {
+            "id": "event_klompen_keychain",
+            "name": "Klompen Keychain",
+            "name_ch": "荷蘭木鞋鑰匙圈",
+            "icon": "special.png",
+            "image_path": "KlompenKeychain",
+            "variants": [
+                {
+                    "id": "event_klompen_keychain",
+                    "name": "Klompen Keychain",
+                    "name_ch": "荷蘭木鞋鑰匙圈",
+                    "image_name": "KlompenKeychain",
+                    "colors": [
+                        "red",
+                        "yellow",
+                        "blue",
+                        "white",
+                        "purple",
+                        "rock",
+                        "winged",
+                        "ice"
                     ]
                 }
             ]

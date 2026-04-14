@@ -3,7 +3,7 @@ import PikminCard from './PikminCard';
 import { PIKMIN_COLORS, DECOR_STATUS } from '../constants';
 import './DecorGrid.css';
 
-const VariantRow = React.memo(({ variant, category, onCardClick, collectionState }) => {
+const VariantRow = React.memo(({ variant, category, onCardClick, variantState }) => {
   const getBaseColorId = (id) => {
     const base = PIKMIN_COLORS.find(pc =>
       id === pc.id || id.startsWith(pc.id) && /^\d+$/.test(id.replace(pc.id, ''))
@@ -51,7 +51,7 @@ const VariantRow = React.memo(({ variant, category, onCardClick, collectionState
             <PikminCard
               key={itemToRender.colorId}
               color={{ ...itemToRender.baseDef, id: itemToRender.colorId }}
-              status={collectionState?.[variant.id]?.[itemToRender.colorId] || DECOR_STATUS.NOT_COLLECTED}
+              status={variantState?.[itemToRender.colorId] || DECOR_STATUS.NOT_COLLECTED}
               variant={variant}
               category={category}
               onClick={(newStatus) => onCardClick(variant.id, itemToRender.colorId, newStatus)}
@@ -72,7 +72,7 @@ const DecorGrid = React.memo(({ variants, onCardClick, collectionState, category
           variant={variant}
           category={category}
           onCardClick={onCardClick}
-          collectionState={collectionState}
+          variantState={collectionState?.[variant.id]}
         />
       ))}
     </div>

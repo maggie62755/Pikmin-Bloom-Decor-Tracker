@@ -95,6 +95,8 @@ const PikminCard = React.memo(({ color, status, onClick, variant, category }) =>
                         src={imagePath}
                         alt={`${color.name_ch || pikminType} ${variant.name}`}
                         className="pikmin-card-image"
+                        loading="lazy"
+                        decoding="async"
                         onError={() => setImgError(true)}
                     />
                 ) : (

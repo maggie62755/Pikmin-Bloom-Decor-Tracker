@@ -81,6 +81,8 @@ const MiniCard = React.memo(({ status, imagePath, color, onClick }) => {
               src={imagePath}
               alt={color.name_ch || color.name}
               className="mini-card-img"
+              loading="lazy"
+              decoding="async"
               onError={() => setImgError(true)}
             />
           ) : (
@@ -105,7 +107,7 @@ const MiniCard = React.memo(({ status, imagePath, color, onClick }) => {
   );
 });
 
-const DecorRow = React.memo(({ variant, category, collection, onCardClick }) => {
+const DecorRow = React.memo(({ variant, category, variantCollection, onCardClick }) => {
   const getBaseColorId = (id) => {
     const base = PIKMIN_COLORS.find(pc =>
       id === pc.id || id.startsWith(pc.id) && /^\d+$/.test(id.replace(pc.id, ''))
@@ -159,7 +161,7 @@ const DecorRow = React.memo(({ variant, category, collection, onCardClick }) => 
           <td key={colorDef.id} className="decor-list-td-card">
             {itemToRender ? (
               <MiniCard
-                status={collection[variant.id]?.[itemToRender.colorId] || DECOR_STATUS.NOT_COLLECTED}
+                status={variantCollection?.[itemToRender.colorId] || DECOR_STATUS.NOT_COLLECTED}
                 imagePath={`${import.meta.env.BASE_URL}images/decors_images/${category.image_path}/${variant.image_name}_${itemToRender.colorId.charAt(0).toUpperCase() + itemToRender.colorId.slice(1)}.png`}
                 color={{ ...itemToRender.baseDef, id: itemToRender.colorId }}
                 onClick={(newStatus) => onCardClick(variant.id, itemToRender.colorId, newStatus)}
@@ -204,7 +206,7 @@ const DecorList = ({ categories, collection, onCardClick }) => {
                     key={variant.id}
                     variant={variant}
                     category={category}
-                    collection={collection}
+                    variantCollection={collection?.[variant.id]}
                     onCardClick={onCardClick}
                   />
                 ))}
