@@ -1447,6 +1447,30 @@
             ]
         },
         {
+            "id": "event_paint",
+            "name": "Paint",
+            "name_ch": "彩繪",
+            "icon": "special.png",
+            "image_path": "Paint",
+            "variants": [
+                {
+                    "id": "event_paint",
+                    "name": "Paint",
+                    "name_ch": "彩繪",
+                    "image_name": "Paint",
+                    "colors": [
+                        "red",
+                        "yellow",
+                        "blue",
+                        "white",
+                        "purple",
+                        "rock",
+                        "winged"
+                    ]
+                }
+            ]
+        },
+        {
             "id": "event_3rd_anniversary_cupcake",
             "name": "3rd Anniversary Cupcake",
             "name_ch": "三周年紀念杯子蛋糕",
@@ -1869,6 +1893,31 @@
                     ]
                 }
             ]
-        }   
+        },
+        {
+            "id": "event_game_pak",
+            "name": "Game Pak",
+            "name_ch": "遊戲卡匣",
+            "icon": "special.png",
+            "image_path": "GamePak",
+            "variants": [
+                {
+                    "id": "event_game_pak",
+                    "name": "Game Pak",
+                    "name_ch": "遊戲卡匣",
+                    "image_name": "GamePak",
+                    "colors": [
+                        "red",
+                        "yellow",
+                        "blue",
+                        "white",
+                        "purple",
+                        "rock",
+                        "winged",
+                        "ice"
+                    ]
+                }
+            ]
+        }     
     ]
 }
