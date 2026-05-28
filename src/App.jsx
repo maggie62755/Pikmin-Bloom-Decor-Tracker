@@ -8,16 +8,18 @@ import Dashboard from './pages/Dashboard';
 import Footer from './components/shared/footer';
 import PrivacyPolicy from './pages/PrivacyPolicy';
 import DecisionToolPage from './pages/DecisionToolPage'; // Import Page
+import GlobalToast from './components/shared/GlobalToast';
 
 // Layout Component
 const Layout = () => {
     return (
         <div className="min-h-screen text-nature-earth selection:bg-brand-primary/20">
             <Navigation />
-            <main className="pt-28 pb-20 px-6">
+            <main className="pt-28 pb-24 px-4 md:px-6">
                 <Outlet />
             </main>
             <Footer />
+            <GlobalToast />
 
         </div>
     );

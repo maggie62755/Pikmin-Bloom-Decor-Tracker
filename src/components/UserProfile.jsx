@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { LogOut, Download, Save, User, Cloud, RefreshCw, AlertCircle, CheckCircle2 } from 'lucide-react';
 
-const UserProfile = ({ user, syncStatus, hasUnsavedChanges, onSave, onLoad, onLogout }) => {
+const UserProfile = ({ user, syncStatus, hasUnsavedChanges, lastSyncAt, onSave, onLoad, onLogout }) => {
     const [isOpen, setIsOpen] = useState(false);
     const dropdownRef = useRef(null);
 
@@ -80,7 +80,7 @@ const UserProfile = ({ user, syncStatus, hasUnsavedChanges, onSave, onLoad, onLo
 
             {/* Dropdown Menu */}
             <div className={`
-                absolute right-0 top-full mt-3 w-64 bg-white/90 backdrop-blur-xl rounded-2xl shadow-xl borber border-white/20 overflow-hidden transform transition-all duration-200 origin-top-right z-50
+                absolute right-0 top-full mt-3 w-64 bg-white/90 backdrop-blur-xl rounded-2xl shadow-xl border border-white/20 overflow-hidden transform transition-all duration-200 origin-top-right z-50
                 ${isOpen ? 'opacity-100 scale-100 translate-y-0' : 'opacity-0 scale-95 -translate-y-2 pointer-events-none'}
             `}>
 
@@ -97,6 +97,9 @@ const UserProfile = ({ user, syncStatus, hasUnsavedChanges, onSave, onLoad, onLo
                         <StatusIcon size={14} className={syncStatus === 'syncing' ? 'animate-spin' : ''} />
                         {statusText}
                     </div>
+                    <p className="mt-2 text-[11px] text-stone-500 font-semibold">
+                        上次同步: {lastSyncAt ? new Date(lastSyncAt).toLocaleString() : '尚未同步'}
+                    </p>
                 </div>
 
                 {/* Actions */}

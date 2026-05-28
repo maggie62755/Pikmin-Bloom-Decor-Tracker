@@ -12,12 +12,27 @@
     --brand-primary: #65A30D;
     --brand-secondary: #EC4899;
     --brand-accent: #F59E0B;
+    --role-success: #65A30D;
+    --role-info: #0EA5E9;
+    --role-warning: #F59E0B;
+    --role-critical: #EF4444;
 
     /* Glass Effect Variables */
     --glass-bg: rgba(255, 255, 255, 0.65);
     --glass-border: rgba(255, 255, 255, 0.6);
     --glass-blur: 20px;
     --glass-shadow: 0 8px 32px 0 rgba(77, 124, 15, 0.07);
+    /* Vertical rhythm scale */
+    --space-1: 0.5rem;
+    --space-2: 0.75rem;
+    --space-3: 1rem;
+    --space-4: 1.5rem;
+    --space-5: 2rem;
+    --space-6: 3rem;
+
+    /* Nature Lab atmosphere */
+    --lab-grid-line: rgba(68, 64, 60, 0.06);
+    --lab-note-paper: rgba(255, 255, 255, 0.7);
   }
 
   body {
@@ -28,16 +43,38 @@
     color: var(--color-text-primary);
     
     /* Dynamic Nature Gradient Background */
-    background-image: 
+    background-image:
         radial-gradient(circle at 10% 20%, rgba(236, 252, 203, 0.4) 0%, transparent 40%),
         radial-gradient(circle at 90% 60%, rgba(252, 231, 243, 0.4) 0%, transparent 40%),
+        linear-gradient(0deg, transparent 23px, var(--lab-grid-line) 24px),
+        linear-gradient(90deg, transparent 23px, var(--lab-grid-line) 24px),
         radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.8) 0%, transparent 100%);
+    background-size: auto, auto, 24px 24px, 24px 24px, auto;
     background-attachment: fixed;
     font-family: 'Nunito', sans-serif; /* Applied new font globally */
   }
 
   html {
     scrollbar-gutter: stable;
+  }
+
+  /* Improve keyboard accessibility across interactive controls */
+  :where(a, button, input, textarea, select, [role="button"], [tabindex]):focus-visible {
+    outline: 3px solid color-mix(in srgb, var(--brand-primary) 70%, white 30%);
+    outline-offset: 2px;
+    border-radius: 0.5rem;
+  }
+
+  /* Respect reduced-motion users globally */
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
   }
 }
 
@@ -111,12 +148,12 @@
   .page-container {
     max-width: 80rem; /* max-w-7xl */
     margin: 0 auto;
-    padding: 0 1.5rem 6rem 1.2rem;
+    padding: 0 var(--space-4) calc(var(--space-6) + var(--space-5)) var(--space-4);
   }
 
   .section-header {
-    margin-bottom: 1rem;
-    padding-top: 1rem;
+    margin-bottom: var(--space-4);
+    padding-top: var(--space-3);
     padding-left: 0.5rem;
     padding-right: 0.5rem;
   }
@@ -132,8 +169,8 @@
   }
 
   .section-title {
-    font-size: 2.25rem;
-    line-height: 2.5rem;
+    font-size: clamp(1.9rem, 3vw, 2.5rem);
+    line-height: 1.1;
     font-weight: 900;
     color: var(--color-text-primary);
     letter-spacing: -0.025em;
@@ -144,7 +181,7 @@
 
   .section-desc {
     color: var(--color-text-secondary);
-    font-weight: 700;
+    font-weight: 600;
     line-height: 1.5rem;
     font-size: 0.875rem;
     letter-spacing: normal;
@@ -170,7 +207,7 @@
 
   .stat-card-label {
     font-size: 0.875rem;
-    font-weight: 700;
+    font-weight: 600;
     color: var(--color-text-secondary);
     text-transform: uppercase;
     letter-spacing: 0.05em;
@@ -234,5 +271,26 @@
     mask-size: contain;
     background-color: var(--color-text-secondary);
     display: inline-block;
+  }
+
+  .nature-lab-panel {
+    background:
+      linear-gradient(135deg, rgba(255, 255, 255, 0.74), rgba(255, 255, 255, 0.54)),
+      repeating-linear-gradient(
+        -45deg,
+        transparent,
+        transparent 12px,
+        rgba(101, 163, 13, 0.04) 12px,
+        rgba(101, 163, 13, 0.04) 13px
+      ),
+      var(--lab-note-paper);
+    border: 1px solid rgba(255, 255, 255, 0.65);
+    box-shadow: 0 10px 24px rgba(28, 25, 23, 0.06);
+  }
+
+  .section-stack {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-5);
   }
 }

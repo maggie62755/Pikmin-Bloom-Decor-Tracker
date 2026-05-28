@@ -15,7 +15,7 @@ const Home = () => {
                     Pikmin <span className="text-brand-primary">Bloom</span> <br />
                     <span className="text-4xl text-stone-400 font-bold">Decor Tracker</span>
                 </h1>
-                <p className="text-xl text-stone-600/80 max-w-xl mx-auto font-bold">
+                <p className="text-xl text-stone-700 max-w-xl mx-auto font-semibold">
                     輕鬆追蹤你的皮克敏裝飾收藏，<br />紀錄每一步與花開的時刻。
                 </p>
                 <div className="flex justify-center gap-6">
@@ -70,7 +70,7 @@ const Home = () => {
             <section className="space-y-8">
                 <div className="flex items-center gap-4">
                     <div className="h-px flex-1 bg-stone-200" />
-                    <h2 className="text-2xl font-black text-stone-300 uppercase tracking-widest">操作說明</h2>
+                    <h2 className="text-2xl font-black text-stone-500 uppercase tracking-widest">操作說明</h2>
                     <div className="h-px flex-1 bg-stone-200" />
                 </div>
 
@@ -87,13 +87,13 @@ const Home = () => {
                         <div className="space-y-4">
                             <div className="flex gap-4 items-start">
                                 <div className="bg-stone-100 px-3 py-1 rounded text-sm font-bold text-stone-500 whitespace-nowrap">點擊 (Click)</div>
-                                <p className="text-stone-600 font-medium">
-                                    快速切換 <span className="text-stone-400 font-bold">未取得</span> 與 <span className="text-brand-primary font-bold">已獲得</span> 狀態。
+                                <p className="text-stone-700 font-medium">
+                                    快速切換 <span className="text-stone-600 font-bold">未取得</span> 與 <span className="text-brand-primary font-bold">已獲得</span> 狀態。
                                 </p>
                             </div>
                             <div className="flex gap-4 items-start">
                                 <div className="bg-stone-100 px-3 py-1 rounded text-sm font-bold text-stone-500 whitespace-nowrap">長按 / 右鍵</div>
-                                <p className="text-stone-600 font-medium">
+                                <p className="text-stone-700 font-medium">
                                     開啟選單，可選擇詳細狀態：<br />
                                     <span className="inline-block mt-1 text-sm bg-amber-50 text-amber-700 px-2 py-0.5 rounded">花苗未孵化</span>
                                     <span className="inline-block mt-1 ml-2 text-sm bg-pink-50 text-pink-600 px-2 py-0.5 rounded">培養感情中</span>
@@ -112,10 +112,10 @@ const Home = () => {
                         </div>
 
                         <div className="space-y-4">
-                            <p className="text-stone-600 font-medium leading-relaxed">
+                            <p className="text-stone-700 font-medium leading-relaxed">
                                 點擊右上角的 <span className="font-bold text-stone-800">個人頭像</span> 可開啟同步選單。
                             </p>
-                            <ul className="list-disc list-inside space-y-2 text-stone-600 bg-stone-50 p-4 rounded-2xl text-sm font-medium">
+                            <ul className="list-disc list-inside space-y-2 text-stone-700 bg-stone-50 p-4 rounded-2xl text-sm font-medium">
                                 <li>需登入 Google 帳號</li>
                                 <li>資料將儲存於您的私人 Google 試算表</li>
                                 <li>更換裝置時，請務必先 <span className="text-brand-primary font-bold">儲存</span> 再 <span className="text-brand-accent font-bold">讀取</span></li>
@@ -157,7 +157,7 @@ const StatusItem = ({ color, label, icon }) => (
         <div className={`w-20 h-20 rounded-3xl flex items-center justify-center transition-transform group-hover:scale-110 ${color}`}>
             {icon}
         </div>
-        <span className="font-bold text-lime-900/70">{label}</span>
+        <span className="font-bold text-lime-900/85">{label}</span>
     </div>
 );
 
@@ -167,7 +167,7 @@ const FeatureCard = ({ icon, title, desc, bg }) => (
             {React.cloneElement(icon, { size: 28 })}
         </div>
         <h3 className="text-xl font-black text-lime-950 mb-3">{title}</h3>
-        <p className="text-lime-900/60 leading-relaxed font-medium">
+        <p className="text-lime-900/80 leading-relaxed font-medium">
             {desc}
         </p>
     </div>

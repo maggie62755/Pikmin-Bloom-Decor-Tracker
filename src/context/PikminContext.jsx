@@ -22,6 +22,7 @@ export const PikminProvider = ({ children }) => {
 
     const [hasUnsavedChanges, setHasUnsavedChanges] = useState(false);
     const [localTimestamp, setLocalTimestamp] = useState(() => localStorage.getItem('pikmin-local-timestamp') || null);
+    const [lastSyncAt, setLastSyncAt] = useState(() => localStorage.getItem('pikmin-last-sync-at') || null);
 
     // Conflict State
     const [conflictData, setConflictData] = useState(null); // { cloud: {data, timestamp, completion}, local: {data, timestamp, completion} }
@@ -38,6 +39,12 @@ export const PikminProvider = ({ children }) => {
             localStorage.setItem('pikmin-local-timestamp', localTimestamp);
         }
     }, [localTimestamp]);
+
+    useEffect(() => {
+        if (lastSyncAt) {
+            localStorage.setItem('pikmin-last-sync-at', lastSyncAt);
+        }
+    }, [lastSyncAt]);
 
     const toggleStatus = React.useCallback((variantId, colorId, specificStatus = null) => {
         setCollection(prev => {
@@ -146,6 +153,7 @@ export const PikminProvider = ({ children }) => {
         if (isDataIdentical) {
             setLocalTimestamp(cloudTimestamp);
             setHasUnsavedChanges(false);
+            setLastSyncAt(cloudTimestamp);
             return;
         }
 
@@ -156,6 +164,7 @@ export const PikminProvider = ({ children }) => {
             setCollection(cloudData);
             setLocalTimestamp(cloudTimestamp);
             setHasUnsavedChanges(false);
+            setLastSyncAt(cloudTimestamp);
             return;
         }
 
@@ -197,6 +206,7 @@ export const PikminProvider = ({ children }) => {
 
             // If successful:
             setLocalTimestamp(newTimestamp);
+            setLastSyncAt(newTimestamp);
             setHasUnsavedChanges(false);
         } catch (error) {
             if (error.message === 'CLOUD_CONFLICT') {
@@ -204,6 +214,19 @@ export const PikminProvider = ({ children }) => {
                 await performCloudCheck();
             }
         }
+    };
+
+    const loadFromSheet = async () => {
+        const result = await loadFromSheetApi();
+        if (!result) return false;
+
+        const { data, timestamp } = result;
+        setCollection(data || {});
+        const resolvedTimestamp = timestamp || new Date().toISOString();
+        setLocalTimestamp(resolvedTimestamp);
+        setLastSyncAt(resolvedTimestamp);
+        setHasUnsavedChanges(false);
+        return true;
     };
 
     const value = React.useMemo(() => ({
@@ -217,20 +240,21 @@ export const PikminProvider = ({ children }) => {
         user,
         token,
         saveToSheet,
-        loadFromSheet: loadFromSheetApi, // Expose raw if needed, but mainly we use internal logic
+        loadFromSheet,
         syncStatus,
         syncMessage,
         hasUnsavedChanges,
-        localTimestamp
+        localTimestamp,
+        lastSyncAt
     }), [
         collection,
         toggleStatus,
         calculateProgress,
         calculateTotalProgress,
         login, logout, user, token,
-        saveToSheet, loadFromSheetApi,
+        saveToSheet, loadFromSheet,
         syncStatus, syncMessage,
-        hasUnsavedChanges, localTimestamp
+        hasUnsavedChanges, localTimestamp, lastSyncAt
     ]);
 
     return (

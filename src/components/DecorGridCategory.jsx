@@ -4,7 +4,7 @@ import './DecorGridCategory.css';
 
 const DecorGridCategory = React.memo(({ category, isOpen, onToggle, progress, total, children }) => {
   return (
-    <div className={`grid-category-container soft-card ${isOpen ? 'is-open' : ''}`}>
+    <div className={`grid-category-container ${isOpen ? 'is-open' : ''}`}>
       <button
         onClick={onToggle}
         className={`grid-category-header ${isOpen ? 'is-open' : ''}`}

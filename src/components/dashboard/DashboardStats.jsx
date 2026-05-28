@@ -8,21 +8,21 @@ import ChartTooltip from './ChartTooltip';
 // --- Sub-component: StatCard ---
 const StatCard = ({ value, label, color, status, isActive, onHover, isDimmed }) => (
     <div
-        className={`soft-card p-4 text-center group flex flex-col items-center justify-center relative overflow-hidden transition-all duration-300
+        className={`dashboard-stat-tile p-4 text-center group flex flex-col items-center justify-center relative overflow-hidden transition-all duration-300
             ${isActive ? 'scale-[1.05] shadow-xl bg-white' : ''}
             ${isDimmed ? 'opacity-40 grayscale-[0.5] scale-95' : 'hover:scale-[1.02]'}
         `}
         onMouseEnter={() => onHover(status)}
         onMouseLeave={() => onHover(null)}
     >
-        <div className="absolute top/2 right/2 p-2 opacity-10 group-hover:opacity-20 transition-opacity transform group-hover:rotate-12 group-hover:scale-125">
+        <div className="absolute top-2 right-2 p-2 opacity-10 group-hover:opacity-20 transition-opacity transform group-hover:rotate-12 group-hover:scale-125">
             <StatusIcon status={status} size={80} />
         </div>
 
         <div className={`stat-card-value ${color} relative z-10`}>
             {value}
         </div>
-        <div className="text-sm font-bold text-stone-500 uppercase tracking-wider relative z-10">{label}</div>
+        <div className="text-sm font-semibold text-stone-500 uppercase tracking-wider relative z-10">{label}</div>
     </div>
 );
 

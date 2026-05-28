@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
 import { NavLink, useLocation } from 'react-router-dom';
-import { LogIn, LogOut, Download, Save, Home, List as ListIcon, BarChart2, Menu, X, Leaf } from 'lucide-react';
+import { LogIn, Home, List as ListIcon, BarChart2, Menu, X, Leaf } from 'lucide-react';
 import { usePikmin } from '../context/PikminContext';
-import { DECOR_CATEGORIES } from '../constants';
 
 import logo from '../assets/logo.png';
 
@@ -19,7 +18,7 @@ const Navigation = () => {
     const {
         user, login, logout,
         saveToSheet, loadFromSheet, syncStatus, hasUnsavedChanges,
-        calculateTotalProgress
+        calculateTotalProgress, lastSyncAt
     } = usePikmin();
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const location = useLocation();
@@ -63,18 +62,30 @@ const Navigation = () => {
                         {/* Desktop/Tablet Actions */}
                         <div className="flex items-center gap-2">
                             {!user ? (
-                                <button onClick={() => login()} className="flex items-center gap-1 px-4 py-2 bg-brand-primary text-white rounded-full text-sm font-bold hover:brightness-110 transition-all shadow-md shadow-stone-200 active:scale-95">
+                                <button
+                                    onClick={() => login()}
+                                    className="flex items-center gap-1 px-4 py-2 bg-brand-primary text-white rounded-full text-sm font-bold hover:brightness-110 transition-all shadow-md shadow-stone-200 active:scale-95"
+                                    aria-label="使用 Google 帳號登入"
+                                >
                                     <span className="hidden sm:inline">Login</span> <LogIn size={16} />
                                 </button>
                             ) : (
-                                <UserProfile
-                                    user={user}
-                                    syncStatus={syncStatus}
-                                    hasUnsavedChanges={hasUnsavedChanges}
-                                    onSave={() => saveToSheet()}
-                                    onLoad={loadFromSheet}
-                                    onLogout={logout}
-                                />
+                                <div className="flex items-center gap-2">
+                                    <div className={`hidden lg:flex items-center gap-2 text-[11px] font-extrabold px-3 py-1.5 rounded-full border ${hasUnsavedChanges ? 'bg-amber-50 text-amber-700 border-amber-200' : syncStatus === 'syncing' ? 'bg-blue-50 text-blue-700 border-blue-200' : 'bg-emerald-50 text-emerald-700 border-emerald-200'}`}>
+                                        <span className={`w-2 h-2 rounded-full ${hasUnsavedChanges ? 'bg-amber-500' : syncStatus === 'syncing' ? 'bg-blue-500 animate-pulse' : 'bg-emerald-500'}`} />
+                                        {hasUnsavedChanges ? '未同步' : syncStatus === 'syncing' ? '同步中' : '已同步'}
+                                        {lastSyncAt ? <span className="text-stone-500 font-bold">| {new Date(lastSyncAt).toLocaleDateString()}</span> : null}
+                                    </div>
+                                    <UserProfile
+                                        user={user}
+                                        syncStatus={syncStatus}
+                                        hasUnsavedChanges={hasUnsavedChanges}
+                                        lastSyncAt={lastSyncAt}
+                                        onSave={() => saveToSheet()}
+                                        onLoad={loadFromSheet}
+                                        onLogout={logout}
+                                    />
+                                </div>
                             )}
                         </div>
 
@@ -82,6 +93,9 @@ const Navigation = () => {
                         <button
                             onClick={() => setIsMenuOpen(!isMenuOpen)}
                             className="md:hidden p-2 text-stone-600 hover:bg-stone-100 rounded-full transition-colors"
+                            aria-label={isMenuOpen ? '關閉導覽選單' : '開啟導覽選單'}
+                            aria-expanded={isMenuOpen}
+                            aria-controls="mobile-nav-menu"
                         >
                             {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
                         </button>
@@ -89,10 +103,13 @@ const Navigation = () => {
                 </div>
 
                 {/* Mobile Menu Dropdown */}
-                <div className={`
+                <div
+                    id="mobile-nav-menu"
+                    className={`
                     md:hidden overflow-hidden transition-all duration-300 ease-in-out
                     ${isMenuOpen ? 'max-h-96 opacity-100 pb-4' : 'max-h-0 opacity-0'}
-                `}>
+                `}
+                >
                     <div className="px-4 flex flex-col gap-2">
                         {NAV_ITEMS.map((item) => (
                             <NavLink
@@ -125,9 +142,10 @@ const Navigation = () => {
     );
 };
 
-const NavTab = ({ to, icon: Icon, label }) => (
+const NavTab = ({ to, icon, label }) => (
     <NavLink
         to={to}
+        aria-label={label}
         className={({ isActive }) => `
             relative flex items-center gap-2 px-4 py-2.5 rounded-full text-sm font-black transition-all duration-300 overflow-hidden group
             ${isActive
@@ -137,7 +155,7 @@ const NavTab = ({ to, icon: Icon, label }) => (
     >
         <div className={`absolute inset-0 bg-gradient-to-r from-white/0 via-white/40 to-white/0 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-700`} />
 
-        <Icon size={18} className="relative z-10" />
+        {React.createElement(icon, { size: 18, className: 'relative z-10' })}
         <span className="hidden lg:inline relative z-10">{label}</span>
     </NavLink>
 );

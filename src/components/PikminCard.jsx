@@ -38,7 +38,7 @@ const PikminCard = React.memo(({ color, status, onClick, variant, category }) =>
     // 1. Toggle Logic (Left Click / Tap)
     // Only toggles between NOT_COLLECTED (0) and COLLECTED (3)
     // Or if currently 1 or 2, finishes to COLLECTED (3)
-    const handleToggle = (e) => {
+    const handleToggle = () => {
         if (showMenu) return; // Don't toggle if menu is open
 
         let newStatus = DECOR_STATUS.COLLECTED;
@@ -81,13 +81,30 @@ const PikminCard = React.memo(({ color, status, onClick, variant, category }) =>
         setShowMenu(false);
     };
 
+    const handleKeyDown = (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            handleToggle();
+        }
+        if (e.key === 'ContextMenu') {
+            e.preventDefault();
+            setShowMenu(true);
+        }
+    };
+
     return (
         <div
-            className={`pikmin-card soft-card status-${Object.keys(DECOR_STATUS).find(key => DECOR_STATUS[key] === status).toLowerCase().replace('_', '-')} ${status === DECOR_STATUS.NOT_COLLECTED ? 'not-collected' : ''} ${statusClass[status] || ''}`}
+            className={`pikmin-card status-${Object.keys(DECOR_STATUS).find(key => DECOR_STATUS[key] === status).toLowerCase().replace('_', '-')} ${status === DECOR_STATUS.NOT_COLLECTED ? 'not-collected' : ''} ${statusClass[status] || ''}`}
             onClick={handleToggle}
             onContextMenu={handleContextMenu}
             onTouchStart={handleTouchStart}
             onTouchEnd={handleTouchEnd}
+            onKeyDown={handleKeyDown}
+            role="button"
+            tabIndex={0}
+            aria-haspopup="menu"
+            aria-expanded={showMenu}
+            aria-label={`${variant?.name || ''} ${color.name_ch || pikminType}，目前狀態：${DECOR_STATUS_LABELS[status] || 'Unknown'}。按 Enter 切換，長按或右鍵開啟狀態選單。`}
         >
             <div className="pikmin-card-image-container">
                 {!imgError && imagePath ? (
