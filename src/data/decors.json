@@ -27,7 +27,7 @@
                     "id": "shiny_chef_hat",
                     "name": "Rare: Shiny Chef Hat",
                     "name_ch": "稀有：發光廚師帽",
-                    "image_name": "(Rare)",
+                    "image_name": "ChefHat(Rare)",
                     "colors": [
                         "red",
                         "yellow",
@@ -490,6 +490,21 @@
                         "rock",
                         "winged"
                     ]
+                },
+                {
+                    "id": "banana_rare",
+                    "name": "Banana (Rare)",
+                    "name_ch": "稀有:香蕉",
+                    "image_name": "Banana(Rare)",
+                    "colors": [
+                        "red",
+                        "yellow",
+                        "blue",
+                        "white",
+                        "purple",
+                        "rock",
+                        "winged"
+                    ]
                 }
             ]
         },
@@ -591,7 +606,37 @@
                     "id": "four_leaf_clover",
                     "name": "Four-Leaf Clover",
                     "name_ch": "四葉草",
-                    "image_name": "FourLeafClover",
+                    "image_name": "Four-LeafClover",
+                    "colors": [
+                        "red",
+                        "yellow",
+                        "blue",
+                        "white",
+                        "purple",
+                        "rock",
+                        "winged"
+                    ]
+                },
+                {
+                    "id": "clover_rare",
+                    "name": "Clover (Rare)",
+                    "name_ch": "稀有:三葉草",
+                    "image_name": "Clover(Rare)",
+                    "colors": [
+                        "red",
+                        "yellow",
+                        "blue",
+                        "white",
+                        "purple",
+                        "rock",
+                        "winged"
+                    ]
+                },
+                {
+                    "id": "four_leaf_clover_rare",
+                    "name": "Four-Leaf Clover (Rare)",
+                    "name_ch": "稀有:四葉草",
+                    "image_name": "Four-LeafClover(Rare)",
                     "colors": [
                         "red",
                         "yellow",
@@ -768,7 +813,7 @@
         {
             "id": "stadium",
             "name": "Stadium",
-            "name_ch": "體育場",
+            "name_ch": "體育館",
             "icon": "Stadium.png",
             "image_path": "Stadium",
             "variants": [
@@ -1257,7 +1302,14 @@
                     "name_ch": "泡菜",
                     "image_name": "Kimchi",
                     "colors": [
-                        "purple"
+                        "red",
+                        "yellow",
+                        "blue",
+                        "white",
+                        "purple",
+                        "rock",
+                        "winged",
+                        "ice"
                     ]
                 }
             ]
