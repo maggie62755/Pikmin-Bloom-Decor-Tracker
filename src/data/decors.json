@@ -1970,6 +1970,30 @@
                     ]
                 }
             ]
+        },
+        {
+            "id": "event_surfboard_keychain",
+            "name": "Surfboard Keychain",
+            "name_ch": "衝浪板鑰匙圈",
+            "icon": "special.png",
+            "image_path": "SurfboardKeychain",
+            "variants": [
+                {
+                    "id": "event_surfboard_keychain",
+                    "name": "Surfboard Keychain",
+                    "name_ch": "衝浪板鑰匙圈",
+                    "image_name": "SurfboardKeychain",
+                    "colors": [
+                        "red",
+                        "yellow",
+                        "blue",
+                        "white",
+                        "purple",
+                        "rock",
+                        "winged"
+                    ]
+                }
+            ]
         }     
     ]
 }

@@ -14,6 +14,15 @@
     background: rgba(255, 255, 255, 0.32);
 }
 
+/* Keep card proportions stable on narrow screens. */
+@media (max-width: 420px) {
+    .pikmin-card {
+        padding: 0.4rem;
+        gap: 0.35rem;
+        border-radius: 0.75rem;
+    }
+}
+
 .pikmin-card::before {
     content: "";
     position: absolute;
@@ -95,20 +104,24 @@
 .pikmin-card-image-container {
     position: relative;
     width: 100%;
-    height: 5rem; /* 手機版固定高度 */
-    /* background-color: rgba(255, 255, 255, 0.4); */
+    height: clamp(3.4rem, 14vw, 5rem);
+    max-height: 5rem;
+    aspect-ratio: 1 / 1;
+    /* overflow: hidden; */
     border-radius: 1rem;
     display: flex;
     align-items: flex-end; /* 底端對齊 */
     justify-content: center;
-    padding: 0.25rem;
+    /* padding: 0.25rem; */
+    padding: 0;
     margin-bottom: 0.5rem;
     transition: transform 0.5s ease;
 }
 
 @media (min-width: 640px) {
     .pikmin-card-image-container {
-        height: 7rem; /* 桌機版固定高度 */
+        height: clamp(5.4rem, 9vw, 7rem);
+        max-height: 7rem;
     }
 }
 
@@ -118,9 +131,10 @@
 }
 
 .pikmin-card-image {
-    max-width: 100%;
-    max-height: 100%;
+    width: 100%;
+    height: 100%;
     object-fit: contain;
+    object-position: center;
     filter: drop-shadow(0 4px 3px rgba(0, 0, 0, 0.07)) drop-shadow(0 2px 2px rgba(0, 0, 0, 0.06)); /* drop-shadow-md */
 }
 
@@ -147,6 +161,13 @@
     height: 1.5rem;
 }
 
+@media (max-width: 420px) {
+    .pikmin-card-label-row {
+        height: 1.25rem;
+        gap: 0.3rem;
+    }
+}
+
 .pikmin-card-color-dot {
     width: 0.625rem; /* 2.5 */
     height: 0.625rem;
@@ -167,6 +188,12 @@
     text-overflow: ellipsis;
     max-width: 80%;
     text-align: center;
+}
+
+@media (max-width: 420px) {
+    .pikmin-card-type-text {
+        font-size: 9px;
+    }
 }
 
 /* 懸浮提示標籤 */
