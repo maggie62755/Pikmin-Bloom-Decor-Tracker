@@ -1994,6 +1994,31 @@
                     ]
                 }
             ]
-        }     
+        },
+        {
+            "id": "event_flower_crown",
+            "name": "Flower Crown",
+            "name_ch": "花冠",
+            "icon": "special.png",
+            "image_path": "FlowerCrown",
+            "variants": [
+                {
+                    "id": "event_flower_crown",
+                    "name": "Flower Crown",
+                    "name_ch": "花冠",
+                    "image_name": "FlowerCrown",
+                    "colors": [
+                        "red",
+                        "yellow",
+                        "blue",
+                        "white",
+                        "purple",
+                        "rock",
+                        "winged",
+                        "ice"
+                    ]
+                }
+            ]
+        }      
     ]
 }
