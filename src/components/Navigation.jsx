@@ -68,7 +68,7 @@ const Navigation = () => {
                                 title={t('common.language')}
                             >
                                 <Globe size={14} />
-                                <span>{language === 'zh-TW' ? 'EN' : '中'}</span>
+                                <span>{language === 'zh-TW' ? '中' : 'EN'}</span>
                             </button>
 
                             {!user ? (
@@ -127,7 +127,7 @@ const Navigation = () => {
                             aria-label={t('common.language')}
                         >
                             <Globe size={14} />
-                            <span>{language === 'zh-TW' ? 'EN' : '中'}</span>
+                            <span>{language === 'zh-TW' ? '中' : 'EN'}</span>
                         </button>
 
                         {!user ? (
@@ -163,7 +163,7 @@ const Navigation = () => {
 
             {/* ====== Mobile Bottom Tab Bar (< md) ====== */}
             <nav className="md:hidden fixed bottom-0 left-0 right-0 z-50 bg-journal-paper/95 backdrop-blur-xl border-t border-journal-line/50 safe-bottom">
-                <div className="flex items-center justify-around px-2 py-1">
+                <div className="flex items-center justify-around px-2 py-0.5">
                     {NAV_ITEMS.map((item) => (
                         <MobileTabItem key={item.to} {...item} label={t(item.labelKey)} />
                     ))}
@@ -198,7 +198,7 @@ const MobileTabItem = ({ to, icon, label }) => (
         to={to}
         end={to === '/'}
         className={({ isActive }) => `
-            flex flex-col items-center gap-0.5 px-3 py-2 rounded-2xl transition-all min-w-[4rem]
+            flex flex-col items-center gap-0 px-2.5 py-1 rounded-2xl transition-all min-w-[3.5rem]
             ${isActive
                 ? 'text-brand-primary'
                 : 'text-journal-muted'}
@@ -206,10 +206,10 @@ const MobileTabItem = ({ to, icon, label }) => (
     >
         {({ isActive }) => (
             <>
-                <div className={`p-1.5 rounded-full transition-all ${isActive ? 'bg-brand-primary/10' : ''}`}>
-                    {React.createElement(icon, { size: 20, strokeWidth: isActive ? 2.5 : 2 })}
+                <div className={`p-1 rounded-full transition-all ${isActive ? 'bg-brand-primary/10' : ''}`}>
+                    {React.createElement(icon, { size: 18, strokeWidth: isActive ? 2.5 : 2 })}
                 </div>
-                <span className="text-[10px] font-bold leading-none">{label}</span>
+                <span className="text-[9px] font-bold leading-none">{label}</span>
             </>
         )}
     </NavLink>

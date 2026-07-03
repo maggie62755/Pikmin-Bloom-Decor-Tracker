@@ -157,8 +157,9 @@ const Home = () => {
                     }
                 </button>
 
-                <div className={`overflow-hidden transition-all duration-400 ${showGuide ? 'max-h-[600px] opacity-100' : 'max-h-0 opacity-0'}`}>
-                    <div className="glass-panel rounded-3xl p-6 md:p-10 space-y-8">
+                <div className={`grid overflow-hidden transition-all duration-400 ${showGuide ? 'grid-rows-[1fr] opacity-100' : 'grid-rows-[0fr] opacity-0'}`}>
+                    <div className="min-h-0">
+                        <div className="glass-panel rounded-3xl p-6 md:p-10 space-y-8">
                         {/* 狀態指南 */}
                         <div className="grid grid-cols-2 lg:grid-cols-4 gap-6">
                             <StatusItem label={t('status.not_collected')} status={DECOR_STATUS.NOT_COLLECTED} />
@@ -212,6 +213,7 @@ const Home = () => {
                             >
                                 {t('home.got_it_hide')}
                             </button>
+                        </div>
                         </div>
                     </div>
                 </div>

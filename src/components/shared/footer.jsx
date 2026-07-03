@@ -10,7 +10,7 @@ const Footer = () => {
 
     return (
         <footer
-            className="relative mt-auto w-full py-16 px-6 overflow-hidden"
+            className="relative mt-auto w-full pt-16 pb-22 md:pb-16 px-6 overflow-hidden"
             style={{
                 // 這裡不設定背景色，讓 body 的 radial-gradient 透出來
                 backgroundImage: `url(${bgImage})`,
@@ -24,7 +24,7 @@ const Footer = () => {
             <div className="absolute inset-0 bg-gradient-to-b from-transparent to-white/20 -z-10" />
 
             <div className="relative z-10 max-w-7xl mx-auto">
-                <div className="flex flex-col md:flex-row justify-between items-center gap-10">
+                <div className="flex flex-col md:flex-row justify-between items-center gap-8">
 
                     {/* Logo & 描述 */}
                     <div className="flex items-center gap-3 flex-shrink-0 min-w-0">
