@@ -1,28 +1,31 @@
 @import "tailwindcss";
 @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700;800;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&display=swap');
 @config "../tailwind.config.js";
 
 @layer base {
   :root {
-    /* Colors from theme/colors.js mapping */
-    --color-bg-base: #F7F9F5;
-    --color-text-primary: #1C1917;
-    --color-text-secondary: #78716C;
-    
-    --brand-primary: #65A30D;
-    --brand-secondary: #EC4899;
-    --brand-accent: #F59E0B;
-    --role-success: #65A30D;
-    --role-info: #0EA5E9;
-    --role-warning: #F59E0B;
-    --role-critical: #EF4444;
+    /* 陽光花園 (Sunny Garden) 主題色彩 */
+    --color-bg-base: #FDFCF7;
+    --color-text-primary: #1D3B23;
+    --color-text-secondary: #638260;
 
-    /* Glass Effect Variables */
-    --glass-bg: rgba(255, 255, 255, 0.65);
+    --brand-primary: #52B739;
+    --brand-secondary: #FF6B98;
+    --brand-accent: #FFC82C;
+    --role-success: #52B739;
+    --role-info: #99D6EA;
+    --role-warning: #FFC82C;
+    --role-critical: #E53E3E;
+
+    /* 陽光質感效果變數 */
+    --glass-bg: rgba(255, 255, 255, 0.85);
     --glass-border: rgba(255, 255, 255, 0.6);
-    --glass-blur: 20px;
-    --glass-shadow: 0 8px 32px 0 rgba(77, 124, 15, 0.07);
-    /* Vertical rhythm scale */
+    --glass-blur: 16px;
+    --glass-shadow: 0 8px 32px 0 rgba(82, 183, 57, 0.08);
+
+    /* 垂直節奏間距 */
     --space-1: 0.5rem;
     --space-2: 0.75rem;
     --space-3: 1rem;
@@ -30,9 +33,9 @@
     --space-5: 2rem;
     --space-6: 3rem;
 
-    /* Nature Lab atmosphere */
-    --lab-grid-line: rgba(68, 64, 60, 0.06);
-    --lab-note-paper: rgba(255, 255, 255, 0.7);
+    /* 花園氛圍 */
+    --journal-line: rgba(82, 183, 57, 0.05);
+    --journal-surface: rgba(255, 255, 255, 0.9);
   }
 
   body {
@@ -41,31 +44,32 @@
     -moz-osx-font-smoothing: grayscale;
     background-color: var(--color-bg-base);
     color: var(--color-text-primary);
-    
-    /* Dynamic Nature Gradient Background */
+
+    /* 陽光花園背景：更淡的光暈 + 淺淺的方格筆記本效果 */
     background-image:
-        radial-gradient(circle at 10% 20%, rgba(236, 252, 203, 0.4) 0%, transparent 40%),
-        radial-gradient(circle at 90% 60%, rgba(252, 231, 243, 0.4) 0%, transparent 40%),
-        linear-gradient(0deg, transparent 23px, var(--lab-grid-line) 24px),
-        linear-gradient(90deg, transparent 23px, var(--lab-grid-line) 24px),
-        radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.8) 0%, transparent 100%);
-    background-size: auto, auto, 24px 24px, 24px 24px, auto;
+        radial-gradient(circle at 15% 0%, rgba(255, 200, 44, 0.07) 0%, transparent 40%),
+        radial-gradient(circle at 85% 15%, rgba(255, 107, 152, 0.04) 0%, transparent 50%),
+        radial-gradient(circle at 50% 100%, rgba(153, 214, 234, 0.08) 0%, transparent 60%),
+        linear-gradient(rgba(82, 183, 57, 0.035) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(82, 183, 57, 0.035) 1px, transparent 1px);
+    background-size: auto, auto, auto, 24px 24px, 24px 24px;
+    background-position: center, center, center, -1px -1px, -1px -1px;
     background-attachment: fixed;
-    font-family: 'Nunito', sans-serif; /* Applied new font globally */
+    font-family: 'Nunito', sans-serif;
   }
 
   html {
     scrollbar-gutter: stable;
   }
 
-  /* Improve keyboard accessibility across interactive controls */
+  /* 鍵盤無障礙焦點樣式 */
   :where(a, button, input, textarea, select, [role="button"], [tabindex]):focus-visible {
     outline: 3px solid color-mix(in srgb, var(--brand-primary) 70%, white 30%);
     outline-offset: 2px;
     border-radius: 0.5rem;
   }
 
-  /* Respect reduced-motion users globally */
+  /* 尊重使用者的減少動態偏好 */
   @media (prefers-reduced-motion: reduce) {
     *,
     *::before,
@@ -79,9 +83,9 @@
 }
 
 @layer components {
-  /* 
-   * Glass Panel 
-   * The core container style for the app
+  /*
+   * 日誌玻璃面板
+   * 應用程式核心容器樣式
    */
   .glass-panel {
     background-color: var(--glass-bg);
@@ -91,37 +95,38 @@
     box-shadow: var(--glass-shadow);
     transition: all 0.3s ease;
   }
-  
-  /* 
-   * Soft Card
-   * Used for list items, stats, etc.
+
+  /*
+   * 柔和卡片
+   * 用於清單項目、統計等
    */
   .soft-card {
-    background-color: rgba(255, 255, 255, 0.85);
-    border: 1px solid rgba(255, 255, 255, 0.8);
-    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.02), 0 2px 4px -1px rgba(0, 0, 0, 0.02);
+    background-color: rgba(255, 255, 255, 0.9);
+    border: 1px solid rgba(82, 183, 57, 0.1);
+    box-shadow: 0 4px 12px -2px rgba(82, 183, 57, 0.05);
     border-radius: 1.5rem;
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   }
   .soft-card:hover {
-    background-color: rgba(255, 255, 255, 0.95);
-    transform: translateY(-2px);
-    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05), 0 4px 6px -2px rgba(0, 0, 0, 0.025);
+    background-color: #FFFFFF;
+    transform: translateY(-4px);
+    box-shadow: 0 12px 24px -4px rgba(82, 183, 57, 0.12), 0 4px 8px -2px rgba(255, 107, 152, 0.08);
+    border-color: rgba(82, 183, 57, 0.3);
   }
 
-  /* Buttons */
+  /* 按鈕 */
   .btn-primary {
     padding: 0.75rem 1.5rem;
-    background: linear-gradient(135deg, var(--brand-primary), #4d7c0f);
+    background: linear-gradient(135deg, var(--brand-primary), #2A721C);
     color: white;
     border-radius: 9999px;
     font-weight: 800;
-    box-shadow: 0 4px 12px rgba(101, 163, 13, 0.3);
+    box-shadow: 0 4px 12px rgba(74, 140, 63, 0.3);
     transition: all 0.2s ease;
     border: 2px solid transparent;
   }
   .btn-primary:hover {
-    box-shadow: 0 6px 16px rgba(101, 163, 13, 0.4);
+    box-shadow: 0 6px 16px rgba(74, 140, 63, 0.4);
     transform: translateY(-1px);
     filter: brightness(1.05);
   }
@@ -131,22 +136,22 @@
 
   .btn-secondary {
     padding: 0.75rem 1.5rem;
-    background-color: rgba(255, 255, 255, 0.8);
+    background-color: rgba(245, 243, 237, 0.8);
     color: var(--color-text-secondary);
-    border: 1px solid rgba(0,0,0,0.05);
+    border: 1px solid rgba(201, 185, 154, 0.2);
     border-radius: 9999px;
     font-weight: 800;
     transition: all 0.2s ease;
   }
   .btn-secondary:hover {
-    background-color: white;
+    background-color: #FEFDF8;
     color: var(--brand-primary);
-    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    box-shadow: 0 2px 8px rgba(45, 58, 40, 0.06);
   }
 
-  /* Layout & Typography */
+  /* 版面與字體排版 */
   .page-container {
-    max-width: 80rem; /* max-w-7xl */
+    max-width: 80rem;
     margin: 0 auto;
     padding: 0 var(--space-4) calc(var(--space-6) + var(--space-5)) var(--space-4);
   }
@@ -162,7 +167,7 @@
     display: block;
     font-size: 0.75rem;
     font-weight: 900;
-    color: rgba(101, 163, 13, 0.6); /* brand-primary/60 */
+    color: rgba(74, 140, 63, 0.6);
     text-transform: uppercase;
     letter-spacing: 0.2em;
     margin-bottom: 0.5rem;
@@ -177,6 +182,7 @@
     display: flex;
     align-items: baseline;
     gap: 0.75rem;
+    font-family: 'Fredoka', 'Nunito', sans-serif;
   }
 
   .section-desc {
@@ -193,16 +199,18 @@
     }
   }
 
-  /* Components: Stat Card */
+  /* 元件：統計卡片 */
   .stat-card-value {
     font-size: 2.5rem;
     line-height: 1;
     font-weight: 900;
     margin-bottom: 0.5rem;
     transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+    font-family: 'JetBrains Mono', monospace;
   }
   .group:hover .stat-card-value {
-      transform: scale(1.15) rotate(-2deg);
+      transform: scale(1.15) rotate(-3deg);
+      color: var(--brand-secondary);
   }
 
   .stat-card-label {
@@ -215,15 +223,15 @@
 
   .nav-tabs-wrapper {
     display: flex;
-    background-color: rgba(255, 255, 255, 0.5);
+    background-color: rgba(245, 243, 237, 0.5);
     padding: 0.375rem;
     border-radius: 9999px;
-    border: 1px solid rgba(255, 255, 255, 0.6);
+    border: 1px solid rgba(201, 185, 154, 0.2);
     backdrop-filter: blur(8px);
-    box-shadow: 0 2px 10px rgba(0,0,0,0.03);
+    box-shadow: 0 2px 10px rgba(45, 58, 40, 0.03);
   }
 
-  /* Dashboard Grid */
+  /* 儀表板網格 */
   .stats-grid {
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -247,14 +255,12 @@
   }
 
   .chart-panel {
-    /* Extending glass-panel styles explicitly to avoid @apply error */
+    /* 圖表面板：使用日誌表面色，不使用模糊效果 */
     background-color: var(--glass-bg);
-    backdrop-filter: blur(var(--glass-blur));
-    -webkit-backdrop-filter: blur(var(--glass-blur));
     border: 1px solid var(--glass-border);
     box-shadow: var(--glass-shadow);
     transition: all 0.3s ease;
-    
+
     padding: 2rem;
     border-radius: 2rem;
     height: 400px;
@@ -275,17 +281,17 @@
 
   .nature-lab-panel {
     background:
-      linear-gradient(135deg, rgba(255, 255, 255, 0.74), rgba(255, 255, 255, 0.54)),
+      linear-gradient(135deg, rgba(254, 253, 248, 0.78), rgba(245, 243, 237, 0.58)),
       repeating-linear-gradient(
         -45deg,
         transparent,
         transparent 12px,
-        rgba(101, 163, 13, 0.04) 12px,
-        rgba(101, 163, 13, 0.04) 13px
+        rgba(74, 140, 63, 0.04) 12px,
+        rgba(74, 140, 63, 0.04) 13px
       ),
-      var(--lab-note-paper);
-    border: 1px solid rgba(255, 255, 255, 0.65);
-    box-shadow: 0 10px 24px rgba(28, 25, 23, 0.06);
+      var(--journal-surface);
+    border: 1px solid rgba(201, 185, 154, 0.22);
+    box-shadow: 0 10px 24px rgba(45, 58, 40, 0.05);
   }
 
   .section-stack {

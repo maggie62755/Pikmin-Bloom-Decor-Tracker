@@ -42,7 +42,7 @@
     transform: scale(1.02);
     background-color: rgba(255, 255, 255, 0.95);
     box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05);
-    border-color: var(--brand-primary);
+    border-color: var(--brand-primary, #4A8C3F);
 }
 
 .search-input-minimal {
@@ -50,13 +50,14 @@
     border: none;
     background: transparent;
     padding: 0.75rem 0.5rem 0.75rem 1.5rem;
+    font-family: 'Nunito', sans-serif;
     font-size: 1rem;
     font-weight: 700;
-    color: var(--color-stone-800);
+    color: var(--journal-ink, #2D3A28);
     outline: none;
 }
 .search-input-minimal::placeholder {
-    color: var(--color-text-secondary);
+    color: var(--journal-muted, #7C8B73);
     font-weight: 500;
 }
 
@@ -106,7 +107,8 @@
     background-color: rgba(255, 255, 255, 0.6);
     backdrop-filter: blur(8px);
     border: 1px solid rgba(255, 255, 255, 0.5);
-    color: var(--color-stone-400);
+    color: var(--journal-muted, #7C8B73);
+    font-family: 'Nunito', sans-serif;
     font-size: 0.875rem;
     font-weight: 800;
     cursor: pointer;
@@ -116,21 +118,21 @@
 
 .chip-btn:hover {
     background-color: white;
-    color: var(--color-stone-800);
+    color: var(--journal-ink, #2D3A28);
     transform: translateY(-1px);
 }
 
 .chip-btn.active {
-    background-color: var(--brand-primary);
+    background-color: var(--brand-primary, #4A8C3F);
     color: white;
-    box-shadow: 0 4px 12px rgba(101, 163, 13, 0.3);
+    box-shadow: 0 4px 12px rgba(74, 140, 63, 0.3);
     border-color: transparent;
 }
 
 .chip-btn.active-secondary {
     background-color: white;
-    color: var(--brand-primary);
-    border-color: var(--brand-primary);
+    color: var(--brand-primary, #4A8C3F);
+    border-color: var(--brand-primary, #4A8C3F);
 }
 
 /* Icon Buttons (Small) */
@@ -141,7 +143,7 @@
     align-items: center;
     justify-content: center;
     border-radius: 9999px;
-    color: var(--color-stone-400);
+    color: var(--journal-muted, #7C8B73);
     transition: all 0.2s;
     background: transparent;
     border: none;
@@ -149,11 +151,11 @@
 }
 .icon-btn-small:hover {
     background-color: white;
-    color: var(--color-stone-800);
+    color: var(--journal-ink, #2D3A28);
 }
 .icon-btn-small.active {
     background-color: white;
-    color: var(--brand-primary);
+    color: var(--brand-primary, #4A8C3F);
     box-shadow: 0 1px 2px rgba(0,0,0,0.1);
 }
 
@@ -177,21 +179,22 @@
 .onboarding-hint {
     margin-top: 0.75rem;
     border-radius: 1rem;
-    background: linear-gradient(135deg, rgba(236, 252, 203, 0.72), rgba(255, 255, 255, 0.9));
-    border: 1px solid rgba(101, 163, 13, 0.18);
+    /* Journal theme nature lab panel override */
+    background: linear-gradient(135deg, rgba(247, 249, 245, 0.9), rgba(255, 255, 255, 0.95)); /* journal.grass */
+    border: 1px solid rgba(124, 139, 115, 0.18); /* journal.muted */
     padding: 0.9rem 1rem;
 }
 
 .empty-state-text {
     margin: 0 0 0.5rem 0;
-    color: #57534e;
+    color: var(--journal-ink, #2D3A28);
     font-weight: 700;
 }
 
 .btn-link {
     border: none;
     background: transparent;
-    color: var(--brand-primary);
+    color: var(--brand-primary, #4A8C3F);
     font-weight: 800;
     cursor: pointer;
     text-decoration: underline;

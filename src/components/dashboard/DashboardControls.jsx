@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { ChevronDown, Check } from 'lucide-react';
+import { useTranslation, getLocalizedName } from '../../i18n';
 
 const DashboardControls = ({
     filterType,
@@ -8,6 +9,7 @@ const DashboardControls = ({
     setSelectedCategories,
     availableCategories
 }) => {
+    const { t, language } = useTranslation();
     const [isCategoryDropdownOpen, setIsCategoryDropdownOpen] = useState(false);
     const [dropdownSearch, setDropdownSearch] = useState('');
     const [isCompact, setIsCompact] = useState(false);
@@ -61,17 +63,17 @@ const DashboardControls = ({
                 aria-haspopup="listbox"
                 aria-expanded={isCategoryDropdownOpen}
                 aria-controls="dashboard-category-dropdown"
-                aria-label="選擇統計類別"
+                aria-label={t('dashboard.select_categories')}
                 role="button"
                 tabIndex={0}
             >
-                <span className={`text-base md:text-lg font-extrabold ${selectedCategories.length === 0 ? 'text-stone-400' : 'text-stone-800'}`}>
+                <span className={`text-base md:text-lg font-display font-bold ${selectedCategories.length === 0 ? 'text-journal-muted' : 'text-journal-ink'}`}>
                     {selectedCategories.length === 0
-                        ? '選擇特定類別...'
-                        : `已選擇 ${selectedCategories.length} 個類別`}
+                        ? t('dashboard.select_categories')
+                        : t('dashboard.selected_count', { count: selectedCategories.length })}
                 </span>
                 <div className="flex-1" />
-                <ChevronDown size={20} className="text-stone-400" />
+                <ChevronDown size={20} className="text-journal-muted" />
 
                 {isCategoryDropdownOpen && (
                     <div
@@ -83,17 +85,17 @@ const DashboardControls = ({
                     >
                         <input
                             type="text"
-                            placeholder="搜尋類別..."
+                            placeholder={t('dashboard.search_categories')}
                             className="multi-select-search"
                             value={dropdownSearch}
                             onChange={(e) => setDropdownSearch(e.target.value)}
                             ref={dropdownInputRef}
-                            aria-label="搜尋類別"
+                            aria-label={t('dashboard.search_categories')}
                         />
 
                         <div className="multi-select-list custom-scrollbar">
                             {availableCategories
-                                .filter(c => c.name.toLowerCase().includes(dropdownSearch.toLowerCase()) || c.name_ch.includes(dropdownSearch))
+                                .filter(c => getLocalizedName(c, language).toLowerCase().includes(dropdownSearch.toLowerCase()))
                                 .map(category => (
                                     <button
                                         type="button"
@@ -106,17 +108,17 @@ const DashboardControls = ({
                                         <div className="checkbox-custom">
                                             {selectedCategories.includes(category.id) && <Check size={12} strokeWidth={4} />}
                                         </div>
-                                        <span className="text-sm font-medium text-stone-700">{category.name_ch}</span>
+                                        <span className="text-sm font-bold font-sans text-journal-ink">{getLocalizedName(category, language)}</span>
                                     </button>
                                 ))}
                             {availableCategories.length === 0 && (
-                                <div className="p-4 text-center text-sm text-stone-400">無可用類別</div>
+                                <div className="p-4 text-center text-sm text-journal-muted">{t('tracker.empty_title')}</div>
                             )}
                         </div>
 
                         <div className="multi-select-actions">
-                            <button type="button" onClick={selectAll} className="text-btn-small">全選</button>
-                            <button type="button" onClick={clearSelection} className="text-btn-small">清空</button>
+                            <button type="button" onClick={selectAll} className="text-btn-small">{t('dashboard.select_all')}</button>
+                            <button type="button" onClick={clearSelection} className="text-btn-small">{t('dashboard.clear_selection')}</button>
                         </div>
                     </div>
                 )}
@@ -136,9 +138,9 @@ const DashboardControls = ({
             <div className="dashboard-filter-row no-scrollbar">
                 <div className="flex items-center gap-2 mx-auto">
                     {[
-                        { id: 'all', label: '全部' },
-                        { id: 'standard', label: '一般' },
-                        { id: 'event', label: '活動' },
+                        { id: 'all', labelKey: 'tracker.filter_all' },
+                        { id: 'standard', labelKey: 'tracker.filter_standard' },
+                        { id: 'event', labelKey: 'tracker.filter_event' },
                     ].map(type => (
                         <button
                             type="button"
@@ -147,7 +149,7 @@ const DashboardControls = ({
                             className={`chip-btn ${filterType === type.id ? 'active' : ''}`}
                             aria-pressed={filterType === type.id}
                         >
-                            {type.label}
+                            {t(type.labelKey)}
                         </button>
                     ))}
                 </div>

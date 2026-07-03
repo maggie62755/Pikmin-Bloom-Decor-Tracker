@@ -1,7 +1,9 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { LogOut, Download, Save, User, Cloud, RefreshCw, AlertCircle, CheckCircle2 } from 'lucide-react';
+import { useTranslation } from '../i18n';
 
 const UserProfile = ({ user, syncStatus, hasUnsavedChanges, lastSyncAt, onSave, onLoad, onLogout }) => {
+    const { t } = useTranslation();
     const [isOpen, setIsOpen] = useState(false);
     const dropdownRef = useRef(null);
 
@@ -30,18 +32,18 @@ const UserProfile = ({ user, syncStatus, hasUnsavedChanges, lastSyncAt, onSave, 
     let statusColor = "bg-green-500";
     let statusRing = "ring-green-400/50";
     let StatusIcon = CheckCircle2;
-    let statusText = "All Synced";
+    let statusText = t('sync.all_synced');
 
     if (syncStatus === 'syncing') {
         statusColor = "bg-blue-500";
         statusRing = "ring-blue-400/50";
         StatusIcon = RefreshCw;
-        statusText = "Syncing...";
+        statusText = t('sync.syncing');
     } else if (hasUnsavedChanges) {
         statusColor = "bg-amber-500";
         statusRing = "ring-amber-400/50";
         StatusIcon = AlertCircle;
-        statusText = "Unsaved Changes";
+        statusText = t('sync.unsaved_changes');
     }
 
     return (
@@ -67,7 +69,7 @@ const UserProfile = ({ user, syncStatus, hasUnsavedChanges, lastSyncAt, onSave, 
                         <img src={user.picture} alt="User" className="w-full h-full object-cover" />
                     ) : (
                         <div className="w-full h-full bg-gradient-to-br from-brand-primary to-brand-secondary flex items-center justify-center text-white">
-                            <span className="font-bold text-lg">{user?.name?.[0] || "U"}</span>
+                            <span className="font-display font-bold text-lg">{user?.name?.[0] || "U"}</span>
                         </div>
                     )}
                 </div>
@@ -80,14 +82,14 @@ const UserProfile = ({ user, syncStatus, hasUnsavedChanges, lastSyncAt, onSave, 
 
             {/* Dropdown Menu */}
             <div className={`
-                absolute right-0 top-full mt-3 w-64 bg-white/90 backdrop-blur-xl rounded-2xl shadow-xl border border-white/20 overflow-hidden transform transition-all duration-200 origin-top-right z-50
+                absolute right-0 top-full mt-3 w-64 bg-journal-paper/95 backdrop-blur-xl rounded-2xl shadow-xl border border-white/40 overflow-hidden transform transition-all duration-200 origin-top-right z-50
                 ${isOpen ? 'opacity-100 scale-100 translate-y-0' : 'opacity-0 scale-95 -translate-y-2 pointer-events-none'}
             `}>
 
                 {/* User Header */}
-                <div className="p-4 border-b border-stone-100 bg-stone-50/50">
-                    <p className="font-bold text-stone-800 truncate">{user?.name || "Pikmin Player"}</p>
-                    <p className="text-xs text-stone-500 truncate font-medium">{user?.email}</p>
+                <div className="p-4 border-b border-journal-line/50 bg-journal-surface/30">
+                    <p className="font-display font-bold text-journal-ink truncate">{user?.name || "Pikmin Player"}</p>
+                    <p className="text-xs text-journal-muted truncate font-medium">{user?.email}</p>
 
                     {/* Status Badge in Menu */}
                     <div className={`mt-3 flex items-center gap-2 text-xs font-bold px-3 py-1.5 rounded-lg w-fit transition-colors
@@ -97,8 +99,8 @@ const UserProfile = ({ user, syncStatus, hasUnsavedChanges, lastSyncAt, onSave, 
                         <StatusIcon size={14} className={syncStatus === 'syncing' ? 'animate-spin' : ''} />
                         {statusText}
                     </div>
-                    <p className="mt-2 text-[11px] text-stone-500 font-semibold">
-                        上次同步: {lastSyncAt ? new Date(lastSyncAt).toLocaleString() : '尚未同步'}
+                    <p className="mt-2 text-[11px] text-journal-muted font-semibold">
+                        {t('sync.last_sync')}: {lastSyncAt ? new Date(lastSyncAt).toLocaleString() : t('sync.never_synced')}
                     </p>
                 </div>
 
@@ -107,40 +109,40 @@ const UserProfile = ({ user, syncStatus, hasUnsavedChanges, lastSyncAt, onSave, 
                     <button
                         onClick={() => handleAction(onSave)}
                         disabled={syncStatus === 'syncing'}
-                        className="w-full text-left flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-stone-100 text-stone-600 font-bold text-sm transition-colors group disabled:opacity-50"
+                        className="w-full text-left flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-journal-line/30 text-journal-ink/80 font-bold text-sm transition-colors group disabled:opacity-50"
                     >
-                        <div className={`p-2 rounded-full ${hasUnsavedChanges ? 'bg-amber-100 text-amber-600 group-hover:bg-amber-200' : 'bg-stone-200 text-stone-500'}`}>
+                        <div className={`p-2 rounded-full ${hasUnsavedChanges ? 'bg-amber-100 text-amber-600 group-hover:bg-amber-200' : 'bg-journal-line/50 text-journal-muted'}`}>
                             <Save size={18} />
                         </div>
-                        <span>Save to Cloud</span>
+                        <span>{t('sync.save')}</span>
                         {hasUnsavedChanges && <span className="ml-auto w-2 h-2 rounded-full bg-amber-500"></span>}
                     </button>
 
                     <button
                         onClick={() => {
-                            if (confirm("This will overwrite your local changes with the Cloud version. Continue?")) {
+                            if (window.confirm(t('sync.load_confirm'))) {
                                 handleAction(onLoad);
                             }
                         }}
                         disabled={syncStatus === 'syncing'}
-                        className="w-full text-left flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-stone-100 text-stone-600 font-bold text-sm transition-colors group"
+                        className="w-full text-left flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-journal-line/30 text-journal-ink/80 font-bold text-sm transition-colors group"
                     >
-                        <div className="p-2 rounded-full bg-stone-200 text-stone-500 group-hover:bg-blue-100 group-hover:text-blue-500 transition-colors">
+                        <div className="p-2 rounded-full bg-journal-line/50 text-journal-muted group-hover:bg-blue-100 group-hover:text-blue-500 transition-colors">
                             <Download size={18} />
                         </div>
-                        <span>Load from Cloud</span>
+                        <span>{t('sync.load')}</span>
                     </button>
 
-                    <div className="h-px bg-stone-100 my-1 mx-2"></div>
+                    <div className="h-px bg-journal-line/50 my-1 mx-2"></div>
 
                     <button
                         onClick={() => handleAction(onLogout)}
-                        className="w-full text-left flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-red-50 text-stone-500 hover:text-red-500 font-bold text-sm transition-colors group"
+                        className="w-full text-left flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-red-50 text-journal-muted hover:text-red-500 font-bold text-sm transition-colors group"
                     >
-                        <div className="p-2 rounded-full bg-stone-200 text-stone-400 group-hover:bg-red-100 group-hover:text-red-500 transition-colors">
+                        <div className="p-2 rounded-full bg-journal-line/50 text-journal-muted/70 group-hover:bg-red-100 group-hover:text-red-500 transition-colors">
                             <LogOut size={18} />
                         </div>
-                        <span>Logout</span>
+                        <span>{t('sync.logout')}</span>
                     </button>
                 </div>
             </div>

@@ -7,26 +7,23 @@ import Tracker from './pages/Tracker';
 import Dashboard from './pages/Dashboard';
 import Footer from './components/shared/footer';
 import PrivacyPolicy from './pages/PrivacyPolicy';
-import DecisionToolPage from './pages/DecisionToolPage'; // Import Page
 import GlobalToast from './components/shared/GlobalToast';
+import ScrollToTop from './components/shared/ScrollToTop';
 
 // Layout Component
 const Layout = () => {
     return (
-        <div className="min-h-screen text-nature-earth selection:bg-brand-primary/20">
+        <div className="min-h-screen text-journal-ink selection:bg-brand-primary/20">
             <Navigation />
-            <main className="pt-28 pb-24 px-4 md:px-6">
+            {/* pt-28: 頂部導覽列空間, pb-24 md:pb-8: 手機底部 Tab Bar + 電腦無底部 Tab */}
+            <main className="pt-28 pb-24 md:pb-8 px-4 md:px-6">
                 <Outlet />
             </main>
             <Footer />
             <GlobalToast />
-
         </div>
     );
 };
-
-
-import ScrollToTop from './components/shared/ScrollToTop';
 
 function App() {
     return (
@@ -37,7 +34,6 @@ function App() {
                     <Route path="/" element={<Layout />}>
                         <Route index element={<Home />} />
                         <Route path="tracker" element={<Tracker />} />
-                        <Route path="decision-helper" element={<DecisionToolPage />} />
                         <Route path="dashboard" element={<Dashboard />} />
                         <Route path="privacy" element={<PrivacyPolicy />} />
                     </Route>

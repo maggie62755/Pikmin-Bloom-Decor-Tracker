@@ -31,6 +31,14 @@ export const DECOR_STATUS_LABELS = {
   [DECOR_STATUS.COLLECTED]: '已獲得',
 };
 
+// i18n key mapping for status labels – components should use t(`status.${DECOR_STATUS_KEYS[status]}`) instead
+export const DECOR_STATUS_KEYS = {
+  [DECOR_STATUS.NOT_COLLECTED]: 'not_collected',
+  [DECOR_STATUS.SEEDLING]: 'seedling',
+  [DECOR_STATUS.GROWING]: 'growing',
+  [DECOR_STATUS.COLLECTED]: 'collected',
+};
+
 export const isStandardCategory = (id) => {
   return !id.startsWith('event_');
 };

@@ -1,25 +1,28 @@
-import React, { useState, useRef } from 'react';
-import { DECOR_STATUS, DECOR_STATUS_LABELS } from '../constants';
+import React, { useState, useRef, useCallback } from 'react';
+import { DECOR_STATUS, DECOR_STATUS_LABELS, DECOR_STATUS_KEYS } from '../constants';
 import { COLORS } from '../theme/colors';
+import { useTranslation, getLocalizedName } from '../i18n';
 import './PikminCard.css';
 import MissingImageFallback from './shared/MissingImageFallback';
 import StatusIcon from './shared/StatusIcon';
 import ContextMenu from './shared/ContextMenu';
 
 const PikminCard = React.memo(({ color, status, onClick, variant, category }) => {
+    const { t, language } = useTranslation();
     const [imgError, setImgError] = useState(false);
     const [showMenu, setShowMenu] = useState(false);
+    const [animClass, setAnimClass] = useState('');
 
     // Long Press Refs
     const timerRef = useRef(null);
     const isLongPress = useRef(false);
 
-    // Determines CSS class
+    // Determines CSS class (handled entirely by PikminCard.css in Sticker theme)
     const statusClass = {
         [DECOR_STATUS.NOT_COLLECTED]: '',
-        [DECOR_STATUS.SEEDLING]: 'ring-1 ring-amber-200 bg-amber-50/30',
-        [DECOR_STATUS.GROWING]: 'ring-1 ring-pink-200 bg-pink-50/30',
-        [DECOR_STATUS.COLLECTED]: 'ring-1 ring-brand-primary/20 bg-brand-primary/5',
+        [DECOR_STATUS.SEEDLING]: '',
+        [DECOR_STATUS.GROWING]: '',
+        [DECOR_STATUS.COLLECTED]: '',
     };
 
     const imagePath = (category && variant)
@@ -33,6 +36,20 @@ const PikminCard = React.memo(({ color, status, onClick, variant, category }) =>
         setImgError(false);
     }, [imagePath]);
 
+    // -- Signature Animation Trigger --
+    const triggerAnimation = useCallback((newStatus) => {
+        if (newStatus === DECOR_STATUS.COLLECTED) {
+            setAnimClass('just-collected');
+        } else if (newStatus === DECOR_STATUS.NOT_COLLECTED) {
+            setAnimClass('just-uncollected');
+        } else {
+            setAnimClass('just-changed');
+        }
+        // Clear after animation
+        const timer = setTimeout(() => setAnimClass(''), 400);
+        return () => clearTimeout(timer);
+    }, []);
+
     // -- Interaction Handlers --
 
     // 1. Toggle Logic (Left Click / Tap)
@@ -45,6 +62,7 @@ const PikminCard = React.memo(({ color, status, onClick, variant, category }) =>
         if (status === DECOR_STATUS.COLLECTED) {
             newStatus = DECOR_STATUS.NOT_COLLECTED;
         }
+        triggerAnimation(newStatus);
         onClick(newStatus);
     };
 
@@ -77,6 +95,7 @@ const PikminCard = React.memo(({ color, status, onClick, variant, category }) =>
     };
 
     const handleMenuSelect = (selectedStatus) => {
+        triggerAnimation(selectedStatus);
         onClick(selectedStatus);
         setShowMenu(false);
     };
@@ -92,9 +111,14 @@ const PikminCard = React.memo(({ color, status, onClick, variant, category }) =>
         }
     };
 
+    const statusKey = DECOR_STATUS_KEYS[status] || 'not_collected';
+    const statusLabel = t(`status.${statusKey}`);
+    const colorName = t(`colors.${pikminType}`) || getLocalizedName(color, language) || pikminType;
+    const variantName = variant ? getLocalizedName(variant, language) : '';
+
     return (
         <div
-            className={`pikmin-card status-${Object.keys(DECOR_STATUS).find(key => DECOR_STATUS[key] === status).toLowerCase().replace('_', '-')} ${status === DECOR_STATUS.NOT_COLLECTED ? 'not-collected' : ''} ${statusClass[status] || ''}`}
+            className={`pikmin-card status-${Object.keys(DECOR_STATUS).find(key => DECOR_STATUS[key] === status).toLowerCase().replace('_', '-')} ${status === DECOR_STATUS.NOT_COLLECTED ? 'not-collected' : ''} ${statusClass[status] || ''} ${animClass}`}
             onClick={handleToggle}
             onContextMenu={handleContextMenu}
             onTouchStart={handleTouchStart}
@@ -104,13 +128,13 @@ const PikminCard = React.memo(({ color, status, onClick, variant, category }) =>
             tabIndex={0}
             aria-haspopup="menu"
             aria-expanded={showMenu}
-            aria-label={`${variant?.name || ''} ${color.name_ch || pikminType}，目前狀態：${DECOR_STATUS_LABELS[status] || 'Unknown'}。按 Enter 切換，長按或右鍵開啟狀態選單。`}
+            aria-label={`${variantName} ${colorName}，${statusLabel}`}
         >
             <div className="pikmin-card-image-container">
                 {!imgError && imagePath ? (
                     <img
                         src={imagePath}
-                        alt={`${color.name_ch || pikminType} ${variant.name}`}
+                        alt={`${colorName} ${variantName}`}
                         className="pikmin-card-image"
                         loading="lazy"
                         decoding="async"
@@ -131,14 +155,14 @@ const PikminCard = React.memo(({ color, status, onClick, variant, category }) =>
                     style={{ backgroundColor: COLORS.pikmin[pikminType] || '#ccc' }}
                 />
                 <span className="pikmin-card-type-text">
-                    {color.name_ch || pikminType}
+                    {colorName}
                 </span>
             </div>
 
             {/* Tooltip (Only show if menu is NOT open) */}
             {!showMenu && (
                 <div className="pikmin-card-tooltip">
-                    {DECOR_STATUS_LABELS[status] || 'Unknown'}
+                    {statusLabel}
                 </div>
             )}
 

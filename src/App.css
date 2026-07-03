@@ -1,1 +1,13 @@
-/* Intentionally minimal: app-level styling lives in index.css and component styles. */
+/* App.css — 全域 Layout 調整 */
+
+/* 手機版底部 Tab Bar 安全區域 */
+.safe-bottom {
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+}
+
+/* 手機版主內容區需要額外的頂部 padding（簡化 top bar） */
+@media (max-width: 767px) {
+    main {
+        padding-top: 4rem !important; /* 手機 top bar 較矮 */
+    }
+}

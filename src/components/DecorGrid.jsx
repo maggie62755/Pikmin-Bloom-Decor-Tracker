@@ -1,9 +1,11 @@
 import React from 'react';
 import PikminCard from './PikminCard';
+import { useTranslation, getLocalizedName } from '../i18n';
 import { PIKMIN_COLORS, DECOR_STATUS } from '../constants';
 import './DecorGrid.css';
 
 const VariantRow = React.memo(({ variant, category, onCardClick, variantState }) => {
+  const { language } = useTranslation();
   const getBaseColorId = (id) => {
     const base = PIKMIN_COLORS.find(pc =>
       id === pc.id || id.startsWith(pc.id) && /^\d+$/.test(id.replace(pc.id, ''))
@@ -18,7 +20,7 @@ const VariantRow = React.memo(({ variant, category, onCardClick, variantState })
     <div className="variant-row-container">
       <div className="variant-header">
         <div className="variant-line" />
-        <h4 className="variant-title">{variant.name_ch || variant.name}</h4>
+        <h4 className="variant-title">{getLocalizedName(variant, language)}</h4>
       </div>
       <div className="pikmin-grid">
         {PIKMIN_COLORS.map((colorDef, index) => {

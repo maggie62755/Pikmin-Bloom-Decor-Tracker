@@ -2,9 +2,11 @@ import { useState, useMemo, useEffect } from 'react';
 import { DECOR_CATEGORIES, DECOR_STATUS, DECOR_STATUS_LABELS, PIKMIN_COLORS, isStandardCategory } from '../constants';
 import { COLORS } from '../theme/colors';
 import { usePikmin } from '../context/PikminContext';
+import { useTranslation, getLocalizedName } from '../i18n';
 
 export const useDashboardStats = () => {
     const { collection, calculateProgress } = usePikmin();
+    const { language } = useTranslation();
 
     // -- State --
     const [filterType, setFilterType] = useState('all'); // 'all', 'standard', 'event'
@@ -77,12 +79,12 @@ export const useDashboardStats = () => {
         });
 
         return PIKMIN_COLORS.map(c => ({
-            name: c.name_ch || c.name,
+            name: getLocalizedName(c, language),
             value: missingCounts[c.id],
             fill: COLORS.pikmin[c.id],
             type: c.id
         })).filter(item => item.value > 0);
-    }, [activeCategories, collection]);
+    }, [activeCategories, collection, language]);
 
     // 5. Incomplete Categories List
     const incompleteCategories = useMemo(() => {
@@ -98,11 +100,11 @@ export const useDashboardStats = () => {
                             const baseColor = PIKMIN_COLORS.find(col => 
                                 c === col.id || c.startsWith(col.id) && /^\d+$/.test(c.replace(col.id, ''))
                             );
-                            const colorLabel = baseColor?.name_ch || c;
+                            const colorLabel = baseColor ? getLocalizedName(baseColor, language) : c;
                             missingItems.push({
-                                label: `${v.name_ch || v.name} (${colorLabel})`,
+                                label: `${getLocalizedName(v, language)} (${colorLabel})`,
                                 // Store enough info to navigate/search
-                                searchTerm: v.name_ch || v.name,
+                                searchTerm: getLocalizedName(v, language),
                                 filterType: isStandardCategory(cat.id) ? 'standard' : 'event',
                                 categoryId: cat.id
                             });
@@ -119,7 +121,7 @@ export const useDashboardStats = () => {
             }
         });
         return list.sort((a, b) => a.percent - b.percent);
-    }, [activeCategories, calculateProgress, collection]);
+    }, [activeCategories, calculateProgress, collection, language]);
 
     const statusData = [
         { name: DECOR_STATUS_LABELS[DECOR_STATUS.COLLECTED], value: stats[DECOR_STATUS.COLLECTED], color: COLORS.status.collected },
@@ -143,8 +145,8 @@ export const useDashboardStats = () => {
                 });
             });
         });
-        return { name: c.name_ch, type: c.id || c.name, value: count, fill: COLORS.pikmin[c.id], type: c.id };
-    }), [activeCategories, collection]);
+        return { name: getLocalizedName(c, language), type: c.id || c.name, value: count, fill: COLORS.pikmin[c.id] };
+    }), [activeCategories, collection, language]);
 
     return {
         filterType, setFilterType,

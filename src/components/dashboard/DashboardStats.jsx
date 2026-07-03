@@ -1,7 +1,8 @@
 import React from 'react';
 import { PieChart, Pie, Cell, ResponsiveContainer, Tooltip } from 'recharts';
-import { DECOR_STATUS, DECOR_STATUS_LABELS } from '../../constants';
+import { DECOR_STATUS, DECOR_STATUS_KEYS } from '../../constants';
 import { COLORS } from '../../theme/colors';
+import { useTranslation } from '../../i18n';
 import StatusIcon from '../shared/StatusIcon';
 import ChartTooltip from './ChartTooltip';
 
@@ -19,25 +20,27 @@ const StatCard = ({ value, label, color, status, isActive, onHover, isDimmed }) 
             <StatusIcon status={status} size={80} />
         </div>
 
-        <div className={`stat-card-value ${color} relative z-10`}>
+        <div className={`stat-card-value font-mono ${color} relative z-10`}>
             {value}
         </div>
-        <div className="text-sm font-semibold text-stone-500 uppercase tracking-wider relative z-10">{label}</div>
+        <div className="text-sm font-semibold text-journal-muted uppercase tracking-wider relative z-10">{label}</div>
     </div>
 );
 
 // --- Sub-component: DonutChart (Internal) ---
-const DonutChartSection = ({ stats, transparent = true, centerLabel = "Complete", hoveredStatus, onHover }) => {
+const DonutChartSection = ({ stats, transparent = true, hoveredStatus, onHover }) => {
+    const { t } = useTranslation();
+    
     // Construct data from stats for the chart
     const data = [
-        { name: DECOR_STATUS_LABELS[DECOR_STATUS.COLLECTED], value: stats[DECOR_STATUS.COLLECTED], color: COLORS.status.collected, status: DECOR_STATUS.COLLECTED },
-        { name: DECOR_STATUS_LABELS[DECOR_STATUS.GROWING], value: stats[DECOR_STATUS.GROWING], color: COLORS.status.growing, status: DECOR_STATUS.GROWING },
-        { name: DECOR_STATUS_LABELS[DECOR_STATUS.SEEDLING], value: stats[DECOR_STATUS.SEEDLING], color: COLORS.status.seedling, status: DECOR_STATUS.SEEDLING },
-        { name: DECOR_STATUS_LABELS[DECOR_STATUS.NOT_COLLECTED], value: stats[DECOR_STATUS.NOT_COLLECTED], color: COLORS.status.missing, status: DECOR_STATUS.NOT_COLLECTED },
+        { name: t(`status.${DECOR_STATUS_KEYS[DECOR_STATUS.COLLECTED]}`), value: stats[DECOR_STATUS.COLLECTED], color: COLORS.status.collected, status: DECOR_STATUS.COLLECTED },
+        { name: t(`status.${DECOR_STATUS_KEYS[DECOR_STATUS.GROWING]}`), value: stats[DECOR_STATUS.GROWING], color: COLORS.status.growing, status: DECOR_STATUS.GROWING },
+        { name: t(`status.${DECOR_STATUS_KEYS[DECOR_STATUS.SEEDLING]}`), value: stats[DECOR_STATUS.SEEDLING], color: COLORS.status.seedling, status: DECOR_STATUS.SEEDLING },
+        { name: t(`status.${DECOR_STATUS_KEYS[DECOR_STATUS.NOT_COLLECTED]}`), value: stats[DECOR_STATUS.NOT_COLLECTED], color: COLORS.status.missing, status: DECOR_STATUS.NOT_COLLECTED },
     ];
 
     const total = data.reduce((sum, item) => sum + item.value, 0);
-    const collectedItem = data.find(d => d.name === DECOR_STATUS_LABELS[DECOR_STATUS.COLLECTED]);
+    const collectedItem = data.find(d => d.status === DECOR_STATUS.COLLECTED);
 
     // Determine which item is highlighted (for center text)
     const activeItem = data.find(d => d.status === hoveredStatus);
@@ -45,21 +48,21 @@ const DonutChartSection = ({ stats, transparent = true, centerLabel = "Complete"
         ? (total > 0 ? Math.round((activeItem.value / total) * 100) : 0)
         : (total > 0 ? Math.round(((collectedItem?.value || 0) / total) * 100) : 0);
 
-    const displayLabel = activeItem ? activeItem.name : centerLabel;
+    const displayLabel = activeItem ? activeItem.name : t('dashboard.overall_progress');
 
     // Inject totalValue into data for tooltip
     const chartData = data.map(item => ({ ...item, totalValue: total }));
 
     return (
-        <div className={`flex flex-col w-full aspect-square lg:aspect-auto lg:h-full lg:min-h-[400px] max-w-md mx-auto ${transparent ? '' : 'chart-panel bg-white/80 backdrop-blur-md rounded-[2.5rem] p-6 shadow-sm border border-stone-100'}`}>
+        <div className={`flex flex-col w-full aspect-square lg:aspect-auto lg:h-full lg:min-h-[400px] max-w-md mx-auto ${transparent ? '' : 'chart-panel bg-white/80 backdrop-blur-md rounded-[2.5rem] p-6 shadow-sm border border-journal-line'}`}>
             <div className="flex-1 relative">
                 {/* Center Label */}
                 <div className="absolute top-[50%] left-1/2 -translate-x-1/2 -translate-y-1/2 text-center pointer-events-none transition-all duration-300">
                     <div className="flex flex-col items-center">
-                        <span className={`text-4xl font-black tabular-nums transition-colors duration-300 ${activeItem ? 'text-brand-primary scale-110' : 'text-stone-700'}`}>
+                        <span className={`text-4xl font-mono font-bold tabular-nums transition-colors duration-300 ${activeItem ? 'text-brand-primary scale-110' : 'text-journal-ink'}`}>
                             {displayPercentage}%
                         </span>
-                        <span className="text-[10px] font-bold text-stone-400 tracking-[0.2em] uppercase mt-1">
+                        <span className="text-[10px] font-bold text-journal-muted tracking-[0.2em] uppercase mt-1">
                             {displayLabel}
                         </span>
                     </div>
@@ -113,6 +116,7 @@ const DonutChartSection = ({ stats, transparent = true, centerLabel = "Complete"
 };
 
 const DashboardStats = ({ stats, className }) => {
+    const { t } = useTranslation();
     const [hoveredStatus, setHoveredStatus] = React.useState(null);
 
     // This component now manages the entire top row layout: [ DonutChart | StatsGrid ]
@@ -129,7 +133,7 @@ const DashboardStats = ({ stats, className }) => {
             <div className="grid grid-cols-2 gap-3 h-full">
                 <StatCard
                     value={stats[DECOR_STATUS.COLLECTED]}
-                    label="已收藏"
+                    label={t(`status.${DECOR_STATUS_KEYS[DECOR_STATUS.COLLECTED]}`)}
                     color="text-brand-primary"
                     status={DECOR_STATUS.COLLECTED}
                     isActive={hoveredStatus === DECOR_STATUS.COLLECTED}
@@ -138,7 +142,7 @@ const DashboardStats = ({ stats, className }) => {
                 />
                 <StatCard
                     value={stats[DECOR_STATUS.GROWING]}
-                    label="成長中"
+                    label={t(`status.${DECOR_STATUS_KEYS[DECOR_STATUS.GROWING]}`)}
                     color="text-brand-secondary"
                     status={DECOR_STATUS.GROWING}
                     isActive={hoveredStatus === DECOR_STATUS.GROWING}
@@ -147,7 +151,7 @@ const DashboardStats = ({ stats, className }) => {
                 />
                 <StatCard
                     value={stats[DECOR_STATUS.SEEDLING]}
-                    label="大苗"
+                    label={t(`status.${DECOR_STATUS_KEYS[DECOR_STATUS.SEEDLING]}`)}
                     color="text-brand-accent"
                     status={DECOR_STATUS.SEEDLING}
                     isActive={hoveredStatus === DECOR_STATUS.SEEDLING}
@@ -156,8 +160,8 @@ const DashboardStats = ({ stats, className }) => {
                 />
                 <StatCard
                     value={stats[DECOR_STATUS.NOT_COLLECTED]}
-                    label="未獲得"
-                    color="text-stone-300"
+                    label={t(`status.${DECOR_STATUS_KEYS[DECOR_STATUS.NOT_COLLECTED]}`)}
+                    color="text-journal-muted/60"
                     status={DECOR_STATUS.NOT_COLLECTED}
                     isActive={hoveredStatus === DECOR_STATUS.NOT_COLLECTED}
                     isDimmed={hoveredStatus !== null && hoveredStatus !== DECOR_STATUS.NOT_COLLECTED}

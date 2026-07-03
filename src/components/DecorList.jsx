@@ -1,6 +1,7 @@
 import React, { useState, useRef } from 'react';
-import { PIKMIN_COLORS, DECOR_STATUS } from '../constants';
+import { PIKMIN_COLORS, DECOR_STATUS, DECOR_STATUS_KEYS } from '../constants';
 import { COLORS } from '../theme/colors';
+import { useTranslation, getLocalizedName } from '../i18n';
 
 import './DecorList.css';
 import MissingImageFallback from './shared/MissingImageFallback';
@@ -10,6 +11,7 @@ import ContextMenu from './shared/ContextMenu';
 const MiniCard = React.memo(({ status, imagePath, color, onClick }) => {
   const [imgError, setImgError] = useState(false);
   const [showMenu, setShowMenu] = useState(false);
+  const { language } = useTranslation();
 
   // Long Press Refs
   const timerRef = useRef(null);
@@ -79,7 +81,7 @@ const MiniCard = React.memo(({ status, imagePath, color, onClick }) => {
           {!imgError && imagePath ? (
             <img
               src={imagePath}
-              alt={color.name_ch || color.name}
+              alt={getLocalizedName(color, language)}
               className="mini-card-img"
               loading="lazy"
               decoding="async"
@@ -108,6 +110,7 @@ const MiniCard = React.memo(({ status, imagePath, color, onClick }) => {
 });
 
 const DecorRow = React.memo(({ variant, category, variantCollection, onCardClick }) => {
+  const { language } = useTranslation();
   const getBaseColorId = (id) => {
     const base = PIKMIN_COLORS.find(pc =>
       id === pc.id || id.startsWith(pc.id) && /^\d+$/.test(id.replace(pc.id, ''))
@@ -121,7 +124,7 @@ const DecorRow = React.memo(({ variant, category, variantCollection, onCardClick
 
   return (
     <tr className="group">
-      <td className="decor-list-td-main" title={variant.name_ch || variant.name}>
+      <td className="decor-list-td-main" title={getLocalizedName(variant, language)}>
         <div className="flex items-center justify-center sm:justify-start gap-0 sm:gap-3">
           {category.icon && (
             <div
@@ -133,8 +136,8 @@ const DecorRow = React.memo(({ variant, category, variantCollection, onCardClick
             />
           )}
           <div className="flex flex-col hidden sm:flex">
-            <div className="decor-list-variant-name leading-tight">{variant.name_ch || variant.name}</div>
-            <div className="decor-list-category-name hidden sm:block text-xs opacity-50">{category.name_ch || category.name}</div>
+            <div className="decor-list-variant-name leading-tight font-display font-bold">{getLocalizedName(variant, language)}</div>
+            <div className="decor-list-category-name hidden sm:block text-xs font-bold opacity-50">{getLocalizedName(category, language)}</div>
           </div>
         </div>
       </td>
@@ -177,22 +180,24 @@ const DecorRow = React.memo(({ variant, category, variantCollection, onCardClick
 });
 
 const DecorList = ({ categories, collection, onCardClick }) => {
+  const { t } = useTranslation();
+
   return (
     <div className="decor-list-container">
       <div className="decor-list-scroll custom-scrollbar">
         <table className="decor-list-table">
           <thead className="decor-list-thead">
             <tr>
-              <th className="decor-list-th-main">
-                <span className="hidden sm:inline">裝飾種類</span>
-                <span className="sm:hidden">飾品</span>
+              <th className="decor-list-th-main font-display font-bold">
+                <span className="hidden sm:inline">{t('tracker.decor_type')}</span>
+                <span className="sm:hidden">{t('tracker.decor_short')}</span>
               </th>
               {PIKMIN_COLORS.map(color => (
                 <th key={color.id} className="decor-list-th-color">
                   <div
                     className="decor-list-color-indicator"
                     style={{ backgroundColor: color.hex }}
-                    title={color.name_ch || color.name}
+                    title={t(`colors.${color.id}`)}
                   />
                 </th>
               ))}

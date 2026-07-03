@@ -2,8 +2,10 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Filter, Search } from 'lucide-react';
 import { COLORS } from '../../theme/colors';
+import { useTranslation, getLocalizedName } from '../../i18n';
 
 const IncompleteList = ({ incompleteCategories }) => {
+    const { t, language } = useTranslation();
     const navigate = useNavigate();
 
     const handleTagClick = (item) => {
@@ -20,11 +22,11 @@ const IncompleteList = ({ incompleteCategories }) => {
     return (
         <div className="mt-12">
             <div className="mb-4 pl-2 border-l-4 border-brand-primary/20">
-                <span className="block text-xs font-bold text-stone-400 uppercase tracking-widest mb-1">
-                    Action Items
+                <span className="block text-xs font-display font-bold text-journal-muted uppercase tracking-widest mb-1">
+                    {t('dashboard.action_items')}
                 </span>
-                <h3 className="text-2xl font-black text-stone-800 leading-none tracking-tight">
-                    未完成類別 <span className="text-brand-primary ml-1">({incompleteCategories.length})</span>
+                <h3 className="text-2xl font-display font-bold text-journal-ink leading-none tracking-tight">
+                    {t('dashboard.incomplete_title')} <span className="text-brand-primary ml-1">({incompleteCategories.length})</span>
                 </h3>
             </div>
 
@@ -42,8 +44,8 @@ const IncompleteList = ({ incompleteCategories }) => {
                                         }}
                                     />
                                 )}
-                                <span className="incomplete-title">{cat.name_ch}</span>
-                                <span className="text-sm font-bold text-brand-primary ml-auto">{cat.progress}/{cat.total}</span>
+                                <span className="incomplete-title">{getLocalizedName(cat, language)}</span>
+                                <span className="text-sm font-mono font-bold text-brand-primary ml-auto">{cat.progress}/{cat.total}</span>
                             </div>
 
                             {/* Progress Bar */}
@@ -61,14 +63,14 @@ const IncompleteList = ({ incompleteCategories }) => {
                                         key={idx}
                                         className="missing-tag hover:bg-brand-primary/10 hover:text-brand-primary hover:border-brand-primary/30 cursor-pointer transition-all active:scale-95 flex items-center gap-1"
                                         onClick={() => handleTagClick(item)}
-                                        title={`前往追蹤頁面搜尋 "${item.searchTerm}"`}
+                                        title={t('dashboard.missing_label')}
                                     >
                                         <Search size={10} className="opacity-50" />
                                         {item.label}
                                     </button>
                                 ))}
                                 {cat.missingItems.length > 10 && (
-                                    <span className="missing-tag text-stone-400">+{cat.missingItems.length - 10} 更多</span>
+                                    <span className="missing-tag text-journal-muted">+{cat.missingItems.length - 10}</span>
                                 )}
                             </div>
                         </div>
@@ -76,7 +78,7 @@ const IncompleteList = ({ incompleteCategories }) => {
                 </div>
             ) : (
                 <div className="empty-state">
-                    <p className="empty-state-text">太棒了！所選範圍內的所有類別都已收集完成！</p>
+                    <p className="empty-state-text">{t('dashboard.empty_title')}</p>
                 </div>
             )}
         </div>

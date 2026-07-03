@@ -3,10 +3,10 @@
 .decor-list-container {
     border-radius: 1rem;
     overflow: hidden;
-    border: 1px solid rgba(231, 229, 228, 0.5); /* border-stone-200/50 */
-    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04); /* shadow-xl */
-    background-color: rgba(255, 255, 255, 0.5); /* bg-white/50 */
-    backdrop-filter: blur(12px); /* glass-panel effect */
+    border: 1px solid rgba(232, 227, 216, 0.5); /* journal-line/50 */
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+    background-color: rgba(254, 253, 248, 0.5); /* journal-paper/50 */
+    backdrop-filter: blur(12px);
 }
 
 .decor-list-scroll {
@@ -15,26 +15,26 @@
 
 .decor-list-table {
     width: 100%;
-    font-size: 0.875rem; /* text-sm */
+    font-size: 0.875rem;
     text-align: left;
     border-collapse: collapse;
 }
 
 /* 表頭樣式 */
 .decor-list-thead tr {
-    background-color: #fafaf9; /* bg-stone-50 */
-    border-bottom: 1px solid rgba(231, 229, 228, 1); /* border-stone-100 */
+    background-color: var(--journal-surface, #F5F3ED);
+    border-bottom: 1px solid var(--journal-line, #E8E3D8);
 }
 
 .decor-list-th-main {
-    padding: 1rem 0.75rem; /* Reduced for mobile */
-    font-weight: 900;
-    color: #1c1917;
+    padding: 1rem 0.75rem;
+    font-weight: 700;
+    color: var(--journal-ink, #2D3A28);
     white-space: nowrap;
-    min-width: 50px; /* Smaller min-width for mobile */
+    min-width: 50px;
     position: sticky;
     left: 0;
-    background-color: #fafaf9;
+    background-color: var(--journal-surface, #F5F3ED);
     z-index: 10;
     box-shadow: 2px 0 5px rgba(0, 0, 0, 0.02);
 }
@@ -47,9 +47,9 @@
 }
 
 .decor-list-th-color {
-    padding: 0.5rem 0.25rem; /* Reduced for mobile */
+    padding: 0.5rem 0.25rem;
     text-align: center;
-    min-width: 52px; /* Narrower for mobile, slightly increased to fit larger card */
+    min-width: 52px;
 }
 
 @media (min-width: 640px) {
@@ -59,19 +59,19 @@
 }
 
 .decor-list-color-indicator {
-    width: 1.25rem; /* 5 */
+    width: 1.25rem;
     height: 1.25rem;
     border-radius: 9999px;
     margin-left: auto;
     margin-right: auto;
     border: 2px solid white;
-    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05); /* shadow-sm */
-    outline: 1px solid rgba(231, 229, 228, 1); /* ring-1 ring-stone-200 */
+    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+    outline: 1px solid var(--journal-line, #E8E3D8);
 }
 
 /* 內容列樣式 */
 .decor-list-tbody tr {
-    border-bottom: 1px solid rgba(231, 229, 228, 1); /* divide-stone-100 */
+    border-bottom: 1px solid var(--journal-line, #E8E3D8);
     transition: background-color 0.2s ease;
 }
 
@@ -80,7 +80,7 @@
 }
 
 .decor-list-td-main {
-    padding: 0.6rem 0.5rem; /* Further reduced for mobile */
+    padding: 0.6rem 0.5rem;
     position: sticky;
     left: 0;
     background-color: white;
@@ -96,21 +96,21 @@
 }
 
 .decor-list-tbody tr:hover .decor-list-td-main {
-    background-color: #fafaf9; /* stone-50 */
+    background-color: var(--journal-paper, #FEFDF8);
 }
 
 .decor-list-variant-name {
-    font-weight: 900;
-    color: #292524; /* stone-800 */
+    font-weight: 700;
+    color: var(--journal-ink, #2D3A28);
     line-height: 1.25;
 }
 
 .decor-list-category-name {
     font-size: 10px;
     font-weight: 700;
-    color: #a8a29e; /* stone-400 */
+    color: var(--journal-muted, #7C8B73);
     text-transform: uppercase;
-    letter-spacing: 0.1em; /* tracking-widest */
+    letter-spacing: 0.1em;
     margin-top: 0.125rem;
 }
 
@@ -122,7 +122,7 @@
         left: 3rem;
         top: 50%;
         transform: translateY(-50%);
-        background: #1c1917;
+        background: var(--journal-ink, #2D3A28);
         color: white;
         padding: 0.25rem 0.75rem;
         border-radius: 0.5rem;
@@ -141,7 +141,7 @@
 }
 
 .decor-list-td-card {
-    padding: 0.125rem; /* Very compact for mobile */
+    padding: 0.125rem;
     text-align: center;
 }
 
@@ -154,11 +154,11 @@
 /* MiniCard 樣式 */
 .mini-card {
     position: relative;
-    width: 2.75rem; /* Increased for mobile visibility */
+    width: 2.75rem;
     height: 2.75rem;
     margin-left: auto;
     margin-right: auto;
-    border-radius: 0.75rem; /* xl */
+    border-radius: 0.75rem;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -176,13 +176,13 @@
 }
 
 .mini-card.not-collected {
-    background-color: rgba(245, 245, 244, 0.5); /* stone-100/50 */
+    background-color: var(--journal-surface, #F5F3ED);
 }
 
 .mini-card.collected {
     background-color: white;
     box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
-    outline: 1px solid rgba(245, 245, 244, 1); /* ring-stone-100 */
+    outline: 1px solid var(--journal-line, #E8E3D8);
 }
 
 /* 狀態控制 (MiniCard 圖片) */
@@ -228,7 +228,7 @@
 }
 
 .mini-card-img {
-    width: 150%; /* Significantly larger for visibility */
+    width: 150%;
     height: 150%;
     object-fit: contain;
     transition: transform 0.3s ease;
@@ -243,21 +243,21 @@
 
 .mini-card-status-indicator {
     position: absolute;
-    bottom: 0.15rem; /* -1.5 */
+    bottom: 0.15rem;
     right: 0.15rem;
     padding: 0.1rem;
     background-color: white;
     border-radius: 9999px;
     box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
-    border: 1px solid rgba(245, 245, 244, 1);
+    border: 1px solid var(--journal-line, #E8E3D8);
 }
 
 .decor-list-unavailable-dot {
-    width: 0.375rem; /* 1.5 */
+    width: 0.375rem;
     height: 0.375rem;
     margin-left: auto;
     margin-right: auto;
     border-radius: 9999px;
-    background-color: #e7e5e4; /* stone-200 */
-    opacity: 0.3;
+    background-color: var(--journal-line, #E8E3D8);
+    opacity: 0.5;
 }

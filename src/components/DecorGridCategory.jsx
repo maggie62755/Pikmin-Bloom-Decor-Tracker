@@ -1,8 +1,12 @@
 import React from 'react';
 import { ChevronDown, ChevronRight } from 'lucide-react';
+import { useTranslation, getLocalizedName } from '../i18n';
 import './DecorGridCategory.css';
 
 const DecorGridCategory = React.memo(({ category, isOpen, onToggle, progress, total, children }) => {
+  const { language } = useTranslation();
+  const categoryName = getLocalizedName(category, language);
+
   return (
     <div className={`grid-category-container ${isOpen ? 'is-open' : ''}`}>
       <button
@@ -22,8 +26,8 @@ const DecorGridCategory = React.memo(({ category, isOpen, onToggle, progress, to
               }}
             />
           )}
-          <h3 className="grid-category-title truncate" title={category.name_ch || category.name}>
-            {category.name_ch || category.name}
+          <h3 className="grid-category-title truncate" title={categoryName}>
+            {categoryName}
           </h3>
         </div>
 

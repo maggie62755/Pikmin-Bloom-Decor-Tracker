@@ -72,7 +72,7 @@
     }
 }
 
-/* Chip Buttons */
+/* Chip Buttons (Keep identical to Tracker.css to avoid visual breaks, though Tracker chip btn definition might bleed over depending on build. Safe to define identically here using journal theme colors) */
 .chip-btn {
     flex-shrink: 0;
     display: flex;
@@ -81,10 +81,11 @@
     padding: 0.625rem 1rem;
     min-height: 44px;
     border-radius: 9999px;
-    background-color: rgba(255, 255, 255, 0.6);
+    background-color: rgb(251, 255, 246);
     backdrop-filter: blur(8px);
-    border: 1px solid rgba(255, 255, 255, 0.5);
-    color: var(--color-stone-400);
+    border: 1px solid rgba(215, 219, 209, 0.5);
+    color: var(--journal-muted, #7C8B73);
+    font-family: 'Nunito', sans-serif;
     font-size: 0.875rem;
     font-weight: 800;
     cursor: pointer;
@@ -93,13 +94,13 @@
 }
 .chip-btn:hover {
     background-color: white;
-    color: var(--color-stone-800);
+    color: var(--journal-ink, #2D3A28);
     transform: translateY(-1px);
 }
 .chip-btn.active {
-    background-color: var(--brand-primary);
+    background-color: var(--brand-primary, #4A8C3F);
     color: white;
-    box-shadow: 0 4px 12px rgba(101, 163, 13, 0.3);
+    /* box-shadow: 0 4px 12px rgba(74, 140, 63, 0.3); */
     border-color: transparent;
 }
 
@@ -148,17 +149,17 @@
     width: 100%;
     padding: 0.75rem 1rem;
     margin-bottom: 0.5rem;
-    background-color: var(--color-stone-50);
+    background-color: var(--journal-surface, #F5F3ED);
     border: 1px solid rgba(0,0,0,0.05);
     border-radius: 0.75rem;
     font-size: 0.875rem;
     font-weight: 600;
-    color: var(--color-stone-800);
+    color: var(--journal-ink, #2D3A28);
     outline: none;
 }
 .multi-select-search:focus {
     background-color: white;
-    box-shadow: 0 0 0 2px var(--brand-primary);
+    box-shadow: 0 0 0 2px var(--brand-primary, #4A8C3F);
 }
 
 .multi-select-list {
@@ -183,21 +184,22 @@
     width: 100%;
     text-align: left;
     background: transparent;
+    color: var(--journal-ink, #2D3A28);
 }
 
 .multi-select-item:hover {
-    background-color: var(--color-stone-100);
+    background-color: rgba(124, 139, 115, 0.1); /* journal-muted/10 */
 }
 
 .multi-select-item.selected {
-    background-color: rgba(132, 204, 22, 0.1); 
+    background-color: rgba(74, 140, 63, 0.1); 
 }
 
 .checkbox-custom {
     width: 1.25rem;
     height: 1.25rem;
     border-radius: 0.375rem;
-    border: 2px solid var(--color-stone-300);
+    border: 2px solid var(--journal-muted, #7C8B73);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -206,8 +208,8 @@
 }
 
 .multi-select-item.selected .checkbox-custom {
-    background-color: var(--brand-primary);
-    border-color: var(--brand-primary);
+    background-color: var(--brand-primary, #4A8C3F);
+    border-color: var(--brand-primary, #4A8C3F);
 }
 
 .multi-select-actions {
@@ -215,13 +217,13 @@
     justify-content: space-between;
     margin-top: 0.75rem;
     padding-top: 0.5rem;
-    border-top: 1px solid var(--color-stone-100);
+    border-top: 1px solid var(--journal-line, #E8E3D8);
 }
 
 .text-btn-small {
     font-size: 0.75rem;
     font-weight: 700;
-    color: var(--color-stone-400);
+    color: var(--journal-muted, #7C8B73);
     background: none;
     border: none;
     cursor: pointer;
@@ -229,8 +231,8 @@
     border-radius: 0.25rem;
 }
 .text-btn-small:hover {
-    color: var(--brand-primary);
-    background-color: rgba(132, 204, 22, 0.05);
+    color: var(--brand-primary, #4A8C3F);
+    background-color: rgba(74, 140, 63, 0.05);
 }
 
 
@@ -238,7 +240,7 @@
 .dashboard-section-flat {
     position: relative;
     background-color: rgba(255, 255, 255, 0.42);
-    border: 1px solid rgba(120, 113, 108, 0.12);
+    border: 1px solid rgba(124, 139, 115, 0.12); /* journal-muted/12 */
     border-radius: 1.25rem;
     padding: 1.5rem;
     margin-bottom: 1.25rem;
@@ -246,12 +248,12 @@
 }
 
 .dashboard-priority-panel {
-    border-color: rgba(101, 163, 13, 0.22);
-    background: linear-gradient(180deg, rgba(236, 252, 203, 0.4), rgba(255, 255, 255, 0.52));
+    border-color: rgba(74, 140, 63, 0.22);
+    background: linear-gradient(180deg, rgba(236, 252, 203, 0.4), rgba(255, 255, 255, 0.52)); /* Soft nature tone */
 }
 
 .dashboard-secondary-panel {
-    border-color: rgba(120, 113, 108, 0.14);
+    border-color: rgba(124, 139, 115, 0.14); /* journal-muted/14 */
     background: rgba(255, 255, 255, 0.5);
 }
 
@@ -263,7 +265,7 @@
 
 .dashboard-stat-tile {
     background: rgba(255, 255, 255, 0.58);
-    border: 1px solid rgba(120, 113, 108, 0.12);
+    border: 1px solid rgba(124, 139, 115, 0.12); /* journal-muted/12 */
     border-radius: 0.95rem;
     box-shadow: none;
 }
@@ -289,7 +291,7 @@
 
 .incomplete-card {
     background-color: white;
-    border: 1px solid var(--color-stone-200);
+    border: 1px solid var(--journal-line, #E8E3D8);
     border-radius: 1rem;
     padding: 1rem;
     display: flex;
@@ -304,20 +306,21 @@
 }
 
 .incomplete-title {
-    font-weight: 900;
-    color: var(--color-stone-800);
+    font-weight: 700;
+    font-family: 'Fredoka', 'Nunito', sans-serif;
+    color: var(--journal-ink, #2D3A28);
 }
 
 .progress-bar-bg {
     height: 0.5rem;
-    background-color: var(--color-stone-100);
+    background-color: var(--journal-line, #E8E3D8);
     border-radius: 9999px;
     overflow: hidden;
 }
 
 .progress-bar-fill {
     height: 100%;
-    background-color: var(--brand-primary);
+    background-color: var(--brand-primary, #4A8C3F);
     border-radius: 9999px;
     transition: width 0.5s ease-out;
 }
@@ -332,7 +335,7 @@
     font-size: 0.75rem;
     padding: 0.125rem 0.5rem;
     border-radius: 9999px;
-    background-color: var(--color-stone-100);
-    color: var(--color-stone-600);
-    border: 1px solid var(--color-stone-200);
+    background-color: var(--journal-surface, #F5F3ED);
+    color: var(--journal-muted, #7C8B73);
+    border: 1px solid var(--journal-line, #E8E3D8);
 }

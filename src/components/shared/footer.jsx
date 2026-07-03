@@ -1,8 +1,10 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { useTranslation } from '../../i18n';
 import logo from '../../assets/logo.png';
 
 const Footer = () => {
+    const { t } = useTranslation();
     const currentYear = new Date().getFullYear();
     const bgImage = `${import.meta.env.BASE_URL}assets/footer.png`;
 
@@ -28,43 +30,28 @@ const Footer = () => {
                     <div className="flex items-center gap-3 flex-shrink-0 min-w-0">
                         <img src={logo} alt="Logo" className="w-10 h-10 object-contain drop-shadow-sm" />
                         <div className="flex flex-col leading-none">
-                            <h1 className="text-lg font-black bg-gradient-to-r from-brand-primary to-brand-accent bg-clip-text text-transparent truncate hidden md:block tracking-tight">
-                                Pikmin Bloom
+                            <h1 className="text-lg font-display font-black bg-gradient-to-r from-brand-primary to-brand-accent bg-clip-text text-transparent truncate hidden md:block tracking-tight">
+                                {t('app.title').split(' ')[0] + ' ' + t('app.title').split(' ')[1]}
                             </h1>
-                            <span className="text-[10px] font-bold text-stone-400 tracking-[0.2em] uppercase hidden md:block">
-                                Decor Tracker
+                            <span className="text-[10px] font-display font-bold text-journal-muted tracking-[0.2em] uppercase hidden md:block">
+                                {t('app.subtitle')}
                             </span>
                         </div>
-                        <p className="text-sm text-stone-500 font-medium max-w-xs text-center md:text-left leading-relaxed">
-                            記錄你的皮克敏探險進度，<br />讓每一朵花都在你的圖鑑中綻放。
+                        <p className="text-sm text-journal-muted font-medium max-w-xs text-center md:text-left leading-relaxed" style={{ whiteSpace: 'pre-line' }}>
+                            {t('footer.tagline')}
                         </p>
                     </div>
 
-                    {/* 快速連結：使用稍微深一點的顏色確保在淺色漸變上清晰 */}
-                    {/* <div className="flex gap-16">
-                        <div className="flex flex-col gap-4">
-                            <span className="text-[11px] font-black text-stone-400 uppercase tracking-[0.2em]">Explore</span>
-                            <Link to="/" className="text-sm font-bold text-stone-600 hover:text-green-600 transition-all">首頁</Link>
-                            <Link to="/tracker" className="text-sm font-bold text-stone-600 hover:text-green-600 transition-all">收集器</Link>
-                            <Link to="/dashboard" className="text-sm font-bold text-stone-600 hover:text-green-600 transition-all">儀表板</Link>
-                        </div>
-                        <div className="flex flex-col gap-4">
-                            <span className="text-[11px] font-black text-stone-400 uppercase tracking-[0.2em]">Community</span>
-                            <a href="#" className="text-sm font-bold text-stone-600 hover:text-green-600 transition-all">Twitter</a>
-                            <a href="#" className="text-sm font-bold text-stone-600 hover:text-green-600 transition-all">Discord</a>
-                        </div>
-                    </div> */}
-
                     {/* 版權宣告 */}
                     <div className="flex flex-col items-center md:items-end gap-2">
-                        <p className="text-[11px] font-bold text-stone-400 tracking-widest uppercase">
-                            © {currentYear} Pikmin Fan Project
+                        <p className="text-[11px] font-bold text-journal-muted tracking-widest uppercase">
+                            {t('footer.copyright', { year: currentYear })}
                         </p>
-                        <p className="text-[10px] text-stone-400/80 leading-relaxed text-center md:text-right max-w-[180px]">
-                            This is a fan-made tool. Pikmin is a trademark of Nintendo.
+                        <p className="text-[10px] text-journal-muted/80 leading-relaxed text-center md:text-right max-w-[180px]">
+                            {t('footer.disclaimer')}
                         </p>
-                        <Link to="/privacy" className="text-[10px] text-stone-400/60 hover:text-stone-400 transition-colors">
-                            隱私權條款
+                        <Link to="/privacy" className="text-[10px] text-journal-muted/60 hover:text-journal-muted transition-colors">
+                            {t('footer.privacy')}
                         </Link>
                     </div>
                 </div>

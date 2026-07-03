@@ -1,8 +1,10 @@
 import React from 'react';
 import { Sprout } from 'lucide-react';
 import { COLORS } from '../../theme/colors';
+import { useTranslation, getLocalizedName } from '../../i18n';
 
 const MissingImageFallback = ({ color, compact = false }) => {
+    const { language } = useTranslation();
     const rawColor = COLORS.pikmin[color.id] || '#A8A29E'; // Default to stone-400
 
     // Visibility adjustment for light colors
@@ -35,7 +37,7 @@ const MissingImageFallback = ({ color, compact = false }) => {
                     className="text-[0.55rem] font-bold leading-none z-10 truncate w-full px-0.5 scale-90 origin-center"
                     style={{ color: contentColor }}
                 >
-                    {color.name_ch || color.name}
+                    {getLocalizedName(color, language)}
                 </span>
             </div>
         );
@@ -64,7 +66,7 @@ const MissingImageFallback = ({ color, compact = false }) => {
                 className="text-[0.65rem] sm:text-xs font-black tracking-tight z-10 drop-shadow-sm leading-tight"
                 style={{ color: contentColor, textShadow: '0 1px 0 rgba(255,255,255,0.8)' }}
             >
-                {color.name_ch || color.name}
+                {getLocalizedName(color, language)}
             </span>
 
             <span
