@@ -7,6 +7,7 @@ import './DecorList.css';
 import MissingImageFallback from './shared/MissingImageFallback';
 import StatusIcon from './shared/StatusIcon';
 import ContextMenu from './shared/ContextMenu';
+import SmartImage from './shared/SmartImage';
 
 const MiniCard = React.memo(({ status, imagePath, color, onClick }) => {
   const [imgError, setImgError] = useState(false);
@@ -79,12 +80,10 @@ const MiniCard = React.memo(({ status, imagePath, color, onClick }) => {
       >
         <div className="mini-card-img-container">
           {!imgError && imagePath ? (
-            <img
+            <SmartImage
               src={imagePath}
               alt={getLocalizedName(color, language)}
               className="mini-card-img"
-              loading="lazy"
-              decoding="async"
               onError={() => setImgError(true)}
             />
           ) : (

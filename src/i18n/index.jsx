@@ -75,6 +75,12 @@ function interpolate(template, vars) {
   });
 }
 
+function normalizeColorVariantKey(keyPath) {
+  const match = /^colors\.([a-z]+)\d+$/i.exec(keyPath);
+  if (!match) return keyPath;
+  return `colors.${match[1].toLowerCase()}`;
+}
+
 // --- Context ---
 const I18nContext = createContext(null);
 
@@ -111,12 +117,20 @@ export function I18nProvider({ children }) {
    */
   const t = useCallback(
     (keyPath, vars) => {
+      const normalizedKeyPath = normalizeColorVariantKey(keyPath);
+
       // 1. Try current language
       let value = resolve(LOCALE_MAP[language], keyPath);
+      if (value === undefined && normalizedKeyPath !== keyPath) {
+        value = resolve(LOCALE_MAP[language], normalizedKeyPath);
+      }
 
       // 2. Fallback to zh-TW if missing
       if (value === undefined && language !== FALLBACK_LANG) {
         value = resolve(LOCALE_MAP[FALLBACK_LANG], keyPath);
+        if (value === undefined && normalizedKeyPath !== keyPath) {
+          value = resolve(LOCALE_MAP[FALLBACK_LANG], normalizedKeyPath);
+        }
       }
 
       // 3. If still missing, return the key itself as a last resort

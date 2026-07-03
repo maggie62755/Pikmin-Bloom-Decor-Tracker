@@ -7,6 +7,7 @@ import { useTranslation } from '../i18n';
 import DecorGridCategory from '../components/DecorGridCategory';
 import DecorGrid from '../components/DecorGrid';
 import DecorList from '../components/DecorList';
+import { warmImages } from '../utils/imagePrefetch';
 import './Tracker.css';
 
 const Tracker = () => {
@@ -25,14 +26,48 @@ const Tracker = () => {
     const [showOnboarding, setShowOnboarding] = useState(() => !localStorage.getItem('tracker-onboarded'));
     const [onboardingStep, setOnboardingStep] = useState(0);
 
+    const getCategoryImageUrls = React.useCallback((category) => {
+        if (!category || !category.image_path || !category.variants) return [];
+
+        const urls = [];
+        category.variants.forEach((variant) => {
+            if (!variant?.image_name || !Array.isArray(variant.colors)) return;
+
+            variant.colors.forEach((colorId) => {
+                if (!colorId) return;
+                const fileColor = colorId.charAt(0).toUpperCase() + colorId.slice(1);
+                urls.push(`${import.meta.env.BASE_URL}images/decors_images/${category.image_path}/${variant.image_name}_${fileColor}.png`);
+            });
+        });
+
+        return urls;
+    }, []);
+
+    const prefetchCategoryImages = React.useCallback((category, limit = 18) => {
+        warmImages(getCategoryImageUrls(category), limit);
+    }, [getCategoryImageUrls]);
+
     const toggleCategory = (id) => {
-        setOpenCategories(prev => ({ ...prev, [id]: !prev[id] }));
+        setOpenCategories((prev) => {
+            const willOpen = !prev[id];
+            if (willOpen) {
+                const category = filteredCategories.find((c) => c.id === id);
+                if (category) {
+                    prefetchCategoryImages(category, 20);
+                }
+            }
+            return { ...prev, [id]: willOpen };
+        });
     };
 
     const expandAll = () => {
         const allOpen = {};
         filteredCategories.forEach(c => { allOpen[c.id] = true; });
         setOpenCategories(allOpen);
+
+        filteredCategories.slice(0, 4).forEach((category) => {
+            prefetchCategoryImages(category, 12);
+        });
     };
 
     const collapseAll = () => {
@@ -44,6 +79,18 @@ const Tracker = () => {
         onScroll();
         window.addEventListener('scroll', onScroll, { passive: true });
         return () => window.removeEventListener('scroll', onScroll);
+    }, []);
+
+    React.useEffect(() => {
+        const initiallyOpenIds = Object.keys(openCategories).filter((id) => openCategories[id]);
+        if (initiallyOpenIds.length === 0) return;
+
+        initiallyOpenIds.slice(0, 2).forEach((id) => {
+            const category = DECOR_CATEGORIES.find((c) => c.id === id);
+            if (category) {
+                prefetchCategoryImages(category, 16);
+            }
+        });
     }, []);
 
     const finishOnboarding = () => {

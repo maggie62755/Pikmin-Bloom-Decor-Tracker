@@ -1,5 +1,5 @@
 import React from 'react';
-import { BarChart, Bar, Tooltip, ResponsiveContainer, LabelList, XAxis } from 'recharts';
+import { BarChart, Bar, Tooltip, LabelList, XAxis } from 'recharts';
 import ChartTooltip from './ChartTooltip';
 
 // Custom hook or helper for consistent randomness based on a string/index
@@ -97,6 +97,37 @@ const FlowerBar = (props) => {
 
 const PikminStatChart = ({ data, title, subtitle, height = 250, barSize = 36, transparent = false }) => {
     const hasData = data && data.length > 0 && data.some(item => item.value > 0);
+    const containerRef = React.useRef(null);
+    const [chartSize, setChartSize] = React.useState({ width: 0, height: 0 });
+
+    React.useEffect(() => {
+        const node = containerRef.current;
+        if (!node) return undefined;
+
+        const updateSize = () => {
+            const rect = node.getBoundingClientRect();
+            setChartSize({
+                width: Math.max(0, Math.floor(rect.width)),
+                height: Math.max(0, Math.floor(rect.height)),
+            });
+        };
+
+        updateSize();
+
+        if (typeof ResizeObserver === 'undefined') {
+            return undefined;
+        }
+
+        const observer = new ResizeObserver(updateSize);
+        observer.observe(node);
+        return () => observer.disconnect();
+    }, [height]);
+
+    const isChartReady = chartSize.width > 0 && chartSize.height > 0;
+    const itemCount = Math.max((data?.length || 1), 1);
+    const maxBarSizeForWidth = Math.max(12, Math.floor((chartSize.width - 50) / itemCount) - 6);
+    const effectiveBarSize = Math.min(barSize, maxBarSizeForWidth);
+    const isCompactWidth = chartSize.width < 380;
 
     return (
         <div className={`flex flex-col gap-4 h-full ${transparent ? '' : 'p-6 bg-white/80 backdrop-blur-md rounded-[2.5rem] shadow-sm border border-stone-100'}`}>
@@ -113,53 +144,56 @@ const PikminStatChart = ({ data, title, subtitle, height = 250, barSize = 36, tr
                 </div>
             )}
 
-            <div style={{ width: '100%', height: height }}>
-                {hasData ? (
-                    <ResponsiveContainer>
-                        <BarChart data={data} margin={{ top: 30, right: 0, left: 0, bottom: 20 }}>
-                            <Tooltip
-                                content={<ChartTooltip />}
-                                cursor={{ fill: 'rgba(255,255,255,0.2)' }}
-                                wrapperStyle={{ outline: 'none' }}
+            <div ref={containerRef} style={{ width: '100%', height: height, minHeight: 220 }}>
+                {hasData && isChartReady ? (
+                    <BarChart
+                        width={chartSize.width}
+                        height={chartSize.height}
+                        data={data}
+                        margin={{ top: 30, right: 0, left: 0, bottom: 20 }}
+                    >
+                        <Tooltip
+                            content={<ChartTooltip />}
+                            cursor={{ fill: 'rgba(255,255,255,0.2)' }}
+                            wrapperStyle={{ outline: 'none' }}
+                        />
+
+                        {/* Hidden XAxis because we use custom labels, but sometimes useful for alignment */}
+                        <XAxis dataKey="name" hide />
+
+                        <Bar
+                            dataKey="value"
+                            barSize={effectiveBarSize}
+                            shape={<FlowerBar />}
+                            animationDuration={1500}
+                            animationBegin={200}
+                        >
+                            {/* 數值標籤 (Bar 上方 - 調整位置，避開花朵) */}
+                            <LabelList
+                                dataKey="value"
+                                position="top"
+                                    offset={isCompactWidth ? 18 : 25}
+                                style={{
+                                    fill: '#78716c',
+                                        fontSize: isCompactWidth ? '10px' : '12px',
+                                    fontWeight: '800',
+                                    fontFamily: 'monospace'
+                                }}
                             />
 
-                            {/* Hidden XAxis because we use custom labels, but sometimes useful for alignment */}
-                            <XAxis dataKey="name" hide />
-
-                            <Bar
-                                dataKey="value"
-                                barSize={barSize}
-                                shape={<FlowerBar />}
-                                animationDuration={1500}
-                                animationBegin={200}
-                            >
-                                {/* 數值標籤 (Bar 上方 - 調整位置，避開花朵) */}
-                                <LabelList
-                                    dataKey="value"
-                                    position="top"
-                                    offset={25}
-                                    style={{
-                                        fill: '#78716c',
-                                        fontSize: '12px',
-                                        fontWeight: '800',
-                                        fontFamily: 'monospace'
-                                    }}
-                                />
-
-                                {/* 類別標籤 (Bar 下方) */}
-                                <LabelList
-                                    dataKey="name"
-                                    position="bottom"
-                                    offset={10}
-                                    style={{
-                                        fill: '#a8a29e',
-                                        fontSize: '10px',
-                                        fontWeight: '600'
-                                    }}
-                                />
-                            </Bar>
-                        </BarChart>
-                    </ResponsiveContainer>
+                            {/* 類別標籤 (Bar 下方) */}
+                            <LabelList
+                                dataKey="name"
+                                position="bottom"
+                                    offset={isCompactWidth ? 6 : 10}
+                                style={{
+                                    fill: '#a8a29e',
+                                        fontSize: isCompactWidth ? '9px' : '10px',
+                                    fontWeight: '600'
+                                }}
+                            />
+                        </Bar>
+                    </BarChart>
                 ) : (
                     <div className="w-full h-full flex flex-col items-center justify-center text-stone-300 gap-2">
                         <div className="w-12 h-12 rounded-full bg-stone-50 flex items-center justify-center">

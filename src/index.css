@@ -247,6 +247,11 @@
   .charts-grid {
     display: grid;
     gap: 2rem;
+    min-width: 0;
+  }
+
+  .charts-grid > * {
+    min-width: 0;
   }
   @media (min-width: 1024px) {
     .charts-grid {

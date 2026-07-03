@@ -1,5 +1,5 @@
 import React from 'react';
-import { PieChart, Pie, Cell, ResponsiveContainer, Tooltip } from 'recharts';
+import { PieChart, Pie, Cell, Tooltip } from 'recharts';
 import { DECOR_STATUS, DECOR_STATUS_KEYS } from '../../constants';
 import { COLORS } from '../../theme/colors';
 import { useTranslation } from '../../i18n';
@@ -30,6 +30,8 @@ const StatCard = ({ value, label, color, status, isActive, onHover, isDimmed }) 
 // --- Sub-component: DonutChart (Internal) ---
 const DonutChartSection = ({ stats, transparent = true, hoveredStatus, onHover }) => {
     const { t } = useTranslation();
+    const chartWrapperRef = React.useRef(null);
+    const [chartSize, setChartSize] = React.useState({ width: 0, height: 0 });
     
     // Construct data from stats for the chart
     const data = [
@@ -53,9 +55,34 @@ const DonutChartSection = ({ stats, transparent = true, hoveredStatus, onHover }
     // Inject totalValue into data for tooltip
     const chartData = data.map(item => ({ ...item, totalValue: total }));
 
+    React.useEffect(() => {
+        const node = chartWrapperRef.current;
+        if (!node) return undefined;
+
+        const updateSize = () => {
+            const rect = node.getBoundingClientRect();
+            setChartSize({
+                width: Math.max(0, Math.floor(rect.width)),
+                height: Math.max(0, Math.floor(rect.height)),
+            });
+        };
+
+        updateSize();
+
+        if (typeof ResizeObserver === 'undefined') {
+            return undefined;
+        }
+
+        const observer = new ResizeObserver(updateSize);
+        observer.observe(node);
+        return () => observer.disconnect();
+    }, []);
+
+    const isChartReady = chartSize.width > 0 && chartSize.height > 0;
+
     return (
         <div className={`flex flex-col w-full aspect-square lg:aspect-auto lg:h-full lg:min-h-[400px] max-w-md mx-auto ${transparent ? '' : 'chart-panel bg-white/80 backdrop-blur-md rounded-[2.5rem] p-6 shadow-sm border border-journal-line'}`}>
-            <div className="flex-1 relative">
+            <div ref={chartWrapperRef} className="flex-1 relative min-h-[280px]">
                 {/* Center Label */}
                 <div className="absolute top-[50%] left-1/2 -translate-x-1/2 -translate-y-1/2 text-center pointer-events-none transition-all duration-300">
                     <div className="flex flex-col items-center">
@@ -68,8 +95,8 @@ const DonutChartSection = ({ stats, transparent = true, hoveredStatus, onHover }
                     </div>
                 </div>
 
-                <ResponsiveContainer width="100%" height="100%">
-                    <PieChart>
+                {isChartReady ? (
+                    <PieChart width={chartSize.width} height={chartSize.height}>
                         <Tooltip
                             content={<ChartTooltip />}
                             cursor={false}
@@ -109,7 +136,7 @@ const DonutChartSection = ({ stats, transparent = true, hoveredStatus, onHover }
                             })}
                         </Pie>
                     </PieChart>
-                </ResponsiveContainer>
+                ) : null}
             </div>
         </div>
     );

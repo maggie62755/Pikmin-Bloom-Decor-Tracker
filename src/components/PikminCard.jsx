@@ -6,6 +6,7 @@ import './PikminCard.css';
 import MissingImageFallback from './shared/MissingImageFallback';
 import StatusIcon from './shared/StatusIcon';
 import ContextMenu from './shared/ContextMenu';
+import SmartImage from './shared/SmartImage';
 
 const PikminCard = React.memo(({ color, status, onClick, variant, category }) => {
     const { t, language } = useTranslation();
@@ -132,12 +133,10 @@ const PikminCard = React.memo(({ color, status, onClick, variant, category }) =>
         >
             <div className="pikmin-card-image-container">
                 {!imgError && imagePath ? (
-                    <img
+                    <SmartImage
                         src={imagePath}
                         alt={`${colorName} ${variantName}`}
                         className="pikmin-card-image"
-                        loading="lazy"
-                        decoding="async"
                         onError={() => setImgError(true)}
                     />
                 ) : (

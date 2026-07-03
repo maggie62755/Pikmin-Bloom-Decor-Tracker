@@ -41,7 +41,7 @@ class SectionImageLinkParser(HTMLParser):
 
         attrs_dict = dict(attrs)
         href = attrs_dict.get("href")
-        css_class = attrs_dict.get("class", "")
+        css_class = attrs_dict.get("class") or ""
         if not href or "image" not in css_class.split():
             return
         if not href.startswith("/File:Decor_"):
@@ -106,7 +106,20 @@ def get_image_download_url(file_name: str) -> str:
     return imageinfo[0]["url"]
 
 
-def extract_file_names(section_html: str, category_slug: str) -> list[str]:
+def normalize_category_token(text: str) -> str:
+    return re.sub(r"[^A-Za-z0-9]+", "", text).lower()
+
+
+def build_category_aliases(category_name: str) -> set[str]:
+    aliases = {normalize_category_token(category_name)}
+    if ":" in category_name:
+        primary = category_name.split(":", maxsplit=1)[0].strip()
+        if primary:
+            aliases.add(normalize_category_token(primary))
+    return aliases
+
+
+def extract_file_names(section_html: str, category_aliases: set[str]) -> list[str]:
     parser = SectionImageLinkParser()
     parser.feed(section_html)
 
@@ -114,11 +127,23 @@ def extract_file_names(section_html: str, category_slug: str) -> list[str]:
     seen: set[str] = set()
     for href in parser.file_links:
         file_name = href.removeprefix("/File:")
-        decoded = file_name.replace("_", " ")
         match = FILE_NAME_RE.match(file_name)
         if not match:
             continue
-        if match.group("category") != category_slug:
+        file_category = normalize_category_token(match.group("category"))
+        if file_category not in category_aliases:
+            continue
+        if file_name not in seen:
+            seen.add(file_name)
+            matches.append(file_name)
+
+    if matches:
+        return matches
+
+    # Fallback: if aliases are still too strict for this section, keep all decor images from it.
+    for href in parser.file_links:
+        file_name = href.removeprefix("/File:")
+        if not FILE_NAME_RE.match(file_name):
             continue
         if file_name not in seen:
             seen.add(file_name)
@@ -157,10 +182,10 @@ def build_output_path(output_root: Path, category_dir: str, file_name: str) -> P
 
 
 def iter_download_targets(category_name: str, output_root: Path) -> Iterable[tuple[str, Path]]:
-    category_slug = category_name.strip().replace(" ", "_")
+    category_aliases = build_category_aliases(category_name)
     section_index = get_section_index(category_name)
     section_html = get_section_html(section_index)
-    file_names = extract_file_names(section_html, category_slug)
+    file_names = extract_file_names(section_html, category_aliases)
 
     if not file_names:
         raise ValueError(f'No decor images found for category "{category_name}".')
