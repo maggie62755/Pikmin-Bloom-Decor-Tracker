@@ -2137,6 +2137,31 @@
                     ]
                 }
             ]
+        },
+        {
+            "id": "event_tiny_instrument_orchestra",
+            "name": "Tiny Instrument: Orchestra",
+            "name_ch": "迷你樂器:管弦樂團",
+            "icon": "special.png",
+            "image_path": "TinyInstrumentOrchestra",
+            "variants": [
+                {
+                    "id": "event_tiny_instrument_orchestra",
+                    "name": "Tiny Instrument: Orchestra",
+                    "name_ch": "迷你樂器:管弦樂團",
+                    "image_name": "TinyInstrumentOrchestra",
+                    "colors": [
+                        "red",
+                        "yellow",
+                        "blue",
+                        "white",
+                        "purple",
+                        "rock",
+                        "winged",
+                        "ice"
+                    ]
+                }
+            ]
         }
     ]
 }
