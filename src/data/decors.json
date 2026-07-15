@@ -60,14 +60,15 @@
                         "white",
                         "purple",
                         "rock",
-                        "winged"
+                        "winged",
+                        "ice"
                     ]
                 },
                 {
                     "id": "coffee_cup_rare",
                     "name": "Coffee Cup (Rare)",
                     "name_ch": "咖啡杯(稀有)",
-                    "image_name": "(Rare)",
+                    "image_name": "CoffeeCup(Rare)",
                     "colors": [
                         "red",
                         "yellow",
@@ -394,6 +395,28 @@
                         "rock",
                         "winged"
                     ]
+                },{
+                    "id": "ticket_rare",
+                    "name": "Rare: Ticket",
+                    "name_ch": "稀有: 發光車票",
+                    "image_name": "Ticket(Rare)",
+                    "colors": [
+                        "red",
+                        "yellow",
+                        "blue",
+                        "white",
+                        "purple",
+                        "rock",
+                        "winged"
+                    ]
+                },{
+                    "id": "gold_ticket",
+                    "name": "Gold: Ticket",
+                    "name_ch": "金色車票",
+                    "image_name": "GoldTicket",
+                    "colors": [
+                        "red"
+                    ]
                 }
             ]
         },
@@ -550,6 +573,21 @@
                     "name": "Baguette",
                     "name_ch": "法式長棍麵包",
                     "image_name": "Baguette",
+                    "colors": [
+                        "red",
+                        "yellow",
+                        "blue",
+                        "white",
+                        "purple",
+                        "rock",
+                        "winged",
+                        "ice"
+                    ]
+                },{
+                    "id": "baguette_rare",
+                    "name": "Baguette (Rare)",
+                    "name_ch": "稀有:法式長棍麵包",
+                    "image_name": "Baguette(Rare)",
                     "colors": [
                         "red",
                         "yellow",
@@ -863,10 +901,24 @@
             "image_path": "Stadium",
             "variants": [
                 {
-                    "id": "keychain",
+                    "id": "ball_keychain",
                     "name": "Ball Keychain",
                     "name_ch": "球類吊飾",
                     "image_name": "BallKeychain",
+                    "colors": [
+                        "red",
+                        "yellow",
+                        "blue",
+                        "white",
+                        "purple",
+                        "rock",
+                        "winged"
+                    ]
+                },{
+                    "id": "ball_keychain_rare",
+                    "name": "Ball Keychain (Rare)",
+                    "name_ch": "稀有:球類吊飾",
+                    "image_name": "BallKeychain(Rare)",
                     "colors": [
                         "red",
                         "yellow",
