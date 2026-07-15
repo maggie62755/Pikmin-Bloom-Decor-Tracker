@@ -1595,6 +1595,29 @@
                     ]
                 }
             ]
+        },{
+            "id": "event_ice_cream_classic",
+            "name": "Ice Cream: Classic",
+            "name_ch": "冰淇淋:經典",
+            "icon": "special.png",
+            "image_path": "IceCreamClassic",
+            "variants": [
+                {
+                    "id": "event_ice_cream_classic",
+                    "name": "Ice Cream: Classic",
+                    "name_ch": "冰淇淋:經典",
+                    "image_name": "IceCreamClassic",
+                    "colors": [
+                        "red",
+                        "yellow",
+                        "blue",
+                        "white",
+                        "purple",
+                        "rock",
+                        "winged"
+                    ]
+                }
+            ]
         },
         {
             "id": "event_puzzle_2021_fall_memories",

@@ -124,7 +124,7 @@ const DecorRow = React.memo(({ variant, category, variantCollection, onCardClick
   return (
     <tr className="group">
       <td className="decor-list-td-main" title={getLocalizedName(variant, language)}>
-        <div className="flex items-center justify-center sm:justify-start gap-0 sm:gap-3">
+        <div className="flex w-full items-center justify-start gap-0 sm:gap-3 text-left">
           {category.icon && (
             <div
               className="category-icon w-6 h-6 flex-shrink-0 opacity-80"
@@ -134,7 +134,7 @@ const DecorRow = React.memo(({ variant, category, variantCollection, onCardClick
               }}
             />
           )}
-          <div className="flex flex-col hidden sm:flex">
+          <div className="hidden sm:flex flex-col items-start text-left">
             <div className="decor-list-variant-name leading-tight font-display font-bold">{getLocalizedName(variant, language)}</div>
             <div className="decor-list-category-name hidden sm:block text-xs font-bold opacity-50">{getLocalizedName(category, language)}</div>
           </div>
