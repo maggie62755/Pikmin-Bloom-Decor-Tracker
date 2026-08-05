@@ -395,7 +395,8 @@
                         "rock",
                         "winged"
                     ]
-                },{
+                },
+                {
                     "id": "ticket_rare",
                     "name": "Rare: Ticket",
                     "name_ch": "稀有: 發光車票",
@@ -409,7 +410,8 @@
                         "rock",
                         "winged"
                     ]
-                },{
+                },
+                {
                     "id": "gold_ticket",
                     "name": "Gold: Ticket",
                     "name_ch": "金色車票",
@@ -583,7 +585,8 @@
                         "winged",
                         "ice"
                     ]
-                },{
+                },
+                {
                     "id": "baguette_rare",
                     "name": "Baguette (Rare)",
                     "name_ch": "稀有:法式長棍麵包",
@@ -914,7 +917,8 @@
                         "rock",
                         "winged"
                     ]
-                },{
+                },
+                {
                     "id": "ball_keychain_rare",
                     "name": "Ball Keychain (Rare)",
                     "name_ch": "稀有:球類吊飾",
@@ -1572,7 +1576,8 @@
                     ]
                 }
             ]
-        },{
+        },
+        {
             "id": "event_bunny_egg",
             "name": "Bunny Egg",
             "name_ch": "兔寶寶彩蛋",
@@ -1595,7 +1600,8 @@
                     ]
                 }
             ]
-        },{
+        },
+        {
             "id": "event_ice_cream_classic",
             "name": "Ice Cream: Classic",
             "name_ch": "冰淇淋:經典",
@@ -1607,6 +1613,30 @@
                     "name": "Ice Cream: Classic",
                     "name_ch": "冰淇淋:經典",
                     "image_name": "IceCreamClassic",
+                    "colors": [
+                        "red",
+                        "yellow",
+                        "blue",
+                        "white",
+                        "purple",
+                        "rock",
+                        "winged"
+                    ]
+                }
+            ]
+        },
+        {
+            "id": "event_ice_cream_2024_flavor",
+            "name": "Ice Cream: 2024 Flavor",
+            "name_ch": "冰淇淋:2024口味",
+            "icon": "special.png",
+            "image_path": "IceCream2024Flavor",
+            "variants": [
+                {
+                    "id": "event_ice_cream_2024_flavor",
+                    "name": "Ice Cream: 2024 Flavor",
+                    "name_ch": "冰淇淋:2024限定口味",
+                    "image_name": "IceCream2024Flavor",
                     "colors": [
                         "red",
                         "yellow",
@@ -1831,6 +1861,55 @@
                         "purple",
                         "rock",
                         "winged"
+                    ]
+                }
+            ]
+        },
+        {
+            "id": "event_surfboard_keychain",
+            "name": "Surfboard Keychain",
+            "name_ch": "衝浪板鑰匙圈",
+            "icon": "special.png",
+            "image_path": "SurfboardKeychain",
+            "variants": [
+                {
+                    "id": "event_surfboard_keychain",
+                    "name": "Surfboard Keychain",
+                    "name_ch": "衝浪板鑰匙圈",
+                    "image_name": "SurfboardKeychain",
+                    "colors": [
+                        "red",
+                        "yellow",
+                        "blue",
+                        "white",
+                        "purple",
+                        "rock",
+                        "winged"
+                    ]
+                }
+            ]
+        },
+        {
+            "id": "event_shaved_ice",
+            "name": "Shaved Ice",
+            "name_ch": "刨冰",
+            "icon": "special.png",
+            "image_path": "ShavedIce",
+            "variants": [
+                {
+                    "id": "event_shaved_ice",
+                    "name": "Shaved Ice",
+                    "name_ch": "刨冰",
+                    "image_name": "ShavedIce",
+                    "colors": [
+                        "red",
+                        "yellow",
+                        "blue",
+                        "white",
+                        "purple",
+                        "rock",
+                        "winged",
+                        "ice"
                     ]
                 }
             ]
@@ -2091,7 +2170,6 @@
                     ]
                 }
             ]
-            
         },
         {
             "id": "event_klompen_keychain",
@@ -2165,30 +2243,6 @@
             ]
         },
         {
-            "id": "event_surfboard_keychain",
-            "name": "Surfboard Keychain",
-            "name_ch": "衝浪板鑰匙圈",
-            "icon": "special.png",
-            "image_path": "SurfboardKeychain",
-            "variants": [
-                {
-                    "id": "event_surfboard_keychain",
-                    "name": "Surfboard Keychain",
-                    "name_ch": "衝浪板鑰匙圈",
-                    "image_name": "SurfboardKeychain",
-                    "colors": [
-                        "red",
-                        "yellow",
-                        "blue",
-                        "white",
-                        "purple",
-                        "rock",
-                        "winged"
-                    ]
-                }
-            ]
-        },
-        {
             "id": "event_flower_crown",
             "name": "Flower Crown",
             "name_ch": "花冠",
@@ -2225,6 +2279,31 @@
                     "name": "Tiny Instrument: Orchestra",
                     "name_ch": "迷你樂器:管弦樂團",
                     "image_name": "TinyInstrumentOrchestra",
+                    "colors": [
+                        "red",
+                        "yellow",
+                        "blue",
+                        "white",
+                        "purple",
+                        "rock",
+                        "winged",
+                        "ice"
+                    ]
+                }
+            ]
+        },
+        {
+            "id": "event_balinese_carving",
+            "name": "Balinese Carving",
+            "name_ch": "巴厘島雕刻",
+            "icon": "special.png",
+            "image_path": "BalineseCarving",
+            "variants": [
+                {
+                    "id": "event_balinese_carving",
+                    "name": "Balinese Carving",
+                    "name_ch": "巴厘島雕刻",
+                    "image_name": "BalineseCarving",
                     "colors": [
                         "red",
                         "yellow",
