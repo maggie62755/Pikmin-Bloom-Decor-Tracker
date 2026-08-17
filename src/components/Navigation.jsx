@@ -4,7 +4,7 @@ import { LogIn, Home, List as ListIcon, BarChart2, Globe } from 'lucide-react';
 import { usePikmin } from '../context/PikminContext';
 import { useTranslation } from '../i18n';
 
-import logo from '../assets/logo.png';
+import logo from '../assets/logo.svg';
 import UserProfile from './UserProfile';
 
 const NAV_ITEMS = [

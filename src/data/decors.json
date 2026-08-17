@@ -163,7 +163,8 @@
                         "white",
                         "purple",
                         "rock",
-                        "winged"
+                        "winged",
+                        "ice"
                     ]
                 },
                 {
@@ -178,7 +179,8 @@
                         "white",
                         "purple",
                         "rock",
-                        "winged"
+                        "winged",
+                        "ice"
                     ]
                 }
             ]
@@ -356,6 +358,22 @@
                         "rock",
                         "winged"
                     ]
+                },
+                {
+                    "id": "luggage_tag",
+                    "name": "Luggage Tag",
+                    "name_ch": "行李吊牌",
+                    "image_name": "LuggageTag",
+                    "colors": [
+                        "red",
+                        "yellow",
+                        "blue",
+                        "white",
+                        "purple",
+                        "rock",
+                        "winged",
+                        "ice"
+                    ]
                 }
             ]
         },
@@ -393,7 +411,8 @@
                         "white",
                         "purple",
                         "rock",
-                        "winged"
+                        "winged",
+                        "ice"
                     ]
                 },
                 {
@@ -408,7 +427,8 @@
                         "white",
                         "purple",
                         "rock",
-                        "winged"
+                        "winged",
+                        "ice"
                     ]
                 },
                 {
@@ -915,7 +935,8 @@
                         "white",
                         "purple",
                         "rock",
-                        "winged"
+                        "winged",
+                        "ice"
                     ]
                 },
                 {
@@ -930,7 +951,8 @@
                         "white",
                         "purple",
                         "rock",
-                        "winged"
+                        "winged",
+                        "ice"
                     ]
                 }
             ]
