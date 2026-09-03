@@ -165,3 +165,7 @@ A premium, mobile-responsive web application designed for tracking your Pikmin B
 - **Developer**: [maggie62755](https://github.com/maggie62755)
 - **Assets**: Icons and decor images courtesy of [Pikmin Wiki](https://www.pikminwiki.com/).
 - **Disclaimer**: This is a fan-made project. Pikmin and Pikmin Bloom are trademarks of Nintendo and Niantic. This tool is not affiliated with or endorsed by them.
+
+## Monthly Special Decor updates / 每月特殊飾品更新
+
+Run `npm run update-decors` from the project root and follow the prompts. The helper downloads the selected Special Decor images and updates `src/data/decors.json` together. See [`image_download_helper/README.md`](image_download_helper/README.md) for dry-run, non-interactive, and overwrite options.

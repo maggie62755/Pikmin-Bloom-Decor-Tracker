@@ -1937,6 +1937,30 @@
             ]
         },
         {
+            "id": "event_mooncake",
+            "name": "Mooncake",
+            "name_ch": "月餅",
+            "icon": "special.png",
+            "image_path": "Mooncake",
+            "variants": [
+                {
+                    "id": "event_mooncake",
+                    "name": "Mooncake",
+                    "name_ch": "月餅",
+                    "image_name": "Mooncake",
+                    "colors": [
+                        "red",
+                        "yellow",
+                        "blue",
+                        "white",
+                        "purple",
+                        "rock",
+                        "winged"
+                    ]
+                }
+            ]
+        },
+        {
             "id": "event_photo_button_badge",
             "name": "Photo Button Badge",
             "name_ch": "照片和鈕扣徽章",
@@ -2335,6 +2359,30 @@
                         "rock",
                         "winged",
                         "ice"
+                    ]
+                }
+            ]
+        },
+        {
+            "id": "event_fall_sticker",
+            "name": "Fall Sticker",
+            "name_ch": "秋季貼紙",
+            "icon": "special.png",
+            "image_path": "FallSticker",
+            "variants": [
+                {
+                    "id": "event_fall_sticker",
+                    "name": "Fall Sticker",
+                    "name_ch": "秋季貼紙",
+                    "image_name": "FallSticker",
+                    "colors": [
+                        "red",
+                        "yellow",
+                        "blue",
+                        "white",
+                        "purple",
+                        "rock",
+                        "winged"
                     ]
                 }
             ]

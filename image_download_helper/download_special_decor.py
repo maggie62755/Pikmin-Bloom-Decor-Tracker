@@ -2,9 +2,9 @@
 r"""Download Pikmin Bloom Special Decor images by category.
 
 Example:
-    python download_decor_images.py "Summer Sticker"
-    python download_decor_images.py -l
-    python download_decor_images.py "Summer Sticker" --output "C:\Users\s1065\project\Maggie\Pikmin Bloom 2\public\images\decors_images"
+    python download_special_decor.py "Summer Sticker"
+    python download_special_decor.py -l
+    python download_special_decor.py "Summer Sticker" --output "C:\Users\s1065\project\Maggie\Pikmin Bloom 2\public\images\decors_images"
 """
 
 from __future__ import annotations
@@ -25,6 +25,7 @@ BASE_URL = "https://www.pikminwiki.com"
 API_URL = f"{BASE_URL}/api.php"
 PAGE_TITLE = "Special_Decor_Pikmin"
 USER_AGENT = "PikminDecorImageDownloader/1.0"
+REQUEST_TIMEOUT = 30
 FILE_NAME_RE = re.compile(r"^Decor_(?P<color>.+?)_(?P<category>.+)\.png$")
 
 
@@ -51,7 +52,7 @@ class SectionImageLinkParser(HTMLParser):
 
 def fetch_json(url: str) -> dict:
     request = Request(url, headers={"User-Agent": USER_AGENT})
-    with urlopen(request) as response:
+    with urlopen(request, timeout=REQUEST_TIMEOUT) as response:
         return json.load(response)
 
 
@@ -168,7 +169,7 @@ def color_sort_key(file_name: str) -> tuple[int, str]:
 
 def download_file(url: str, destination: Path) -> None:
     request = Request(url, headers={"User-Agent": USER_AGENT})
-    with urlopen(request) as response, destination.open("wb") as output:
+    with urlopen(request, timeout=REQUEST_TIMEOUT) as response, destination.open("wb") as output:
         output.write(response.read())
 
 
@@ -202,9 +203,9 @@ def parse_args() -> argparse.Namespace:
         description="Download Pikmin Bloom Special Decor images for a specified category.",
         epilog=(
             "Examples:\n"
-            '  python download_decor_images.py -l\n'
-            '  python download_decor_images.py "Summer Sticker"\n'
-            f'  python download_decor_images.py "Summer Sticker" --output "{example_output}"'
+            '  python download_special_decor.py -l\n'
+            '  python download_special_decor.py "Summer Sticker"\n'
+            f'  python download_special_decor.py "Summer Sticker" --output "{example_output}"'
         ),
         formatter_class=argparse.RawTextHelpFormatter,
     )
