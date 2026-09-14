@@ -2386,6 +2386,31 @@
                     ]
                 }
             ]
+        },
+        {
+            "id": "event_wurst",
+            "name": "Wurst",
+            "name_ch": "香腸",
+            "icon": "special.png",
+            "image_path": "Wurst",
+            "variants": [
+                {
+                    "id": "event_wurst",
+                    "name": "Wurst",
+                    "name_ch": "香腸",
+                    "image_name": "Wurst",
+                    "colors": [
+                        "red",
+                        "yellow",
+                        "blue",
+                        "white",
+                        "purple",
+                        "rock",
+                        "winged",
+                        "ice"
+                    ]
+                }
+            ]
         }
     ]
 }

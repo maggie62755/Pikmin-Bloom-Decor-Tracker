@@ -5,7 +5,7 @@
 1. 判斷該分類有哪些皮克敏顏色。
 2. 下載並驗證每張 PNG。
 3. 放入 `public/images/decors_images/<分類>/`。
-4. 新增或更新 `src/data/decors.json`。
+4. 依 Wiki 頁面的章節順序，新增或更新 `src/data/decors.json`。
 
 ## 每月使用方式
 
@@ -55,6 +55,8 @@ public/images/decors_images/TinyInstrumentOrchestra/TinyInstrumentOrchestra_Ice.
 - 新分類的 `image_path` 和 `image_name` 使用相同名稱。
 - 更新既有分類時，以 `decors.json` 已有的 `image_path` 和 `image_name` 為唯一依據，不因 Wiki 改名而改變本地路徑。
 - 預覽畫面會逐一列出最後寫入的檔名；特殊情況可用 `--image-name` 指定新分類名稱。
+- 新分類會放在 Wiki 順序中的下一個既有活動分類之前，不會一律附加在 JSON 最後；一般地點分類仍保留在活動分類前方。
+- 更新既有分類時維持原本 JSON 位置，只同步名稱、顏色與圖片。
 
 ## 安全機制
 

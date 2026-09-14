@@ -73,6 +73,13 @@ class DownloadSpec:
 
 
 @dataclass(frozen=True)
+class ResolvedDecor:
+    wiki_name: str
+    specs: tuple[DownloadSpec, ...]
+    wiki_section_names: tuple[str, ...]
+
+
+@dataclass(frozen=True)
 class UpdatePlan:
     wiki_name: str
     chinese_name: str
@@ -81,6 +88,7 @@ class UpdatePlan:
     colors: tuple[str, ...]
     specs: tuple[DownloadSpec, ...]
     existing_index: int | None
+    insert_index: int
 
     @property
     def is_new(self) -> bool:
@@ -106,9 +114,9 @@ def comparable_name(value: str) -> str:
     return normalize_image_token(value).casefold()
 
 
-def find_wiki_section(category_name: str) -> dict:
+def find_wiki_section(category_name: str, sections: list[dict] | None = None) -> dict:
     requested = category_name.strip().casefold()
-    sections = get_sections()
+    sections = sections or get_sections()
     for section in sections:
         if section.get("line", "").strip().casefold() == requested:
             return section
@@ -122,8 +130,9 @@ def find_wiki_section(category_name: str) -> dict:
     raise UpdateError(f'Wiki 找不到飾品分類「{category_name}」。{hint}')
 
 
-def resolve_download_specs(category_name: str) -> tuple[str, tuple[DownloadSpec, ...]]:
-    section = find_wiki_section(category_name)
+def resolve_download_specs(category_name: str) -> ResolvedDecor:
+    sections = get_sections()
+    section = find_wiki_section(category_name, sections)
     wiki_name = section["line"].strip()
     section_html = get_section_html(section["index"])
     file_names = extract_file_names(section_html, build_category_aliases(wiki_name))
@@ -163,7 +172,15 @@ def resolve_download_specs(category_name: str) -> tuple[str, tuple[DownloadSpec,
         raise UpdateError(f'Wiki 分類「{wiki_name}」內沒有支援的皮克敏顏色。')
 
     specs.sort(key=lambda item: COLOR_ORDER.index(item.color_id))
-    return wiki_name, tuple(specs)
+    return ResolvedDecor(
+        wiki_name=wiki_name,
+        specs=tuple(specs),
+        wiki_section_names=tuple(
+            section_item.get("line", "").strip()
+            for section_item in sections
+            if section_item.get("line", "").strip()
+        ),
+    )
 
 
 def load_decor_data(path: Path) -> tuple[dict, bytes, str]:
@@ -222,15 +239,45 @@ def validate_existing_category(category: dict) -> dict:
     return variants[0]
 
 
+def find_wiki_insert_index(
+    categories: list[dict], wiki_name: str, wiki_section_names: tuple[str, ...]
+) -> int:
+    """Place a new event before the next known event in the Wiki section order."""
+    wiki_order: dict[str, int] = {}
+    for order, section_name in enumerate(wiki_section_names):
+        wiki_order.setdefault(comparable_name(section_name), order)
+
+    target_order = wiki_order.get(comparable_name(wiki_name))
+    if target_order is None:
+        raise UpdateError(f'無法在 Wiki 章節順序中定位「{wiki_name}」。')
+
+    last_event_index: int | None = None
+    for index, category in enumerate(categories):
+        if not isinstance(category, dict) or not str(category.get("id", "")).startswith("event_"):
+            continue
+        last_event_index = index
+        candidate_keys = {
+            comparable_name(str(category.get("name", ""))),
+            comparable_name(str(category.get("image_path", ""))),
+        }
+        candidate_orders = [wiki_order[key] for key in candidate_keys if key in wiki_order]
+        if candidate_orders and min(candidate_orders) > target_order:
+            return index
+
+    return len(categories) if last_event_index is None else last_event_index + 1
+
+
 def create_plan(
     data: dict,
     requested_name: str,
     chinese_name: str | None,
     custom_id: str | None,
     custom_image_token: str | None,
-    resolved: tuple[str, tuple[DownloadSpec, ...]] | None = None,
+    resolved: ResolvedDecor | None = None,
 ) -> UpdatePlan:
-    wiki_name, specs = resolved or resolve_download_specs(requested_name)
+    resolution = resolved or resolve_download_specs(requested_name)
+    wiki_name = resolution.wiki_name
+    specs = resolution.specs
     default_image_token = normalize_image_token(wiki_name)
     image_token = custom_image_token or default_image_token
     category_id = custom_id or f"event_{normalize_id_token(wiki_name)}"
@@ -242,6 +289,11 @@ def create_plan(
 
     categories = data["categories"]
     existing_index = find_existing_category(categories, wiki_name, image_token, category_id)
+    insert_index = (
+        existing_index
+        if existing_index is not None
+        else find_wiki_insert_index(categories, wiki_name, resolution.wiki_section_names)
+    )
     if existing_index is not None:
         existing = categories[existing_index]
         variant = validate_existing_category(existing)
@@ -266,6 +318,7 @@ def create_plan(
         colors=tuple(spec.color_id for spec in specs),
         specs=specs,
         existing_index=existing_index,
+        insert_index=insert_index,
     )
 
 
@@ -290,7 +343,7 @@ def apply_plan_to_data(data: dict, plan: UpdatePlan) -> dict:
                 }
             ],
         }
-        categories.append(category)
+        categories.insert(plan.insert_index, category)
         return updated
 
     category = categories[plan.existing_index]
@@ -421,6 +474,15 @@ def print_plan(plan: UpdatePlan, data_file: Path, output_root: Path, data: dict)
     print("圖片檔名：")
     for spec in plan.specs:
         print(f"  - {image_name}_{spec.color_file_name}.png")
+    if plan.is_new:
+        if plan.insert_index < len(data["categories"]):
+            next_name = data["categories"][plan.insert_index].get("name", "未命名分類")
+            position = f"第 {plan.insert_index + 1} 項（在 {next_name} 前）"
+        else:
+            position = f"第 {plan.insert_index + 1} 項（目前分類最後）"
+        print(f"JSON 位置：  {position}，依 Wiki 章節順序")
+    else:
+        print(f"JSON 位置：  維持既有第 {plan.existing_index + 1} 項")
     print(f"資料檔：     {data_file}")
     print("-" * 64)
 
