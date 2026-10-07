@@ -10,6 +10,7 @@
     "settings": "設定"
   },
   "home": {
+    "got_it_hide": "知道了，隱藏提示",
     "hero_title_1": "Pikmin Bloom",
     "hero_title_2": "飾品追蹤器",
     "hero_desc": "輕鬆追蹤你的皮克敏裝飾收藏，\n紀錄每一步與花開的時刻。",
@@ -103,6 +104,7 @@
     "collected": "已獲得"
   },
   "sync": {
+    "not_configured": "尚未設定 Google 登入，您仍可在此裝置追蹤收藏。",
     "login": "登入",
     "login_aria": "使用 Google 帳號登入",
     "logout": "登出",

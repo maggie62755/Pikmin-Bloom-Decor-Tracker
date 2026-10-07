@@ -12,6 +12,7 @@ dist
 dist-ssr
 *.local
 __pycache__/
+.venv/
 *.py[cod]
 build
 .env
@@ -26,3 +27,6 @@ build
 *.njsproj
 *.sln
 *.sw?
+
+# Local decor manager backups
+.decor-backups/

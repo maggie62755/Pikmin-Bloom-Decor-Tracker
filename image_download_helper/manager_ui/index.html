@@ -1,0 +1,24 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="decor-token" content="__CSRF_TOKEN__">
+  <title>飾品更新工作室 · Pikmin Bloom</title>
+  <link rel="stylesheet" href="/style.css"><script src="/app.js" defer></script>
+</head>
+<body>
+  <header><div class="brand"><span class="brand-icon">🌱</span><div><small>PIKMIN BLOOM · LOCAL TOOLS</small><strong>飾品更新工作室</strong></div></div><button id="refresh" class="primary">↻ 讀取 Wiki 更新</button></header>
+  <main>
+    <section class="hero"><div><span class="eyebrow">YOUR COLLECTION, UP TO DATE</span><h1>看看這半年，<br>又有哪些新朋友。</h1><p>查看新增與復刻資訊，選擇飾品，預覽後一起更新圖片與收藏資料。</p></div><div class="window"><span>近六個月</span><strong id="window">等待讀取 Wiki</strong><p>資料日期以台灣時間計算</p><div class="rule"></div><small>預設保留既有圖片<br>新造型的中文名稱由你確認</small></div></section>
+    <div id="notice" role="status" aria-live="polite"></div>
+    <section id="progress" class="progress hidden" aria-live="polite"><strong id="progress-message"></strong><details><summary>查看執行紀錄</summary><pre id="progress-log"></pre></details></section>
+    <div class="workspace"><section class="browse"><div class="tabs" role="tablist"><button data-tab="recent" role="tab" aria-selected="true" class="active">近半年更新</button><button data-tab="all" role="tab" aria-selected="false">所有飾品</button><button data-tab="undated" role="tab" aria-selected="false">日期待確認</button></div>
+    <div class="toolbar"><input id="search" type="search" placeholder="搜尋地點、造型或更新內容…" aria-label="搜尋飾品"><select id="type" aria-label="飾品種類"><option value="all">全部種類</option><option value="standard">一般飾品</option><option value="special">Special Decor</option></select><label class="check"><input id="needs" type="checkbox">只看有缺漏</label></div>
+    <div class="list-heading"><strong id="list-heading">更新清單</strong><span id="count">尚未讀取</span></div>
+    <div id="list"><div class="empty"><span>🍃</span><h2>從 Wiki 的更新開始</h2><p>按「讀取 Wiki 更新」，查看近半年新增、復刻，以及本機尚未收錄的飾品。</p></div></div>
+    <p class="source-note">資訊取自 <a href="https://www.pikminwiki.com/Decor_Pikmin#History" target="_blank" rel="noopener">Pikipedia · History</a> 與 <a href="https://www.pikminwiki.com/Special_Decor_Pikmin" target="_blank" rel="noopener">Special Decor</a>（<a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener">CC BY-SA 4.0</a>）。建議項目可自行調整。</p></section>
+    <aside class="selection"><div class="selection-heading"><div><span class="eyebrow">UPDATE QUEUE</span><h2>這次要更新</h2></div><span id="selected-count" class="number">0</span></div><p class="muted">只下載缺少的圖片。勾選覆寫時，會在預覽中列出將取代的檔案。</p><div id="selected-list"></div><div class="selection-footer"><button id="preview" class="primary" disabled>預覽圖片與 JSON 變更 →</button><button id="clear" class="quiet" disabled>清空選取</button><small>預覽會顯示分類位置與前後項目。<br>正式更新前會建立 JSON 備份。</small></div></aside></div>
+  </main>
+  <dialog id="preview-dialog"><div class="dialog-heading"><div><span class="eyebrow">CHECK BEFORE UPDATING</span><h2>確認這次的變更</h2></div><button id="close-preview" class="icon-button" aria-label="關閉預覽">×</button></div><div id="preview-content"></div><div class="dialog-footer"><button id="back" class="secondary">返回調整</button><button id="apply" class="primary">下載並更新 JSON</button></div></dialog>
+</body>
+</html>

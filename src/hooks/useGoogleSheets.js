@@ -1,9 +1,12 @@
 import { useState, useCallback, useEffect } from 'react';
 import { useGoogleLogin, googleLogout } from '@react-oauth/google';
 
+import { useTranslation } from '../i18n';
+import { googleClientId } from '../config/googleAuth';
+
 const SPREADSHEET_TITLE = "PikminBloomTracker";
 
-export const useGoogleSheets = () => {
+const useConfiguredGoogleSheets = () => {
   const [user, setUser] = useState(null);
   const [token, setToken] = useState(null);
   const [syncStatus, setSyncStatus] = useState('idle'); // idle, syncing, success, error
@@ -313,3 +316,27 @@ export const useGoogleSheets = () => {
     syncMessage
   };
 };
+
+// Select once at module load: local-only builds never initialize the Google SDK.
+const useLocalGoogleSheets = () => {
+  const { t } = useTranslation();
+  const [syncStatus, setSyncStatus] = useState('idle');
+  const [syncMessage, setSyncMessage] = useState('');
+  const login = () => {
+    setSyncStatus('error');
+    setSyncMessage(t('sync.not_configured'));
+  };
+  return {
+    login,
+    logout: () => {},
+    user: null,
+    token: null,
+    saveToSheet: async () => { throw new Error('Google sign-in is not configured'); },
+    loadFromSheet: async () => null,
+    checkCloudVersion: async () => null,
+    syncStatus,
+    syncMessage,
+  };
+};
+
+export const useGoogleSheets = googleClientId ? useConfiguredGoogleSheets : useLocalGoogleSheets;

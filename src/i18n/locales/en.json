@@ -10,6 +10,7 @@
     "settings": "Settings"
   },
   "home": {
+    "got_it_hide": "Got it, hide this",
     "hero_title_1": "Pikmin Bloom",
     "hero_title_2": "Decor Tracker",
     "hero_desc": "Easily track your Pikmin decor collection,\nrecording every step and every bloom.",
@@ -103,6 +104,7 @@
     "collected": "Collected"
   },
   "sync": {
+    "not_configured": "Google sign-in is not configured. You can still track your collection on this device.",
     "login": "Log In",
     "login_aria": "Log in with Google account",
     "logout": "Log Out",

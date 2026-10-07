@@ -217,6 +217,38 @@
             "image_path": "Forest",
             "variants": [
                 {
+                    "id": "forest_stag_beetle_rare",
+                    "name": "Stag Beetle (Rare)",
+                    "name_ch": "稀有：鍬形蟲",
+                    "image_name": "StagBeetle(Rare)",
+                    "colors": [
+                        "red",
+                        "yellow",
+                        "blue",
+                        "white",
+                        "purple",
+                        "rock",
+                        "winged",
+                        "ice"
+                    ]
+                },
+                {
+                    "id": "forest_acorn_rare",
+                    "name": "Acorn (Rare)",
+                    "name_ch": "稀有：橡栗",
+                    "image_name": "Acorn(Rare)",
+                    "colors": [
+                        "red",
+                        "yellow",
+                        "blue",
+                        "white",
+                        "purple",
+                        "rock",
+                        "winged",
+                        "ice"
+                    ]
+                },
+                {
                     "id": "stag_beetle",
                     "name": "Stag Beetle",
                     "name_ch": "鍬形蟲",
@@ -620,6 +652,22 @@
                         "rock",
                         "winged"
                     ]
+                },
+                {
+                    "id": "bakery_pastry",
+                    "name": "Pastry",
+                    "name_ch": "糕點",
+                    "image_name": "Pastry",
+                    "colors": [
+                        "red",
+                        "yellow",
+                        "blue",
+                        "white",
+                        "purple",
+                        "rock",
+                        "winged",
+                        "ice"
+                    ]
                 }
             ]
         },
@@ -705,7 +753,8 @@
                         "white",
                         "purple",
                         "rock",
-                        "winged"
+                        "winged",
+                        "ice"
                     ]
                 },
                 {
@@ -720,7 +769,8 @@
                         "white",
                         "purple",
                         "rock",
-                        "winged"
+                        "winged",
+                        "ice"
                     ]
                 },
                 {
@@ -735,7 +785,8 @@
                         "white",
                         "purple",
                         "rock",
-                        "winged"
+                        "winged",
+                        "ice"
                     ]
                 },
                 {
@@ -750,7 +801,8 @@
                         "white",
                         "purple",
                         "rock",
-                        "winged"
+                        "winged",
+                        "ice"
                     ]
                 }
             ]
@@ -1011,10 +1063,10 @@
                     "image_name": "ThemeParkTicket",
                     "colors": [
                         "red",
-                        "yellow",
-                        "blue",
                         "red1",
+                        "yellow",
                         "yellow1",
+                        "blue",
                         "blue1"
                     ]
                 }
@@ -1505,6 +1557,79 @@
             ]
         },
         {
+            "id": "event_halloween_treat",
+            "name": "Halloween Treat",
+            "name_ch": "萬聖節糖果",
+            "icon": "special.png",
+            "image_path": "HalloweenTreat",
+            "variants": [
+                {
+                    "id": "event_halloween_treat",
+                    "name": "Halloween Treat",
+                    "name_ch": "萬聖節糖果",
+                    "image_name": "HalloweenTreat",
+                    "colors": [
+                        "red",
+                        "yellow",
+                        "blue",
+                        "white",
+                        "purple",
+                        "rock",
+                        "winged"
+                    ]
+                }
+            ]
+        },
+        {
+            "id": "event_halloween_light",
+            "name": "Halloween Light",
+            "name_ch": "萬聖節燈",
+            "icon": "special.png",
+            "image_path": "HalloweenLight",
+            "variants": [
+                {
+                    "id": "event_halloween_light",
+                    "name": "Halloween Light",
+                    "name_ch": "萬聖節燈",
+                    "image_name": "HalloweenLight",
+                    "colors": [
+                        "red",
+                        "yellow",
+                        "blue",
+                        "white",
+                        "purple",
+                        "rock",
+                        "winged"
+                    ]
+                }
+            ]
+        },
+        {
+            "id": "event_halloween_stained_glass",
+            "name": "Halloween: Stained Glass",
+            "name_ch": "萬聖節：彩繪玻璃",
+            "icon": "special.png",
+            "image_path": "HalloweenStainedGlass",
+            "variants": [
+                {
+                    "id": "event_halloween_stained_glass",
+                    "name": "Halloween: Stained Glass",
+                    "name_ch": "萬聖節：彩繪玻璃",
+                    "image_name": "HalloweenStainedGlass",
+                    "colors": [
+                        "red",
+                        "yellow",
+                        "blue",
+                        "white",
+                        "purple",
+                        "rock",
+                        "winged",
+                        "ice"
+                    ]
+                }
+            ]
+        },
+        {
             "id": "event_mitten",
             "name": "Mitten",
             "name_ch": "連紙手套",
@@ -1562,7 +1687,7 @@
                 {
                     "id": "event_present_sticker_gold",
                     "name": "Present Sticker (Gold)",
-                    "name_ch": "禮物貼紙(金色)",
+                    "name_ch": "禮物貼紙",
                     "image_name": "PresentStickerGold",
                     "colors": [
                         "red",
@@ -1570,6 +1695,7 @@
                         "blue",
                         "white",
                         "purple",
+                        "rock",
                         "winged"
                     ]
                 }
@@ -1707,6 +1833,30 @@
                     "name": "Puzzle: 2023 Summer Memories",
                     "name_ch": "拼圖:2023年夏日回憶",
                     "image_name": "Puzzle2023SummerMemories",
+                    "colors": [
+                        "red",
+                        "yellow",
+                        "blue",
+                        "white",
+                        "purple",
+                        "rock",
+                        "winged"
+                    ]
+                }
+            ]
+        },
+        {
+            "id": "event_coral",
+            "name": "Coral",
+            "name_ch": "珊瑚",
+            "icon": "special.png",
+            "image_path": "Coral",
+            "variants": [
+                {
+                    "id": "event_coral",
+                    "name": "Coral",
+                    "name_ch": "珊瑚",
+                    "image_name": "Coral",
                     "colors": [
                         "red",
                         "yellow",
@@ -1955,7 +2105,8 @@
                         "white",
                         "purple",
                         "rock",
-                        "winged"
+                        "winged",
+                        "ice"
                     ]
                 }
             ]
@@ -2408,6 +2559,24 @@
                         "rock",
                         "winged",
                         "ice"
+                    ]
+                }
+            ]
+        },
+        {
+            "id": "event_golden_toy_airplane",
+            "name": "Golden Toy Airplane",
+            "name_ch": "金色飛機玩具",
+            "icon": "special.png",
+            "image_path": "GoldenToyAirplane",
+            "variants": [
+                {
+                    "id": "event_golden_toy_airplane",
+                    "name": "Golden Toy Airplane",
+                    "name_ch": "金色飛機玩具",
+                    "image_name": "GoldenToyAirplane",
+                    "colors": [
+                        "yellow"
                     ]
                 }
             ]

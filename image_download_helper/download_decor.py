@@ -4,7 +4,7 @@ import re
 import requests
 import unicodedata
 from bs4 import BeautifulSoup
-from urllib.parse import urljoin
+from urllib.parse import urljoin, unquote, urlsplit, urlunsplit
 
 # 目標 URL
 URL = "https://www.pikminwiki.com/Decor_Pikmin"
@@ -34,91 +34,119 @@ def pad_to_width(text, target_width):
         return text + (" " * padding_needed)
     return text
 
-def fetch_decor_data():
-    headers = {
-        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/115.0.0.0 Safari/537.36'
-    }
-    print("正在讀取網頁數據，請稍候... / Fetching data from wiki, please wait...")
-    try:
-        response = requests.get(URL, headers=headers)
-        if response.status_code != 200:
-            print(f"無法讀取網頁 / Failed to load page. Code: {response.status_code}")
-            return None
-    except Exception as e:
-        print(f"連線發生異常 / Connection error: {e}")
-        return None
-    
-    soup = BeautifulSoup(response.text, 'html.parser')
-    tables = soup.find_all('table', class_='wikitable scrollable noresize')
-    
-    decor_dict = {} 
-    
-    for table in tables:
-        headers_row = table.find('tr')
-        if not headers_row:
-            continue
-            
-        th_tags = headers_row.find_all('th')
-        cols = [t.get_text(strip=True) for t in th_tags]
-        
-        if len(cols) < 3 or not any(col in cols[0].lower() or col in cols[1].lower() for col in ['location', 'decor', 'costume', 'type']):
-            continue
-            
-        row_colors = cols[2:]
-        rows = table.find_all('tr')[1:] 
-        
-        current_location = ""
-        for row in rows:
-            tds = row.find_all(['td', 'th'])
-            if not tds:
-                continue
-                
-            if len(tds) == len(cols):
-                current_location = clean_text(tds[0].get_text())
-                costume_td = tds[1]
-                color_tds = tds[2:]
-            elif len(tds) == len(cols) - 1:
-                costume_td = tds[0]
-                color_tds = tds[1:]
-            else:
-                continue
-                
-            current_costume = clean_text(costume_td.get_text())
-            if not current_location or not current_costume:
-                continue
-            
-            if current_costume == "AvailablePikmintypes":
-                continue
-                
-            category_key = f"{current_location}/{current_costume}"
-            
-            if category_key not in decor_dict:
-                decor_dict[category_key] = {}
-                
-            for idx, td in enumerate(color_tds):
-                if idx >= len(row_colors):
-                    break
-                color_name = clean_text(row_colors[idx])
-                
-                td_text = td.get_text(strip=True)
-                if td_text == "N/A" or "N/A" in td_text:
-                    continue
-                    
-                img_tag = td.find('img')
-                if img_tag:
-                    img_url = img_tag.get('src')
-                    if img_url:
-                        img_url = urljoin(URL, img_url)
-                        
-                        final_color_name = color_name
-                        counter = 1
-                        while final_color_name in decor_dict[category_key]:
-                            counter += 1
-                            final_color_name = f"{color_name}{counter}"
-                            
-                        decor_dict[category_key][final_color_name] = img_url
+def original_image_url(src):
+    """Use the original PNG rather than the table's resized thumbnail."""
+    parts = urlsplit(urljoin(URL, src))
+    path = parts.path
+    if '/images/thumb/' in path:
+        path = path.replace('/images/thumb/', '/images/', 1).rsplit('/', 1)[0]
+    return urlunsplit((parts.scheme, parts.netloc, path, '', ''))
 
-    return decor_dict
+
+def parse_decor_html(html):
+    """Return location/costume records, expanding both location and costume rowspans."""
+    soup = BeautifulSoup(html, 'html.parser')
+    records = {}
+    colors = {'red', 'yellow', 'blue', 'purple', 'white', 'winged', 'rock', 'ice'}
+    for table in soup.select('table.wikitable'):
+        rows = table.find_all('tr', recursive=False)
+        if not rows:
+            rows = table.select(':scope > tbody > tr')
+        if not rows:
+            continue
+        headers = [cell.get_text(' ', strip=True) for cell in rows[0].find_all(['th', 'td'], recursive=False)]
+        if len(headers) < 3 or headers[:2] != ['Location', 'Costume']:
+            continue
+        if any(color.casefold() not in colors for color in headers[2:]):
+            raise ValueError('Wiki 飾品表格包含未知顏色欄位。')
+        spans = {}
+        for row in rows[1:]:
+            cells = iter(row.find_all(['th', 'td'], recursive=False))
+            expanded = []
+            for col in range(len(headers)):
+                if col in spans:
+                    cell, remaining = spans[col]
+                    if remaining == 1:
+                        del spans[col]
+                    else:
+                        spans[col] = (cell, remaining - 1)
+                else:
+                    cell = next(cells, None)
+                    if cell is None or int(cell.get('colspan', 1)) != 1:
+                        raise ValueError('Wiki 飾品表格欄位格式已變更，無法安全解析。')
+                    rowspan = int(cell.get('rowspan', 1))
+                    if rowspan > 1:
+                        spans[col] = (cell, rowspan - 1)
+                expanded.append(cell)
+            location = expanded[0].get_text(' ', strip=True)
+            costume = expanded[1].get_text(' ', strip=True)
+            # Roadside's three Sticker rows are separate variants in this project.
+            if location == 'Roadside' and costume == 'Sticker':
+                image = row.find('a', href=re.compile(r'Decor_.*_Sticker_[123]\.png'))
+                if not image:
+                    raise ValueError('無法辨識 Roadside Sticker 款式。')
+                number = int(re.search(r'_([123])\.png', image['href']).group(1))
+                costume = ('Green Sticker', 'Blue Sticker', 'Orange Sticker')[number - 1]
+            key = f'{location}/{costume}'
+            record = records.setdefault(key, {'location': location, 'costume': costume, 'images': {}})
+            for color, cell in zip(headers[2:], expanded[2:]):
+                if cell.get_text(' ', strip=True) == 'N/A':
+                    continue
+                links = cell.select('a.image[href]')
+                if not links:
+                    raise ValueError(f'{key}/{color} 缺少圖片，無法安全更新。')
+                for link in links:
+                    img = link.find('img')
+                    if not img or not img.get('src'):
+                        raise ValueError(f'{key}/{color} 缺少圖片網址。')
+                    url = original_image_url(img['src'])
+                    file_name = unquote(link['href'].split('File:', 1)[-1])
+                    if not file_name.lower().endswith('.png'):
+                        raise ValueError(f'{key}/{color} 不是 PNG 圖片。')
+                    images = record['images']
+                    if any(item['file_name'] == file_name for item in images.values()):
+                        continue
+                    color_id = color.casefold()
+                    numbered = re.search(r'_(\d+)\.png$', file_name)
+                    if int(expanded[1].get('rowspan', 1)) > 1 and numbered and expanded[1].get_text(' ', strip=True) != 'Sticker':
+                        # Preserve collection IDs even if Wiki reorders numbered designs.
+                        number = int(numbered.group(1))
+                        if number < 1:
+                            raise ValueError(f'{key}/{color} 的款式編號無效。')
+                        color_id += str(number - 1) if number > 1 else ''
+                        if color_id in images:
+                            raise ValueError(f'{key}/{color} 的款式編號重複。')
+                    else:
+                        suffix = 0
+                        while color_id in images:
+                            suffix += 1
+                            color_id = f'{color.casefold()}{suffix}'
+                    images[color_id] = {'url': url, 'file_name': file_name}
+    if not records:
+        raise ValueError('Wiki 找不到一般飾品圖片表格。')
+    return records
+
+
+def fetch_standard_records():
+    response = requests.get(URL, headers={'User-Agent': 'PikminDecorImageDownloader/1.0'}, timeout=30)
+    response.raise_for_status()
+    return parse_decor_html(response.text)
+
+
+def fetch_decor_data():
+    print('正在讀取網頁數據，請稍候... / Fetching data from wiki, please wait...')
+    try:
+        records = fetch_standard_records()
+        return {
+            f"{clean_text(record['location'])}/{clean_text(record['costume'])}": {
+                color.capitalize(): image['url'] for color, image in record['images'].items()
+            }
+            for record in records.values()
+        }
+    except (requests.RequestException, ValueError) as exc:
+        print(f'讀取失敗 / Failed to read wiki: {exc}')
+        return None
+
 
 def download_image(url, folder, filename):
     """下載圖片並存檔"""
