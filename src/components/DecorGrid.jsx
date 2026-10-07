@@ -52,11 +52,12 @@ const VariantRow = React.memo(({ variant, category, onCardClick, variantState })
           return (
             <PikminCard
               key={itemToRender.colorId}
-              color={{ ...itemToRender.baseDef, id: itemToRender.colorId }}
+              color={itemToRender.baseDef}
+              colorId={itemToRender.colorId}
               status={variantState?.[itemToRender.colorId] || DECOR_STATUS.NOT_COLLECTED}
               variant={variant}
               category={category}
-              onClick={(newStatus) => onCardClick(variant.id, itemToRender.colorId, newStatus)}
+              onClick={onCardClick}
             />
           );
         })}
@@ -79,6 +80,13 @@ const DecorGrid = React.memo(({ variants, onCardClick, collectionState, category
       ))}
     </div>
   );
-});
+}, (previous, next) => (
+  previous.variants === next.variants &&
+  previous.category === next.category &&
+  previous.onCardClick === next.onCardClick &&
+  next.variants.every(variant =>
+    previous.collectionState?.[variant.id] === next.collectionState?.[variant.id]
+  )
+));
 
 export default DecorGrid;

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useLocation } from 'react-router-dom';
-import { LayoutGrid, List, Search, ArrowUpDown, X, ChevronsDown, ChevronsUp } from 'lucide-react';
+import { LayoutGrid, List, Search, ArrowUpDown, X } from 'lucide-react';
 import { usePikmin } from '../context/PikminContext';
 import { DECOR_CATEGORIES, isStandardCategory } from '../constants';
 import { useTranslation } from '../i18n';
@@ -10,14 +10,38 @@ import DecorList from '../components/DecorList';
 import { warmImages } from '../utils/imagePrefetch';
 import './Tracker.css';
 
+// Keep collection updates inside the category that owns the changed variant.
+const TrackerCategory = React.memo(({ category, isOpen, onToggle, onCardClick, collection, progress, total }) => (
+    <DecorGridCategory
+        category={category}
+        isOpen={isOpen}
+        onToggle={() => onToggle(category.id)}
+        progress={progress}
+        total={total}
+    >
+        <DecorGrid
+            category={category}
+            variants={category.variants}
+            onCardClick={onCardClick}
+            collectionState={collection}
+        />
+    </DecorGridCategory>
+), (previous, next) => (
+    previous.category === next.category &&
+    previous.isOpen === next.isOpen &&
+    previous.onToggle === next.onToggle &&
+    previous.onCardClick === next.onCardClick &&
+    previous.progress === next.progress &&
+    previous.total === next.total &&
+    next.category.variants.every(variant => previous.collection[variant.id] === next.collection[variant.id])
+));
+
 const Tracker = () => {
     const { t } = useTranslation();
     const location = useLocation();
     const { collection, toggleStatus, calculateProgress } = usePikmin();
     const [viewMode, setViewMode] = useState('grid');
-    const [openCategories, setOpenCategories] = useState(
-        location.state?.openCategoryId ? { [location.state.openCategoryId]: true } : {}
-    );
+    const [openCategoryId, setOpenCategoryId] = useState(location.state?.openCategoryId || null);
     // Search & Filter State
     const [searchQuery, setSearchQuery] = useState(location.state?.searchQuery || '');
     const [sortOrder, setSortOrder] = useState('default'); // default, asc (low->high), desc (high->low)
@@ -47,32 +71,9 @@ const Tracker = () => {
         warmImages(getCategoryImageUrls(category), limit);
     }, [getCategoryImageUrls]);
 
-    const toggleCategory = (id) => {
-        setOpenCategories((prev) => {
-            const willOpen = !prev[id];
-            if (willOpen) {
-                const category = filteredCategories.find((c) => c.id === id);
-                if (category) {
-                    prefetchCategoryImages(category, 20);
-                }
-            }
-            return { ...prev, [id]: willOpen };
-        });
-    };
-
-    const expandAll = () => {
-        const allOpen = {};
-        filteredCategories.forEach(c => { allOpen[c.id] = true; });
-        setOpenCategories(allOpen);
-
-        filteredCategories.slice(0, 4).forEach((category) => {
-            prefetchCategoryImages(category, 12);
-        });
-    };
-
-    const collapseAll = () => {
-        setOpenCategories({});
-    };
+    const toggleCategory = React.useCallback((id) => {
+        setOpenCategoryId(previous => previous === id ? null : id);
+    }, []);
 
     React.useEffect(() => {
         const onScroll = () => setIsCompactSticky(window.scrollY > 180);
@@ -82,16 +83,10 @@ const Tracker = () => {
     }, []);
 
     React.useEffect(() => {
-        const initiallyOpenIds = Object.keys(openCategories).filter((id) => openCategories[id]);
-        if (initiallyOpenIds.length === 0) return;
-
-        initiallyOpenIds.slice(0, 2).forEach((id) => {
-            const category = DECOR_CATEGORIES.find((c) => c.id === id);
-            if (category) {
-                prefetchCategoryImages(category, 16);
-            }
-        });
-    }, []);
+        if (!openCategoryId || viewMode !== 'grid') return;
+        const category = DECOR_CATEGORIES.find(candidate => candidate.id === openCategoryId);
+        if (category) prefetchCategoryImages(category, 20);
+    }, [openCategoryId, viewMode, prefetchCategoryImages]);
 
     const finishOnboarding = () => {
         localStorage.setItem('tracker-onboarded', '1');
@@ -227,16 +222,7 @@ const Tracker = () => {
                     <div className="flex-1" /> {/* Spacer */}
 
                     {/* View Toggles */}
-                    {viewMode === 'grid' && (
-                        <div className="flex items-center gap-1 bg-white/40 p-1 rounded-full border border-white/20">
-                            <button type="button" onClick={expandAll} className="icon-btn-small" title={t('tracker.expand_all')} aria-label={t('tracker.expand_all')}>
-                                <ChevronsDown size={16} />
-                            </button>
-                            <button type="button" onClick={collapseAll} className="icon-btn-small" title={t('tracker.collapse_all')} aria-label={t('tracker.collapse_all')}>
-                                <ChevronsUp size={16} />
-                            </button>
-                        </div>
-                    )}
+
 
                     <div className="flex items-center gap-1 bg-white/40 p-1 rounded-full border border-white/20">
                         <button
@@ -289,21 +275,16 @@ const Tracker = () => {
                     filteredCategories.map(category => {
                         const { collected, total } = calculateProgress(category);
                         return (
-                            <DecorGridCategory
+                            <TrackerCategory
                                 key={category.id}
                                 category={category}
-                                isOpen={openCategories[category.id]}
-                                onToggle={() => toggleCategory(category.id)}
+                                isOpen={openCategoryId === category.id}
+                                onToggle={toggleCategory}
+                                onCardClick={toggleStatus}
+                                collection={collection}
                                 progress={collected}
                                 total={total}
-                            >
-                                <DecorGrid
-                                    category={category}
-                                    variants={category.variants}
-                                    onCardClick={toggleStatus}
-                                    collectionState={collection}
-                                />
-                            </DecorGridCategory>
+                            />
                         );
                     })
                 ) : (

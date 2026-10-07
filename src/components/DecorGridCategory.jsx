@@ -35,7 +35,7 @@ const DecorGridCategory = React.memo(({ category, isOpen, onToggle, progress, to
           <div className="grid-category-progress-bar-bg">
             <div
               className={`grid-category-progress-bar-fill ${progress === total && total > 0 ? 'is-complete' : ''}`}
-              style={{ width: `${(progress / total) * 100}%` }}
+              style={{ transform: `scaleX(${total > 0 ? progress / total : 0})` }}
             />
           </div>
           <div className="grid-category-progress-badge">
@@ -51,7 +51,7 @@ const DecorGridCategory = React.memo(({ category, isOpen, onToggle, progress, to
         aria-hidden={!isOpen}
       >
         <div className="grid-category-content">
-          {children}
+          {isOpen ? children : null}
         </div>
       </div>
     </div>

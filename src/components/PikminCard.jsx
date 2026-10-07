@@ -8,7 +8,7 @@ import StatusIcon from './shared/StatusIcon';
 import ContextMenu from './shared/ContextMenu';
 import SmartImage from './shared/SmartImage';
 
-const PikminCard = React.memo(({ color, status, onClick, variant, category }) => {
+const PikminCard = React.memo(({ color, status, onClick, variant, category, colorId = color.id }) => {
     const { t, language } = useTranslation();
     const [imgError, setImgError] = useState(false);
     const [showMenu, setShowMenu] = useState(false);
@@ -27,7 +27,7 @@ const PikminCard = React.memo(({ color, status, onClick, variant, category }) =>
     };
 
     const imagePath = (category && variant)
-        ? `${import.meta.env.BASE_URL}images/decors_images/${category.image_path}/${variant.image_name}_${color.id.charAt(0).toUpperCase() + color.id.slice(1)}.png`
+        ? `${import.meta.env.BASE_URL}images/decors_images/${category.image_path}/${variant.image_name}_${colorId.charAt(0).toUpperCase() + colorId.slice(1)}.png`
         : null;
 
     const pikminType = color.id;
@@ -36,6 +36,10 @@ const PikminCard = React.memo(({ color, status, onClick, variant, category }) =>
     React.useEffect(() => {
         setImgError(false);
     }, [imagePath]);
+
+    React.useEffect(() => () => {
+        clearTimeout(timerRef.current);
+    }, []);
 
     // -- Signature Animation Trigger --
     const triggerAnimation = useCallback((newStatus) => {
@@ -46,9 +50,6 @@ const PikminCard = React.memo(({ color, status, onClick, variant, category }) =>
         } else {
             setAnimClass('just-changed');
         }
-        // Clear after animation
-        const timer = setTimeout(() => setAnimClass(''), 400);
-        return () => clearTimeout(timer);
     }, []);
 
     // -- Interaction Handlers --
@@ -64,7 +65,7 @@ const PikminCard = React.memo(({ color, status, onClick, variant, category }) =>
             newStatus = DECOR_STATUS.NOT_COLLECTED;
         }
         triggerAnimation(newStatus);
-        onClick(newStatus);
+        onClick(variant.id, colorId, newStatus);
     };
 
     // 2. Right Click (Desktop)
@@ -97,7 +98,7 @@ const PikminCard = React.memo(({ color, status, onClick, variant, category }) =>
 
     const handleMenuSelect = (selectedStatus) => {
         triggerAnimation(selectedStatus);
-        onClick(selectedStatus);
+        onClick(variant.id, colorId, selectedStatus);
         setShowMenu(false);
     };
 
@@ -120,10 +121,14 @@ const PikminCard = React.memo(({ color, status, onClick, variant, category }) =>
     return (
         <div
             className={`pikmin-card status-${Object.keys(DECOR_STATUS).find(key => DECOR_STATUS[key] === status).toLowerCase().replace('_', '-')} ${status === DECOR_STATUS.NOT_COLLECTED ? 'not-collected' : ''} ${statusClass[status] || ''} ${animClass}`}
+            onAnimationEnd={(event) => {
+                if (event.target.classList.contains('pikmin-card-image-container')) setAnimClass('');
+            }}
             onClick={handleToggle}
             onContextMenu={handleContextMenu}
             onTouchStart={handleTouchStart}
             onTouchEnd={handleTouchEnd}
+            onTouchCancel={handleTouchEnd}
             onKeyDown={handleKeyDown}
             role="button"
             tabIndex={0}
