@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "vite build",
+    "build": "vite build && node scripts/build-route-pages.mjs",
     "lint": "eslint .",
     "preview": "vite preview",
     "decor-manager": "python image_download_helper/decor_manager.py",
