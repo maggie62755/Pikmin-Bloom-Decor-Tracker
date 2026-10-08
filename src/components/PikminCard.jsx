@@ -1,6 +1,5 @@
 import React, { useState, useRef, useCallback } from 'react';
-import { DECOR_STATUS, DECOR_STATUS_LABELS, DECOR_STATUS_KEYS } from '../constants';
-import { COLORS } from '../theme/colors';
+import { DECOR_STATUS, DECOR_STATUS_KEYS } from '../constants';
 import { useTranslation, getLocalizedName } from '../i18n';
 import './PikminCard.css';
 import MissingImageFallback from './shared/MissingImageFallback';
@@ -155,20 +154,10 @@ const PikminCard = React.memo(({ color, status, onClick, variant, category, colo
                 </div>
             </div>
 
-            <div className="pikmin-card-label-row">
-                <div
-                    className="pikmin-card-color-dot"
-                    style={{ backgroundColor: COLORS.pikmin[pikminType] || '#ccc' }}
-                />
-                <span className="pikmin-card-type-text">
-                    {colorName}
-                </span>
-            </div>
-
             {/* Tooltip (Only show if menu is NOT open) */}
             {!showMenu && (
                 <div className="pikmin-card-tooltip">
-                    {statusLabel}
+                    {colorName}
                 </div>
             )}
 

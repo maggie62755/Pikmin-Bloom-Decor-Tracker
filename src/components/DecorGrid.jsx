@@ -40,14 +40,7 @@ const VariantRow = React.memo(({ variant, category, onCardClick, variantState })
             }
           }
 
-          if (!itemToRender) {
-            return (
-              <div
-                key={colorDef.id}
-                className="empty-pikmin-slot"
-              />
-            );
-          }
+          if (!itemToRender) return null;
 
           return (
             <PikminCard

@@ -61,11 +61,3 @@
         gap: 1rem;
     }
 }
-
-.empty-pikmin-slot {
-    width: 100%;
-    border-radius: 1rem;
-    border: 2px dashed rgba(232, 227, 216, 1); /* journal-line */
-    background-color: rgba(245, 243, 237, 0.5); /* journal-surface/50 */
-    opacity: 0.3;
-}
