@@ -103,7 +103,7 @@ const Navigation = () => {
                     {/* Progress Bar */}
                     <div className="absolute bottom-0 left-0 right-0 h-1 bg-journal-line/30 overflow-hidden border-t border-white/10 rounded-b-[2rem]">
                         <div
-                            className="h-full bg-gradient-to-r from-brand-primary via-brand-accent to-brand-secondary transition-all duration-1000 ease-out"
+                            className="h-full bg-gradient-to-r from-brand-primary via-brand-accent to-brand-secondary"
                             style={{ width: `${grandTotal > 0 ? (totalCollected / grandTotal) * 100 : 0}%` }}
                         />
                     </div>
@@ -155,7 +155,7 @@ const Navigation = () => {
                 {/* Mobile Progress Bar */}
                 <div className="h-0.5 bg-journal-line/20">
                     <div
-                        className="h-full bg-gradient-to-r from-brand-primary via-brand-accent to-brand-secondary transition-all duration-1000 ease-out"
+                        className="h-full bg-gradient-to-r from-brand-primary via-brand-accent to-brand-secondary"
                         style={{ width: `${grandTotal > 0 ? (totalCollected / grandTotal) * 100 : 0}%` }}
                     />
                 </div>

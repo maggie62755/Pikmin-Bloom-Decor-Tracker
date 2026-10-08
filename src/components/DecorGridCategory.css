@@ -182,7 +182,7 @@
     background-color: var(--brand-primary, #4A8C3F);
     border-radius: 9999px;
     transform-origin: left;
-    transition: transform 0.3s ease;
+    /* Progress changes once per click rather than animating layout-adjacent content. */
 }
 
 .grid-category-progress-badge {

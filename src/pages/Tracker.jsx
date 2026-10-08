@@ -99,7 +99,7 @@ const Tracker = () => {
         t('tracker.onboarding_tip_3')
     ];
 
-    // Filter Logic
+    const matchingCategories = React.useMemo(() => {
     let filteredCategories = [...DECOR_CATEGORIES];
 
     // 1. Filter by Type
@@ -122,13 +122,23 @@ const Tracker = () => {
         );
     }
 
+    return filteredCategories;
+    }, [filterType, searchQuery]);
+
+    const categoryProgress = React.useMemo(() => new Map(
+        DECOR_CATEGORIES.map(category => [category.id, calculateProgress(category)])
+    ), [calculateProgress]);
+
+    const filteredCategories = React.useMemo(() => {
+        if (sortOrder === 'default') return matchingCategories;
+        const filteredCategories = [...matchingCategories];
     // 3. Sort
     if (sortOrder !== 'default') {
         filteredCategories.sort((a, b) => {
-            const progA = calculateProgress(a);
+            const progA = categoryProgress.get(a.id);
             const rateA = progA.total > 0 ? progA.collected / progA.total : 0;
 
-            const progB = calculateProgress(b);
+            const progB = categoryProgress.get(b.id);
             const rateB = progB.total > 0 ? progB.collected / progB.total : 0;
 
             if (Math.abs(rateA - rateB) < 0.0001) {
@@ -138,6 +148,9 @@ const Tracker = () => {
             return sortOrder === 'desc' ? rateB - rateA : rateA - rateB;
         });
     }
+
+        return filteredCategories;
+    }, [matchingCategories, sortOrder, categoryProgress]);
 
     return (
         <div className="page-container">
@@ -273,7 +286,7 @@ const Tracker = () => {
             {viewMode === 'grid' ? (
                 filteredCategories.length > 0 ? (
                     filteredCategories.map(category => {
-                        const { collected, total } = calculateProgress(category);
+                        const { collected, total } = categoryProgress.get(category.id);
                         return (
                             <TrackerCategory
                                 key={category.id}

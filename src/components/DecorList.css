@@ -5,8 +5,7 @@
     overflow: hidden;
     border: 1px solid rgba(232, 227, 216, 0.5); /* journal-line/50 */
     box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
-    background-color: rgba(254, 253, 248, 0.5); /* journal-paper/50 */
-    backdrop-filter: blur(12px);
+    background-color: rgba(254, 253, 248, 0.96);
 }
 
 .decor-list-scroll {

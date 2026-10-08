@@ -9,8 +9,9 @@ import StatusIcon from './shared/StatusIcon';
 import ContextMenu from './shared/ContextMenu';
 import SmartImage from './shared/SmartImage';
 
-const MiniCard = React.memo(({ status, imagePath, color, onClick }) => {
-  const [imgError, setImgError] = useState(false);
+const MiniCard = React.memo(({ status, imagePath, color, onClick, variantId, colorId }) => {
+  const [failedImagePath, setFailedImagePath] = useState(null);
+  const imgError = failedImagePath === imagePath;
   const [showMenu, setShowMenu] = useState(false);
   const { language } = useTranslation();
 
@@ -18,22 +19,19 @@ const MiniCard = React.memo(({ status, imagePath, color, onClick }) => {
   const timerRef = useRef(null);
   const isLongPress = useRef(false);
 
-  // Reset error if image path changes
-  React.useEffect(() => {
-    setImgError(false);
-  }, [imagePath]);
+  React.useEffect(() => () => clearTimeout(timerRef.current), []);
 
   // -- Interaction Handlers --
 
   // 1. Toggle Logic (Left Click / Tap)
-  const handleToggle = (e) => {
+  const handleToggle = () => {
     if (showMenu) return; // Don't toggle if menu is open
 
     let newStatus = DECOR_STATUS.COLLECTED;
     if (status === DECOR_STATUS.COLLECTED) {
       newStatus = DECOR_STATUS.NOT_COLLECTED;
     }
-    onClick(newStatus);
+    onClick(variantId, colorId, newStatus);
   };
 
   // 2. Right Click (Desktop)
@@ -65,7 +63,7 @@ const MiniCard = React.memo(({ status, imagePath, color, onClick }) => {
   };
 
   const handleMenuSelect = (selectedStatus) => {
-    onClick(selectedStatus);
+    onClick(variantId, colorId, selectedStatus);
     setShowMenu(false);
   };
 
@@ -76,6 +74,7 @@ const MiniCard = React.memo(({ status, imagePath, color, onClick }) => {
         onContextMenu={handleContextMenu}
         onTouchStart={handleTouchStart}
         onTouchEnd={handleTouchEnd}
+        onTouchCancel={handleTouchEnd}
         className={`mini-card status-${Object.keys(DECOR_STATUS).find(key => DECOR_STATUS[key] === status).toLowerCase().replace('_', '-')} ${status === DECOR_STATUS.NOT_COLLECTED ? 'not-collected' : 'collected'}`}
       >
         <div className="mini-card-img-container">
@@ -84,7 +83,7 @@ const MiniCard = React.memo(({ status, imagePath, color, onClick }) => {
               src={imagePath}
               alt={getLocalizedName(color, language)}
               className="mini-card-img"
-              onError={() => setImgError(true)}
+              onError={() => setFailedImagePath(imagePath)}
             />
           ) : (
             <MissingImageFallback color={color} compact />
@@ -165,8 +164,10 @@ const DecorRow = React.memo(({ variant, category, variantCollection, onCardClick
               <MiniCard
                 status={variantCollection?.[itemToRender.colorId] || DECOR_STATUS.NOT_COLLECTED}
                 imagePath={`${import.meta.env.BASE_URL}images/decors_images/${category.image_path}/${variant.image_name}_${itemToRender.colorId.charAt(0).toUpperCase() + itemToRender.colorId.slice(1)}.png`}
-                color={{ ...itemToRender.baseDef, id: itemToRender.colorId }}
-                onClick={(newStatus) => onCardClick(variant.id, itemToRender.colorId, newStatus)}
+                color={itemToRender.baseDef}
+                variantId={variant.id}
+                colorId={itemToRender.colorId}
+                onClick={onCardClick}
               />
             ) : (
               <div className="decor-list-unavailable-dot" />

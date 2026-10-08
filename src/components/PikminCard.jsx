@@ -122,7 +122,9 @@ const PikminCard = React.memo(({ color, status, onClick, variant, category, colo
         <div
             className={`pikmin-card status-${Object.keys(DECOR_STATUS).find(key => DECOR_STATUS[key] === status).toLowerCase().replace('_', '-')} ${status === DECOR_STATUS.NOT_COLLECTED ? 'not-collected' : ''} ${statusClass[status] || ''} ${animClass}`}
             onAnimationEnd={(event) => {
-                if (event.target.classList.contains('pikmin-card-image-container')) setAnimClass('');
+                if (event.target === event.currentTarget && ['sticker-collect', 'uncollect-shake', 'sticker-status-change'].includes(event.animationName)) {
+                    setAnimClass('');
+                }
             }}
             onClick={handleToggle}
             onContextMenu={handleContextMenu}
