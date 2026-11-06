@@ -2564,6 +2564,31 @@
             ]
         },
         {
+            "id": "event_5th_anniversary_toy_jewelry",
+            "name": "5th Anniversary Toy Jewelry",
+            "name_ch": "五週年紀念玩具珠寶",
+            "icon": "special.png",
+            "image_path": "5thAnniversaryToyJewelry",
+            "variants": [
+                {
+                    "id": "event_5th_anniversary_toy_jewelry",
+                    "name": "5th Anniversary Toy Jewelry",
+                    "name_ch": "五週年紀念玩具珠寶",
+                    "image_name": "5thAnniversaryToyJewelry",
+                    "colors": [
+                        "red",
+                        "yellow",
+                        "blue",
+                        "white",
+                        "purple",
+                        "rock",
+                        "winged",
+                        "ice"
+                    ]
+                }
+            ]
+        },
+        {
             "id": "event_golden_toy_airplane",
             "name": "Golden Toy Airplane",
             "name_ch": "金色飛機玩具",
