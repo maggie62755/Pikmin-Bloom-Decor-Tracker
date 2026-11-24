@@ -2589,6 +2589,30 @@
             ]
         },
         {
+            "id": "event_5th_anniversary_snack",
+            "name": "5th Anniversary Snack",
+            "name_ch": "五週年紀念玩具珠寶飾品",
+            "icon": "special.png",
+            "image_path": "5thAnniversarySnack",
+            "variants": [
+                {
+                    "id": "event_5th_anniversary_snack",
+                    "name": "5th Anniversary Snack",
+                    "name_ch": "五週年紀念玩具珠寶飾品",
+                    "image_name": "5thAnniversarySnack",
+                    "colors": [
+                        "red",
+                        "yellow",
+                        "blue",
+                        "white",
+                        "purple",
+                        "rock",
+                        "winged"
+                    ]
+                }
+            ]
+        },
+        {
             "id": "event_golden_toy_airplane",
             "name": "Golden Toy Airplane",
             "name_ch": "金色飛機玩具",
